@@ -14,3 +14,5 @@ max_line_length = 100
 
 [*.cs]
 indent_size = 4
+dotnet_sort_system_directives_first = true
+csharp_new_line_before_open_brace = all
