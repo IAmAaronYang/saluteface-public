@@ -19,3 +19,5 @@ csharp_new_line_before_open_brace = all
 
 [*.{json,yml,yaml}]
 indent_size = 2
+
+[*.md]
