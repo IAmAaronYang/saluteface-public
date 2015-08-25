@@ -17,3 +17,5 @@ indent_size = 4
 dotnet_sort_system_directives_first = true
 csharp_new_line_before_open_brace = all
 
+[*.{json,yml,yaml}]
+indent_size = 2
