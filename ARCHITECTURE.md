@@ -8,3 +8,9 @@ fingerprint so the same contracts can be enforced inside a .NET service.
 
 ```
               +-------------+
+  contract -->|   Contract  |-- fingerprint --> stable digest
+   (JSON)     |   parser    |
+              +------+------+
+                     |
+        +------------+------------+
+        |            |            |
