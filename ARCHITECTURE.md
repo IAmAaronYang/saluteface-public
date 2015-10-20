@@ -25,3 +25,8 @@ fingerprint so the same contracts can be enforced inside a .NET service.
                v             v
           +---------+   +-----------+
           | Report  |   | Matrix    |
+          +---------+   +-----------+
+           JSON / MD     verdicts
+```
+
+## Modules
