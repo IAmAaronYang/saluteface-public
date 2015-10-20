@@ -30,3 +30,9 @@ fingerprint so the same contracts can be enforced inside a .NET service.
 ```
 
 ## Modules
+
+### `schemapilot.contract`
+
+Parses a compact JSON contract into a `Contract` of named `FieldSpec` entries.
+The parser performs structural sanity checks (`min <= max`, valid regex,
+consistent `items`) and rejects unknown field types. `Contract.fingerprint()`
