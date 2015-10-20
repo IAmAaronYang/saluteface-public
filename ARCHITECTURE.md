@@ -14,3 +14,8 @@ fingerprint so the same contracts can be enforced inside a .NET service.
                      |
         +------------+------------+
         |            |            |
+        v            v            v
+   +---------+  +-----------+  +-----------+
+   | Fuzzer  |  | Validator |  |  Repair   |
+   +----+----+  +-----+-----+  +-----+-----+
+        |             |              |
