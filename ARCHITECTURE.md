@@ -36,3 +36,9 @@ fingerprint so the same contracts can be enforced inside a .NET service.
 Parses a compact JSON contract into a `Contract` of named `FieldSpec` entries.
 The parser performs structural sanity checks (`min <= max`, valid regex,
 consistent `items`) and rejects unknown field types. `Contract.fingerprint()`
+serialises the normalised contract to canonical JSON (keys sorted, no
+whitespace), SHA-256s it, and returns the first 16 hex characters. The
+fingerprint is the project's identity primitive: it seeds deterministic
+generation and detects contract drift.
+
+### `schemapilot.fuzzer`
