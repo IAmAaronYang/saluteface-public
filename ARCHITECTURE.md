@@ -42,3 +42,8 @@ fingerprint is the project's identity primitive: it seeds deterministic
 generation and detects contract drift.
 
 ### `schemapilot.fuzzer`
+
+Turns a contract into a deterministic stream of `FuzzCase` objects. A tiny
+linear-congruential generator seeded from the contract fingerprint XOR the user
+seed drives all randomness, so the same inputs always produce the same cases
+without touching the global `random` state. Two families are produced: `valid`
