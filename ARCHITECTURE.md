@@ -47,3 +47,9 @@ Turns a contract into a deterministic stream of `FuzzCase` objects. A tiny
 linear-congruential generator seeded from the contract fingerprint XOR the user
 seed drives all randomness, so the same inputs always produce the same cases
 without touching the global `random` state. Two families are produced: `valid`
+payloads that satisfy every constraint, and `adversarial` payloads that violate
+exactly one constraint in a labelled way, giving detectors a ground truth.
+
+### `schemapilot.validator`
+
+Checks a payload against a contract and returns a `ValidationResult` of
