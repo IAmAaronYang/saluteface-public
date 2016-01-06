@@ -53,3 +53,8 @@ exactly one constraint in a labelled way, giving detectors a ground truth.
 ### `schemapilot.validator`
 
 Checks a payload against a contract and returns a `ValidationResult` of
+`Violation` records. Each violation carries a stable machine code, the field
+path, a human message, and the observed/expected values. The type checks are
+strict: booleans are rejected for integer and number fields because `bool` is a
+subclass of `int` in Python, and patterns use anchored full-match semantics.
+
