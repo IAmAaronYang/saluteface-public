@@ -58,3 +58,9 @@ path, a human message, and the observed/expected values. The type checks are
 strict: booleans are rejected for integer and number fields because `bool` is a
 subclass of `int` in Python, and patterns use anchored full-match semantics.
 
+### `schemapilot.repair`
+
+Given a contract and an invalid payload, computes the smallest set of `Edit`
+operations that make the payload conform: insert defaults, drop unexpected
+fields, coerce types, snap enums, clamp bounds, pad/truncate strings and
+arrays. It re-validates after each pass (bounded by `max_passes`) and reports
