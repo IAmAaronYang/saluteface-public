@@ -64,3 +64,8 @@ Given a contract and an invalid payload, computes the smallest set of `Edit`
 operations that make the payload conform: insert defaults, drop unexpected
 fields, coerce types, snap enums, clamp bounds, pad/truncate strings and
 arrays. It re-validates after each pass (bounded by `max_passes`) and reports
+whether the payload is now conforming.
+
+### `schemapilot.matrix`
+
+Cross-validates the valid payloads generated for each contract against every
