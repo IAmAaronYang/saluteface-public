@@ -69,3 +69,9 @@ whether the payload is now conforming.
 ### `schemapilot.matrix`
 
 Cross-validates the valid payloads generated for each contract against every
+other contract and summarises pass rates into a matrix of `Cell` objects. Each
+contract pair receives a verdict — `identical`, `forward`, `backward`, `full`,
+or `breaking` — that answers "will deploying this contract change break my
+producers or consumers?".
+
+### `schemapilot.report`
