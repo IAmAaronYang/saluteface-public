@@ -80,3 +80,9 @@ Builds a `RunReport` from a fuzz-and-validate pass, scoring whether each case
 behaved as expected (valid cases pass, adversarial cases fail). It emits JSON
 for machines and Markdown for humans from the same in-memory model.
 
+### `schemapilot.cli`
+
+A thin argparse front end wiring the modules into the `inspect`, `fuzz`,
+`validate`, `repair`, `report`, and `matrix` commands. It reads and writes JSON
+and returns distinct exit codes per failure class for CI gating.
+
