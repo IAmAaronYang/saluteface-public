@@ -86,3 +86,8 @@ A thin argparse front end wiring the modules into the `inspect`, `fuzz`,
 `validate`, `repair`, `report`, and `matrix` commands. It reads and writes JSON
 and returns distinct exit codes per failure class for CI gating.
 
+## .NET runtime (`runtime/`)
+
+`Contract.cs`, `Validator.cs`, and `Fingerprinter.cs` mirror the Python
+semantics. `Fingerprinter.cs` reconstructs the exact canonical JSON that the
+Python `Contract.to_dict()` produces — including `enum`, `items`, and `default`
