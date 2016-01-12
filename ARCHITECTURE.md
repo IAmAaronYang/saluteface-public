@@ -75,3 +75,8 @@ or `breaking` — that answers "will deploying this contract change break my
 producers or consumers?".
 
 ### `schemapilot.report`
+
+Builds a `RunReport` from a fuzz-and-validate pass, scoring whether each case
+behaved as expected (valid cases pass, adversarial cases fail). It emits JSON
+for machines and Markdown for humans from the same in-memory model.
+
