@@ -15,3 +15,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- `.NET 9` runtime (`SchemaPilot.Runtime`) with `inspect`, `validate`, and
+  `fingerprint` commands mirroring the Python semantics.
+- Cross-runtime contract fingerprint that agrees byte-for-byte between the
+  Python package and the .NET runtime.
+
+### Fixed
