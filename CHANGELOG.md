@@ -27,3 +27,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   their own contract and reports reach full detection accuracy.
 - .NET fingerprint canonicalisation now includes `enum`, `items`, and
   `default` members, matching the Python canonical JSON exactly.
+
+## [1.0.0] - 2024-12-03
+
+### Added
+
+- Stable 1.x CLI contract: `inspect`, `fuzz`, `validate`, `repair`, `report`,
