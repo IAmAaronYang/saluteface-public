@@ -21,3 +21,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   Python package and the .NET runtime.
 
 ### Fixed
+
+- Deterministic generator now emits hex-conforming values for the
+  `^[a-f0-9]{8}$` pattern, so generated "valid" payloads validate against
+  their own contract and reports reach full detection accuracy.
+- .NET fingerprint canonicalisation now includes `enum`, `items`, and
+  `default` members, matching the Python canonical JSON exactly.
