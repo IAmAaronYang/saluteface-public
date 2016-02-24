@@ -33,3 +33,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 - Stable 1.x CLI contract: `inspect`, `fuzz`, `validate`, `repair`, `report`,
+  and `matrix` with documented exit codes for CI gating.
+- Typed package marker (`py.typed`) and a documented public surface in
+  `schemapilot.__all__`.
+
+### Changed
+
