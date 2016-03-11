@@ -39,3 +39,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Python 3.11 is the minimum supported interpreter; the package remains
+  dependency-free.
+
+## [0.9.0] - 2023-11-14
+
+### Added
