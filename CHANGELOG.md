@@ -57,3 +57,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- JSON and Markdown report emitters (`schemapilot report`) sharing a single
+  in-memory `RunReport` so the two never drift.
+- Detection accuracy scoring: valid cases must pass and adversarial cases must
+  fail for a pass to count as detected.
+
+## [0.6.0] - 2020-11-10
