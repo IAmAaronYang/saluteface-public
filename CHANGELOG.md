@@ -45,3 +45,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [0.9.0] - 2023-11-14
 
 ### Added
+
+- Compatibility matrix (`schemapilot matrix`) with per-pair verdicts
+  (`identical`, `forward`, `backward`, `full`, `breaking`).
+- Architecture and design documents describing the pipeline and the
+  trade-offs behind the compact contract vocabulary.
+- Makefile tasks (`compile`, `build`, `inspect`, `report`, `matrix`, `parity`,
