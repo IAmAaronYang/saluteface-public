@@ -51,3 +51,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Architecture and design documents describing the pipeline and the
   trade-offs behind the compact contract vocabulary.
 - Makefile tasks (`compile`, `build`, `inspect`, `report`, `matrix`, `parity`,
+  `demo`).
+
+## [0.7.0] - 2021-10-19
+
+### Added
+
