@@ -63,3 +63,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   fail for a pass to count as detected.
 
 ## [0.6.0] - 2020-11-10
+
+### Added
+
+- Minimal repair engine (`schemapilot repair`) producing an ordered, auditable
+  list of edits and a re-validated payload.
+- Repair strategies for missing-required, unexpected-field, null-not-allowed,
