@@ -75,3 +75,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Canonical contract fingerprint: normalised JSON is SHA-256 hashed and
+  truncated to 16 hex characters, giving every contract revision a stable
+  identity.
+- Fingerprint output in `schemapilot inspect` for drift detection between
+  contract revisions.
+
