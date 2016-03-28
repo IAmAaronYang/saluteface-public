@@ -81,3 +81,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Fingerprint output in `schemapilot inspect` for drift detection between
   contract revisions.
 
+## [0.4.0] - 2018-10-02
+
+### Added
+
+- Adversarial mutations: wrong type, dropped required, enum miss, bound
+  overflow/underflow, pattern miss, length overflow, array under/overflow,
