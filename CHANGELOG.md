@@ -69,3 +69,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Minimal repair engine (`schemapilot repair`) producing an ordered, auditable
   list of edits and a re-validated payload.
 - Repair strategies for missing-required, unexpected-field, null-not-allowed,
+  type-mismatch, enum, bounds, string length, and array length violations.
+
+## [0.5.0] - 2019-09-24
+
+### Added
+
