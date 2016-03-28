@@ -87,3 +87,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Adversarial mutations: wrong type, dropped required, enum miss, bound
   overflow/underflow, pattern miss, length overflow, array under/overflow,
+  and null injection. Each case violates exactly one constraint and carries
+  its mutation label and target field.
+
+## [0.3.0] - 2017-11-21
+
+### Added
