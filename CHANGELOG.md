@@ -93,3 +93,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [0.3.0] - 2017-11-21
 
 ### Added
+
+- Deterministic fuzzer (`schemapilot fuzz`) generating valid payloads from a
+  contract fingerprint plus seed.
+- Small linear-congruential generator seeded from the fingerprint so the same
+  inputs always produce the same cases without touching the global `random`
+  state.
