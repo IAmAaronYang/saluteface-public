@@ -8,3 +8,6 @@ reviewable change looks like.
 
 SchemaPilot is dependency-free at runtime. You need:
 
+- Python 3.11 or newer for the `schemapilot` package.
+- The .NET 9 SDK for the `runtime/SchemaPilot.Runtime` project.
+
