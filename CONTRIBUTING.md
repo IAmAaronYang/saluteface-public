@@ -11,3 +11,7 @@ SchemaPilot is dependency-free at runtime. You need:
 - Python 3.11 or newer for the `schemapilot` package.
 - The .NET 9 SDK for the `runtime/SchemaPilot.Runtime` project.
 
+No third-party Python packages are required to run or exercise the tool. Ruff
+and mypy are optional developer conveniences configured in `pyproject.toml`.
+
+## Common tasks
