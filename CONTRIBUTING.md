@@ -22,3 +22,6 @@ make build     # build the .NET runtime in Release
 make inspect    # inspect the default contract
 make report    # emit a Markdown report
 make matrix    # cross-validate the invoice contracts
+make parity    # check Python/.NET fingerprint parity
+```
+
