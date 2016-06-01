@@ -25,3 +25,7 @@ make matrix    # cross-validate the invoice contracts
 make parity    # check Python/.NET fingerprint parity
 ```
 
+## Conventions
+
+- **Standard library only** in `schemapilot/`. If you reach for a third-party
+  dependency, open an issue first — it is almost always avoidable.
