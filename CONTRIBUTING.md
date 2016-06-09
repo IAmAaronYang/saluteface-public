@@ -29,3 +29,6 @@ make parity    # check Python/.NET fingerprint parity
 
 - **Standard library only** in `schemapilot/`. If you reach for a third-party
   dependency, open an issue first — it is almost always avoidable.
+- **Keep the two runtimes in lockstep.** Any change to the contract grammar,
+  the validator rules, or the canonical fingerprint must land in both the
+  Python package and the .NET runtime in the same change.
