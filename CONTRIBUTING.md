@@ -32,3 +32,7 @@ make parity    # check Python/.NET fingerprint parity
 - **Keep the two runtimes in lockstep.** Any change to the contract grammar,
   the validator rules, or the canonical fingerprint must land in both the
   Python package and the .NET runtime in the same change.
+- **Determinism is a contract.** Generation must stay reproducible. Do not use
+  the global `random` module, wall-clock time, or unordered iteration in code
+  paths that affect generated output or fingerprints.
+- **Stable violation codes.** Treat the violation codes in `validator.py` as a
