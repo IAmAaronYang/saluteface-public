@@ -36,3 +36,7 @@ make parity    # check Python/.NET fingerprint parity
   the global `random` module, wall-clock time, or unordered iteration in code
   paths that affect generated output or fingerprints.
 - **Stable violation codes.** Treat the violation codes in `validator.py` as a
+  public API. Add new codes rather than repurposing existing ones.
+- Match the existing code style: type hints on public functions, dataclasses
+  for value objects, and docstrings that explain intent.
+
