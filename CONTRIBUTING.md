@@ -47,3 +47,6 @@ make parity    # check Python/.NET fingerprint parity
 2. Implement the change in both runtimes when it affects shared semantics.
 3. Update `docs/`, `ARCHITECTURE.md`, and `CHANGELOG.md` as needed.
 4. Verify locally:
+   - `make compile` succeeds.
+   - `make build` reports zero errors.
+   - `make parity` shows matching fingerprints for every contract in
