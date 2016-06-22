@@ -43,3 +43,7 @@ make parity    # check Python/.NET fingerprint parity
 ## Making a change
 
 1. Discuss anything that alters the contract grammar or a fingerprint in an
+   issue before implementing it.
+2. Implement the change in both runtimes when it affects shared semantics.
+3. Update `docs/`, `ARCHITECTURE.md`, and `CHANGELOG.md` as needed.
+4. Verify locally:
