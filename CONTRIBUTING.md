@@ -40,3 +40,6 @@ make parity    # check Python/.NET fingerprint parity
 - Match the existing code style: type hints on public functions, dataclasses
   for value objects, and docstrings that explain intent.
 
+## Making a change
+
+1. Discuss anything that alters the contract grammar or a fingerprint in an
