@@ -50,3 +50,7 @@ make parity    # check Python/.NET fingerprint parity
    - `make compile` succeeds.
    - `make build` reports zero errors.
    - `make parity` shows matching fingerprints for every contract in
+     `schemas/`.
+   - Reports for the shipped contracts still reach full detection accuracy.
+5. Open a pull request using the template and describe what you verified.
+
