@@ -12,3 +12,7 @@ way.
   reproducible.
 - **Dependency-free.** The Python package uses only the standard library and
   the .NET runtime uses only the base SDK, so SchemaPilot runs in air-gapped
+  environments without a package resolution step.
+- **Two-runtime parity.** A contract validated in Python and in .NET must
+  reach identical conclusions, because contracts are enforced at the producer
+  (often Python tooling) and the consumer (often a .NET service).
