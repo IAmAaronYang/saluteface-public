@@ -7,3 +7,8 @@ way.
 
 ## Goals
 
+- **Deterministic by construction.** The same contract and seed must always
+  produce the same payloads and reports, so results are diffable and CI is
+  reproducible.
+- **Dependency-free.** The Python package uses only the standard library and
+  the .NET runtime uses only the base SDK, so SchemaPilot runs in air-gapped
