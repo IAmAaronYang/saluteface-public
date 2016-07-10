@@ -21,3 +21,8 @@ way.
 
 ## Non-goals
 
+- SchemaPilot is not a general JSON Schema implementation. The contract
+  vocabulary is deliberately small and opinionated to stay diffable.
+- SchemaPilot does not attempt to *prove* two contracts are equivalent; the
+  compatibility matrix reports empirical pass rates over generated payloads.
+- SchemaPilot does not perform network I/O.
