@@ -26,3 +26,8 @@ way.
 - SchemaPilot does not attempt to *prove* two contracts are equivalent; the
   compatibility matrix reports empirical pass rates over generated payloads.
 - SchemaPilot does not perform network I/O.
+
+## Key decisions
+
+### A compact contract vocabulary
+
