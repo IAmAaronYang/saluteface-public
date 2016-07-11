@@ -31,3 +31,7 @@ way.
 
 ### A compact contract vocabulary
 
+JSON Schema is expressive but verbose and hard to review. SchemaPilot uses a
+flat `fields` map with a fixed set of constraints (`type`, `required`,
+`nullable`, `enum`, `min`/`max`, `min_len`/`max_len`, `pattern`,
+`min_items`/`max_items`, `items`, `default`). This keeps a contract legible in
