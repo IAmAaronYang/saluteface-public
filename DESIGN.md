@@ -45,3 +45,8 @@ contract to sorted, whitespace-free JSON and hashes it. The 16-hex-character
 digest is short enough to embed in report headers and stable enough to seed the
 fuzzer. Because generation is seeded from the fingerprint, two byte-identical
 contracts produce byte-identical payloads.
+
+The cost of this decision is that both runtimes must produce *exactly* the same
+canonical string. That is why the .NET `Fingerprinter` re-creates Python's
+`json.dumps(..., sort_keys=True, separators=(",", ":"))` output precisely,
+including how integers and floats render and how `enum`, `items`, and `default`
