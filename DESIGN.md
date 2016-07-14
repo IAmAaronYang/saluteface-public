@@ -40,3 +40,8 @@ faithfully in a second language.
 
 ### Fingerprint as identity
 
+Rather than compare contracts field by field, SchemaPilot canonicalises a
+contract to sorted, whitespace-free JSON and hashes it. The 16-hex-character
+digest is short enough to embed in report headers and stable enough to seed the
+fuzzer. Because generation is seeded from the fingerprint, two byte-identical
+contracts produce byte-identical payloads.
