@@ -50,3 +50,7 @@ The cost of this decision is that both runtimes must produce *exactly* the same
 canonical string. That is why the .NET `Fingerprinter` re-creates Python's
 `json.dumps(..., sort_keys=True, separators=(",", ":"))` output precisely,
 including how integers and floats render and how `enum`, `items`, and `default`
+values serialise.
+
+### A hand-rolled PRNG
+
