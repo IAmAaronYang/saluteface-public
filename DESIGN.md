@@ -59,3 +59,8 @@ The fuzzer uses a small linear-congruential generator instead of Python's
 identical across Python versions, and makes the generator trivial to port. The
 LCG is not cryptographically strong — it does not need to be; it needs to be
 reproducible.
+
+### Single-fault adversarial cases
+
+Each adversarial payload violates exactly one constraint and records the
+mutation label and target field. This lets a report score a detector against a
