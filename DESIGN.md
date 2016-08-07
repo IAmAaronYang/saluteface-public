@@ -74,3 +74,7 @@ The repair engine favours the smallest change that resolves each violation and
 emits an ordered list of edits. It re-validates between passes so that fixing
 one violation can reveal or resolve another. The engine coerces types only when
 it is safe (for example `"12" -> 12`) and otherwise substitutes a
+type-appropriate default, so a repair never silently invents data of the wrong
+kind.
+
+### Empirical compatibility
