@@ -64,3 +64,8 @@ reproducible.
 
 Each adversarial payload violates exactly one constraint and records the
 mutation label and target field. This lets a report score a detector against a
+known ground truth: a valid case *should* pass and an adversarial case *should*
+fail. A payload that fails for the wrong reason still counts as detected, but
+the labelled mutation makes it easy to find gaps in a downstream validator.
+
+### Minimal, ordered repairs
