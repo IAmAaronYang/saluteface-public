@@ -3,3 +3,6 @@
 
 PY ?= python
 DOTNET ?= dotnet
+CONTRACT ?= schemas/invoice.v1.json
+RUNTIME := runtime/SchemaPilot.Runtime.csproj
+
