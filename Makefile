@@ -6,3 +6,6 @@ DOTNET ?= dotnet
 CONTRACT ?= schemas/invoice.v1.json
 RUNTIME := runtime/SchemaPilot.Runtime.csproj
 
+.PHONY: help
+help:
+	@echo "SchemaPilot targets:"
