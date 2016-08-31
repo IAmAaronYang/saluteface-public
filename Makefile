@@ -9,3 +9,6 @@ RUNTIME := runtime/SchemaPilot.Runtime.csproj
 .PHONY: help
 help:
 	@echo "SchemaPilot targets:"
+	@echo "  make compile        Byte-compile the Python package"
+	@echo "  make build          Build the .NET runtime in Release"
+	@echo "  make inspect        Inspect the default contract (Python)"
