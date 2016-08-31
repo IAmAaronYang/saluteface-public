@@ -12,3 +12,6 @@ help:
 	@echo "  make compile        Byte-compile the Python package"
 	@echo "  make build          Build the .NET runtime in Release"
 	@echo "  make inspect        Inspect the default contract (Python)"
+	@echo "  make report         Emit a Markdown report for the default contract"
+	@echo "  make matrix         Cross-validate the invoice contracts"
+	@echo "  make parity         Check Python/.NET fingerprint parity"
