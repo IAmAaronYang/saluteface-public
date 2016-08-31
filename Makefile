@@ -15,3 +15,6 @@ help:
 	@echo "  make report         Emit a Markdown report for the default contract"
 	@echo "  make matrix         Cross-validate the invoice contracts"
 	@echo "  make parity         Check Python/.NET fingerprint parity"
+	@echo "  make demo           Run inspect + report + matrix end-to-end"
+	@echo "  make clean          Remove build artefacts and caches"
+
