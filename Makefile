@@ -18,3 +18,6 @@ help:
 	@echo "  make demo           Run inspect + report + matrix end-to-end"
 	@echo "  make clean          Remove build artefacts and caches"
 
+.PHONY: compile
+compile:
+	$(PY) -m compileall -q schemapilot
