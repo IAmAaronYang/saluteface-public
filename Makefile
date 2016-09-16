@@ -21,3 +21,6 @@ help:
 .PHONY: compile
 compile:
 	$(PY) -m compileall -q schemapilot
+
+.PHONY: build
+build:
