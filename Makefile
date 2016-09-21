@@ -24,3 +24,6 @@ compile:
 
 .PHONY: build
 build:
+	$(DOTNET) build -c Release $(RUNTIME)
+
+.PHONY: inspect
