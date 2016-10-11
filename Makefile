@@ -27,3 +27,6 @@ build:
 	$(DOTNET) build -c Release $(RUNTIME)
 
 .PHONY: inspect
+inspect:
+	$(PY) -m schemapilot inspect $(CONTRACT)
+
