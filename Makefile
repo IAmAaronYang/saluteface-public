@@ -30,3 +30,6 @@ build:
 inspect:
 	$(PY) -m schemapilot inspect $(CONTRACT)
 
+.PHONY: report
+report:
+	$(PY) -m schemapilot report $(CONTRACT) --format markdown
