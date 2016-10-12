@@ -36,3 +36,6 @@ report:
 
 .PHONY: matrix
 matrix:
+	$(PY) -m schemapilot matrix schemas/invoice.v1.json schemas/invoice.v2.json
+
+.PHONY: parity
