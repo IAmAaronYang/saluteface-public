@@ -33,3 +33,6 @@ inspect:
 .PHONY: report
 report:
 	$(PY) -m schemapilot report $(CONTRACT) --format markdown
+
+.PHONY: matrix
+matrix:
