@@ -39,3 +39,6 @@ matrix:
 	$(PY) -m schemapilot matrix schemas/invoice.v1.json schemas/invoice.v2.json
 
 .PHONY: parity
+parity: build
+	$(PY) -m schemapilot inspect $(CONTRACT) | $(PY) -c "import sys,json;print('py',json.load(sys.stdin)['fingerprint'])"
+	$(DOTNET) run -c Release --project $(RUNTIME) -- fingerprint $(CONTRACT)
