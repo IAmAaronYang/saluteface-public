@@ -15,3 +15,9 @@ compact JSON contract and it will:
 
 Generation is seeded from a canonical contract fingerprint, so the same
 contract and seed always produce byte-identical payloads and reports. The
+package is dependency-free - Python standard library only - and a .NET 9
+runtime mirrors the parser, validator, and fingerprint so Python producers and
+.NET consumers reach the same verdicts.
+
+![SchemaPilot pipeline](docs/assets/pipeline.svg)
+
