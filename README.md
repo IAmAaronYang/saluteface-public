@@ -32,3 +32,9 @@ cd SchemaPilot
 python -m schemapilot inspect schemas/invoice.v1.json
 python -m schemapilot fuzz schemas/invoice.v1.json --seed 7 --valid 3 --adversarial 2
 python -m schemapilot validate schemas/invoice.v1.json fixtures/invoice_invalid.json
+python -m schemapilot repair schemas/invoice.v1.json fixtures/invoice_invalid.json
+python -m schemapilot report schemas/invoice.v1.json --format markdown
+python -m schemapilot matrix schemas/invoice.v1.json schemas/invoice.v2.json
+```
+
+`make demo` runs inspect, report, and matrix end to end on the shipped
