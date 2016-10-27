@@ -21,3 +21,8 @@ runtime mirrors the parser, validator, and fingerprint so Python producers and
 
 ![SchemaPilot pipeline](docs/assets/pipeline.svg)
 
+## Quick start
+
+Python 3.11 or newer. There is nothing to install; run the package in place:
+
+```bash
