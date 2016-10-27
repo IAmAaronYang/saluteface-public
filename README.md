@@ -26,3 +26,9 @@ runtime mirrors the parser, validator, and fingerprint so Python producers and
 Python 3.11 or newer. There is nothing to install; run the package in place:
 
 ```bash
+git clone https://github.com/bramrahanddian/SchemaPilot
+cd SchemaPilot
+
+python -m schemapilot inspect schemas/invoice.v1.json
+python -m schemapilot fuzz schemas/invoice.v1.json --seed 7 --valid 3 --adversarial 2
+python -m schemapilot validate schemas/invoice.v1.json fixtures/invoice_invalid.json
