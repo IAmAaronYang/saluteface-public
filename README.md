@@ -9,3 +9,9 @@ compact JSON contract and it will:
 
 - **fuzz** the contract into reproducible valid and adversarial payloads,
 - **validate** real payloads and report every violation with a stable code,
+- **repair** invalid payloads with a minimal, auditable list of edits,
+- **matrix** two contracts to decide whether a change is safe to deploy,
+- **report** the whole pass as JSON for machines or Markdown for review.
+
+Generation is seeded from a canonical contract fingerprint, so the same
+contract and seed always produce byte-identical payloads and reports. The
