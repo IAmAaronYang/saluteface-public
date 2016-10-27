@@ -38,3 +38,8 @@ python -m schemapilot matrix schemas/invoice.v1.json schemas/invoice.v2.json
 ```
 
 `make demo` runs inspect, report, and matrix end to end on the shipped
+contracts.
+
+## Commands
+
+| Command    | What it does                                                             |
