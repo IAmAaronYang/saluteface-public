@@ -43,3 +43,9 @@ contracts.
 ## Commands
 
 | Command    | What it does                                                             |
+|------------|--------------------------------------------------------------------------|
+| `inspect`  | Parse a contract, print its normalised form and fingerprint.             |
+| `fuzz`     | Generate deterministic valid and adversarial payloads.                   |
+| `validate` | Validate a payload file against a contract.                              |
+| `repair`   | Compute a minimal repair plan for an invalid payload.                    |
+| `report`   | Run a full fuzz+validate pass; emit JSON or Markdown.                    |
