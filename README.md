@@ -61,3 +61,8 @@ fixed set of constraints (`type`, `required`, `nullable`, `enum`, `min`/`max`,
 `min_len`/`max_len`, `pattern`, `min_items`/`max_items`, `items`, `default`).
 
 ```json
+{
+  "name": "invoice",
+  "version": 1,
+  "fields": {
+    "id":       { "type": "string",  "pattern": "^INV-[0-9]{6}$", "required": true },
