@@ -66,3 +66,9 @@ fixed set of constraints (`type`, `required`, `nullable`, `enum`, `min`/`max`,
   "version": 1,
   "fields": {
     "id":       { "type": "string",  "pattern": "^INV-[0-9]{6}$", "required": true },
+    "total":    { "type": "number",  "min": 0, "required": true },
+    "currency": { "type": "string",  "enum": ["USD", "EUR", "GBP"], "required": true },
+    "paid":     { "type": "boolean", "default": false }
+  }
+}
+```
