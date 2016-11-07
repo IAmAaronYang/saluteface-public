@@ -49,3 +49,9 @@ contracts.
 | `validate` | Validate a payload file against a contract.                              |
 | `repair`   | Compute a minimal repair plan for an invalid payload.                    |
 | `report`   | Run a full fuzz+validate pass; emit JSON or Markdown.                    |
+| `matrix`   | Cross-validate contracts and print compatibility verdicts.               |
+
+Exit codes are stable for CI gating: `0` success, `1` validation findings,
+`2` unrepaired payload, `3` contract error, `4` missing file, `5` invalid JSON.
+
+## Contracts
