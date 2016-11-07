@@ -55,3 +55,9 @@ Exit codes are stable for CI gating: `0` success, `1` validation findings,
 `2` unrepaired payload, `3` contract error, `4` missing file, `5` invalid JSON.
 
 ## Contracts
+
+A contract is a small, diffable JSON document: a flat `fields` map with a
+fixed set of constraints (`type`, `required`, `nullable`, `enum`, `min`/`max`,
+`min_len`/`max_len`, `pattern`, `min_items`/`max_items`, `items`, `default`).
+
+```json
