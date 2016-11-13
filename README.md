@@ -72,3 +72,9 @@ fixed set of constraints (`type`, `required`, `nullable`, `enum`, `min`/`max`,
   }
 }
 ```
+
+The fingerprint of the normalised contract is its identity primitive: it seeds
+deterministic generation and flags contract drift between revisions.
+
+## .NET runtime
+
