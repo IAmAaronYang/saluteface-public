@@ -95,3 +95,8 @@ schemapilot/    Python package: contract, fuzzer, validator, repair, matrix, rep
 runtime/        .NET 9 runtime mirroring the parser, validator, and fingerprint
 schemas/        Example contracts (invoice v1/v2, telemetry event v1)
 fixtures/       Valid and invalid payload examples used by the docs and CI
+docs/assets/    Diagrams referenced by the documentation
+```
+
+## Documentation
+
