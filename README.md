@@ -78,3 +78,8 @@ deterministic generation and flags contract drift between revisions.
 
 ## .NET runtime
 
+`runtime/SchemaPilot.Runtime` re-implements the parser, validator, and
+fingerprint for .NET services:
+
+```bash
+dotnet run -c Release --project runtime/SchemaPilot.Runtime.csproj -- fingerprint schemas/invoice.v1.json
