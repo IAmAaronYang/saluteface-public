@@ -83,3 +83,9 @@ fingerprint for .NET services:
 
 ```bash
 dotnet run -c Release --project runtime/SchemaPilot.Runtime.csproj -- fingerprint schemas/invoice.v1.json
+```
+
+Both runtimes must compute the same digest; CI verifies cross-runtime parity for
+every contract in `schemas/`.
+
+## Repository layout
