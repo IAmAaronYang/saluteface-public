@@ -8,3 +8,6 @@ build toward that mission.
 ## Delivered milestones
 
 - [x] **M1 — Contract core.** Compact JSON contract grammar, parser, and a
+  validator with stable violation codes for types, bounds, enums, patterns,
+  string lengths, array sizes, required fields, and unexpected fields.
+- [x] **M2 — Deterministic fuzzing.** Reproducible valid and labelled
