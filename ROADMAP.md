@@ -13,3 +13,5 @@ build toward that mission.
 - [x] **M2 — Deterministic fuzzing.** Reproducible valid and labelled
   adversarial payload generation seeded from the contract fingerprint, with a
   library of single-fault mutations for scoring detectors.
+- [x] **M3 — Repair and reporting.** Minimal, auditable repair plans plus
+  JSON and Markdown reports that quantify detection accuracy per contract.
