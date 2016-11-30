@@ -15,3 +15,5 @@ build toward that mission.
   library of single-fault mutations for scoring detectors.
 - [x] **M3 — Repair and reporting.** Minimal, auditable repair plans plus
   JSON and Markdown reports that quantify detection accuracy per contract.
+- [x] **M4 — Cross-runtime parity.** A .NET 9 runtime whose validator and
+  contract fingerprint agree byte-for-byte with the Python package, so a
