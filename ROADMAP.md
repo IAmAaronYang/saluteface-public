@@ -17,3 +17,6 @@ build toward that mission.
   JSON and Markdown reports that quantify detection accuracy per contract.
 - [x] **M4 — Cross-runtime parity.** A .NET 9 runtime whose validator and
   contract fingerprint agree byte-for-byte with the Python package, so a
+  payload accepted by one runtime is accepted by the other.
+
+## In progress
