@@ -20,3 +20,5 @@ build toward that mission.
   payload accepted by one runtime is accepted by the other.
 
 ## In progress
+
+- [ ] **M5 — Nested object contracts.** First-class `object` fields with their
