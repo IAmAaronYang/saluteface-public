@@ -22,3 +22,5 @@ build toward that mission.
 ## In progress
 
 - [ ] **M5 — Nested object contracts.** First-class `object` fields with their
+  own `fields` map and recursive validation, generation, and repair.
+- [ ] **M6 — Richer pattern synthesis.** Built-in generators for UUID,
