@@ -29,3 +29,5 @@ build toward that mission.
 
 ## Under consideration
 
+- [ ] **M7 — Matrix visualisation.** An HTML heat-map export of the
+  compatibility matrix for release reviews.
