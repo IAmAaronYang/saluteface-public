@@ -27,3 +27,5 @@ build toward that mission.
   RFC 3339 timestamps, and email-shaped strings so patterned fields fuzz
   without hand-written seeds.
 
+## Under consideration
+
