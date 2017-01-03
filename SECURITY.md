@@ -9,3 +9,4 @@
 
 ## Reporting a vulnerability
 
+SchemaPilot parses local JSON files and never performs network I/O. It is not
