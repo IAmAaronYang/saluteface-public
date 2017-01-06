@@ -14,3 +14,5 @@ expected to handle secrets: contracts and payloads are test data and should
 not contain credentials.
 
 If you find a security issue - for example a crash or unbounded resource use
+on a hostile contract, a path handling problem in the CLI, or a report that
+leaks file contents beyond the fields it flags - please report it privately
