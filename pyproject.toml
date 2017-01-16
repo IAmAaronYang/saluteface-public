@@ -7,3 +7,6 @@ name = "schemapilot"
 version = "1.0.1"
 description = "Structured Output Contract Fuzzer — deterministic payload generation, validation, repair, and compatibility matrices."
 readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "SchemaPilot contributors" }]
