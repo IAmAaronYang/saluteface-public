@@ -10,3 +10,6 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "SchemaPilot contributors" }]
+keywords = [
+    "contract",
+    "schema",
