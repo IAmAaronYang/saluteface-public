@@ -3,3 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
+name = "schemapilot"
+version = "1.0.1"
+description = "Structured Output Contract Fuzzer — deterministic payload generation, validation, repair, and compatibility matrices."
+readme = "README.md"
