@@ -13,3 +13,7 @@ authors = [{ name = "SchemaPilot contributors" }]
 keywords = [
     "contract",
     "schema",
+    "fuzzer",
+    "validation",
+    "structured-output",
+    "compatibility",
