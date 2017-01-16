@@ -17,3 +17,6 @@ keywords = [
     "validation",
     "structured-output",
     "compatibility",
+    "deterministic",
+]
+classifiers = [
