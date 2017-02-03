@@ -27,3 +27,6 @@ classifiers = [
     "Topic :: Software Development :: Quality Assurance",
     "Topic :: Software Development :: Testing",
     "Typing :: Typed",
+]
+dependencies = []
+
