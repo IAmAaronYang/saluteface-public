@@ -34,3 +34,6 @@ dependencies = []
 Homepage = "https://github.com/bramrahanddian/SchemaPilot"
 Documentation = "https://github.com/bramrahanddian/SchemaPilot/tree/main/docs"
 Repository = "https://github.com/bramrahanddian/SchemaPilot"
+Changelog = "https://github.com/bramrahanddian/SchemaPilot/blob/main/CHANGELOG.md"
+
+[project.scripts]
