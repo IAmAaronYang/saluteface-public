@@ -37,3 +37,7 @@ Repository = "https://github.com/bramrahanddian/SchemaPilot"
 Changelog = "https://github.com/bramrahanddian/SchemaPilot/blob/main/CHANGELOG.md"
 
 [project.scripts]
+schemapilot = "schemapilot.cli:main"
+
+[tool.setuptools]
+packages = ["schemapilot"]
