@@ -41,3 +41,6 @@ schemapilot = "schemapilot.cli:main"
 
 [tool.setuptools]
 packages = ["schemapilot"]
+
+[tool.setuptools.package-data]
+schemapilot = ["py.typed"]
