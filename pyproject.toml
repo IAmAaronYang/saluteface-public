@@ -30,3 +30,7 @@ classifiers = [
 ]
 dependencies = []
 
+[project.urls]
+Homepage = "https://github.com/bramrahanddian/SchemaPilot"
+Documentation = "https://github.com/bramrahanddian/SchemaPilot/tree/main/docs"
+Repository = "https://github.com/bramrahanddian/SchemaPilot"
