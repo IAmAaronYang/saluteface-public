@@ -44,3 +44,6 @@ packages = ["schemapilot"]
 
 [tool.setuptools.package-data]
 schemapilot = ["py.typed"]
+
+[tool.ruff]
+line-length = 100
