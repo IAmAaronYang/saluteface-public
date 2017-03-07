@@ -9,3 +9,7 @@ and Markdown.
 The package is dependency-free: it uses only the Python standard library so
 it can run in air-gapped environments and reproducible CI without network
 access.
+
+Public surface
+--------------
+- :class:`~schemapilot.contract.Contract` — parsed contract model.
