@@ -6,3 +6,6 @@ valid and adversarial payloads, validates payloads against the contract
 invalid payloads, and publishes compatibility matrices and reports in JSON
 and Markdown.
 
+The package is dependency-free: it uses only the Python standard library so
+it can run in air-gapped environments and reproducible CI without network
+access.
