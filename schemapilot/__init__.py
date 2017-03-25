@@ -17,3 +17,6 @@ Public surface
 - :class:`~schemapilot.fuzzer.Fuzzer` — deterministic payload generator.
 - :class:`~schemapilot.validator.Validator` — payload validator.
 - :func:`~schemapilot.repair.repair_payload` — minimal repair engine.
+- :class:`~schemapilot.matrix.CompatibilityMatrix` — cross-contract matrix.
+- :mod:`schemapilot.report` — JSON/Markdown report emitters.
+"""
