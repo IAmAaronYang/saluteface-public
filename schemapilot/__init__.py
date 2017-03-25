@@ -13,3 +13,7 @@ access.
 Public surface
 --------------
 - :class:`~schemapilot.contract.Contract` — parsed contract model.
+- :func:`~schemapilot.contract.load_contract` — parse a contract dict/file.
+- :class:`~schemapilot.fuzzer.Fuzzer` — deterministic payload generator.
+- :class:`~schemapilot.validator.Validator` — payload validator.
+- :func:`~schemapilot.repair.repair_payload` — minimal repair engine.
