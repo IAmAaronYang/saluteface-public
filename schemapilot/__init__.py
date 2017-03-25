@@ -20,3 +20,7 @@ Public surface
 - :class:`~schemapilot.matrix.CompatibilityMatrix` — cross-contract matrix.
 - :mod:`schemapilot.report` — JSON/Markdown report emitters.
 """
+
+from schemapilot.contract import Contract, FieldSpec, load_contract
+from schemapilot.fuzzer import Fuzzer, FuzzCase
+from schemapilot.validator import Validator, ValidationResult, Violation
