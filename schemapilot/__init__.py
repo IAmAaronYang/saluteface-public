@@ -24,3 +24,7 @@ Public surface
 from schemapilot.contract import Contract, FieldSpec, load_contract
 from schemapilot.fuzzer import Fuzzer, FuzzCase
 from schemapilot.validator import Validator, ValidationResult, Violation
+from schemapilot.repair import repair_payload, RepairPlan
+from schemapilot.matrix import CompatibilityMatrix
+
+__all__ = [
