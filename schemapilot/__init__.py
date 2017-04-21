@@ -28,3 +28,7 @@ from schemapilot.repair import repair_payload, RepairPlan
 from schemapilot.matrix import CompatibilityMatrix
 
 __all__ = [
+    "Contract",
+    "FieldSpec",
+    "load_contract",
+    "Fuzzer",
