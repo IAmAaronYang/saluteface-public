@@ -32,3 +32,6 @@ __all__ = [
     "FieldSpec",
     "load_contract",
     "Fuzzer",
+    "FuzzCase",
+    "Validator",
+    "ValidationResult",
