@@ -22,3 +22,13 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from typing import List, Optional
+
+from schemapilot.contract import load_contract, ContractError
+from schemapilot.fuzzer import Fuzzer
+from schemapilot.matrix import CompatibilityMatrix
+from schemapilot.repair import repair_payload
+from schemapilot.report import run_report, to_json, to_markdown
+from schemapilot.validator import Validator
+
+
