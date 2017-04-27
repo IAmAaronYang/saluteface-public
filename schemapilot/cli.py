@@ -13,3 +13,12 @@ Commands
 ``report``    Run a full fuzz+validate pass and emit JSON or Markdown.
 ``matrix``    Build a compatibility matrix across multiple contracts.
 
+All commands read/write JSON and never touch the network.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
