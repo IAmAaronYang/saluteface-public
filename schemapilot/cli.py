@@ -32,3 +32,12 @@ from schemapilot.report import run_report, to_json, to_markdown
 from schemapilot.validator import Validator
 
 
+def _read_json(path: str):
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def _cmd_inspect(args: argparse.Namespace) -> int:
+    contract = load_contract(Path(args.contract))
+    out = contract.to_dict()
+    out["fingerprint"] = contract.fingerprint()
+    print(json.dumps(out, indent=2))
