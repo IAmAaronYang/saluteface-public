@@ -41,3 +41,13 @@ def _cmd_inspect(args: argparse.Namespace) -> int:
     out = contract.to_dict()
     out["fingerprint"] = contract.fingerprint()
     print(json.dumps(out, indent=2))
+    return 0
+
+
+def _cmd_fuzz(args: argparse.Namespace) -> int:
+    contract = load_contract(Path(args.contract))
+    fuzzer = Fuzzer(contract, seed=args.seed)
+    cases = fuzzer.all_cases(valid_count=args.valid, adversarial_per_field=args.adversarial)
+    print(json.dumps([c.to_dict() for c in cases], indent=2))
+    return 0
+
