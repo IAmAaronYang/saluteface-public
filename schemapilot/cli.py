@@ -80,3 +80,12 @@ def _cmd_report(args: argparse.Namespace) -> int:
         print(to_markdown(report))
     else:
         print(to_json(report))
+    return 0
+
+
+def _cmd_matrix(args: argparse.Namespace) -> int:
+    contracts = [load_contract(Path(p)) for p in args.contracts]
+    matrix = CompatibilityMatrix(contracts, threshold=args.threshold).build()
+    print(json.dumps(matrix.to_dict(), indent=2))
+    return 0
+
