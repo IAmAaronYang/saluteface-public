@@ -70,3 +70,13 @@ def _cmd_repair(args: argparse.Namespace) -> int:
 
 def _cmd_report(args: argparse.Namespace) -> int:
     contract = load_contract(Path(args.contract))
+    report = run_report(
+        contract,
+        seed=args.seed,
+        valid_count=args.valid,
+        adversarial_per_field=args.adversarial,
+    )
+    if args.format == "markdown":
+        print(to_markdown(report))
+    else:
+        print(to_json(report))
