@@ -51,3 +51,13 @@ def _cmd_fuzz(args: argparse.Namespace) -> int:
     print(json.dumps([c.to_dict() for c in cases], indent=2))
     return 0
 
+
+def _cmd_validate(args: argparse.Namespace) -> int:
+    contract = load_contract(Path(args.contract))
+    payload = _read_json(args.payload)
+    result = Validator(contract, allow_extra=args.allow_extra).validate(payload)
+    print(json.dumps(result.to_dict(), indent=2))
+    return 0 if result.ok else 1
+
+
+def _cmd_repair(args: argparse.Namespace) -> int:
