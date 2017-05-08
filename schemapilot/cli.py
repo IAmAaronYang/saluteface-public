@@ -89,3 +89,13 @@ def _cmd_matrix(args: argparse.Namespace) -> int:
     print(json.dumps(matrix.to_dict(), indent=2))
     return 0
 
+
+def build_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(prog="schemapilot", description="Structured Output Contract Fuzzer")
+    sub = p.add_subparsers(dest="command", required=True)
+
+    pi = sub.add_parser("inspect", help="parse and normalise a contract")
+    pi.add_argument("contract")
+    pi.set_defaults(func=_cmd_inspect)
+
+    pf = sub.add_parser("fuzz", help="generate deterministic payloads")
