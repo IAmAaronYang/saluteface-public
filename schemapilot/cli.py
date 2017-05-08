@@ -61,3 +61,12 @@ def _cmd_validate(args: argparse.Namespace) -> int:
 
 
 def _cmd_repair(args: argparse.Namespace) -> int:
+    contract = load_contract(Path(args.contract))
+    payload = _read_json(args.payload)
+    plan = repair_payload(contract, payload)
+    print(json.dumps(plan.to_dict(), indent=2))
+    return 0 if plan.repaired_ok else 2
+
+
+def _cmd_report(args: argparse.Namespace) -> int:
+    contract = load_contract(Path(args.contract))
