@@ -99,3 +99,13 @@ def build_parser() -> argparse.ArgumentParser:
     pi.set_defaults(func=_cmd_inspect)
 
     pf = sub.add_parser("fuzz", help="generate deterministic payloads")
+    pf.add_argument("contract")
+    pf.add_argument("--seed", type=int, default=0)
+    pf.add_argument("--valid", type=int, default=3)
+    pf.add_argument("--adversarial", type=int, default=2)
+    pf.set_defaults(func=_cmd_fuzz)
+
+    pv = sub.add_parser("validate", help="validate a payload against a contract")
+    pv.add_argument("contract")
+    pv.add_argument("payload")
+    pv.add_argument("--allow-extra", action="store_true")
