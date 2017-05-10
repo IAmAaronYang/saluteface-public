@@ -20,3 +20,16 @@ Contract grammar (informal)::
     }
 
 Supported field ``type`` values: ``string``, ``integer``, ``number``,
+``boolean``, ``array``, ``object``, ``null``.
+
+Constraints understood by the validator and fuzzer:
+
+===============  ================================================
+Constraint       Applies to
+===============  ================================================
+``required``     any field (default ``false``)
+``enum``         any scalar type
+``min``/``max``  ``integer``, ``number`` (inclusive bounds)
+``min_len``      ``string`` (character count, inclusive)
+``max_len``      ``string`` (character count, inclusive)
+``pattern``      ``string`` (Python ``re`` anchored fullmatch)
