@@ -109,3 +109,12 @@ def build_parser() -> argparse.ArgumentParser:
     pv.add_argument("contract")
     pv.add_argument("payload")
     pv.add_argument("--allow-extra", action="store_true")
+    pv.set_defaults(func=_cmd_validate)
+
+    pr = sub.add_parser("repair", help="compute a minimal repair plan")
+    pr.add_argument("contract")
+    pr.add_argument("payload")
+    pr.set_defaults(func=_cmd_repair)
+
+    prep = sub.add_parser("report", help="fuzz + validate and emit a report")
+    prep.add_argument("contract")
