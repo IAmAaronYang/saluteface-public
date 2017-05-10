@@ -118,3 +118,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     prep = sub.add_parser("report", help="fuzz + validate and emit a report")
     prep.add_argument("contract")
+    prep.add_argument("--seed", type=int, default=0)
+    prep.add_argument("--valid", type=int, default=3)
+    prep.add_argument("--adversarial", type=int, default=3)
+    prep.add_argument("--format", choices=["json", "markdown"], default="json")
+    prep.set_defaults(func=_cmd_report)
+
+    pm = sub.add_parser("matrix", help="cross-contract compatibility matrix")
+    pm.add_argument("contracts", nargs="+")
+    pm.add_argument("--threshold", type=float, default=1.0)
+    pm.set_defaults(func=_cmd_matrix)
