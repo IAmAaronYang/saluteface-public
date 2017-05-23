@@ -33,3 +33,15 @@ Constraint       Applies to
 ``min_len``      ``string`` (character count, inclusive)
 ``max_len``      ``string`` (character count, inclusive)
 ``pattern``      ``string`` (Python ``re`` anchored fullmatch)
+``min_items``    ``array`` (inclusive)
+``max_items``    ``array`` (inclusive)
+``items``        ``array`` (nested :class:`FieldSpec`)
+``default``      any field (used by repair engine)
+``nullable``     any field (allows an explicit ``null`` value)
+===============  ================================================
+"""
+
+from __future__ import annotations
+
+import json
+import re
