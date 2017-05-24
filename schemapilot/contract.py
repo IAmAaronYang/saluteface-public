@@ -58,3 +58,15 @@ class ContractError(ValueError):
 
 
 @dataclass
+class FieldSpec:
+    """A single field's specification within a contract."""
+
+    name: str
+    type: str
+    required: bool = False
+    nullable: bool = False
+    enum: Optional[List[Any]] = None
+    minimum: Optional[float] = None
+    maximum: Optional[float] = None
+    min_len: Optional[int] = None
+    max_len: Optional[int] = None
