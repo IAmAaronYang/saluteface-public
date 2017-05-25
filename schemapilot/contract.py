@@ -96,3 +96,15 @@ class FieldSpec:
         if self.maximum is not None:
             out["max"] = self.maximum
         if self.min_len is not None:
+            out["min_len"] = self.min_len
+        if self.max_len is not None:
+            out["max_len"] = self.max_len
+        if self.pattern is not None:
+            out["pattern"] = self.pattern
+        if self.min_items is not None:
+            out["min_items"] = self.min_items
+        if self.max_items is not None:
+            out["max_items"] = self.max_items
+        if self.items is not None:
+            out["items"] = self.items.to_dict()
+        if self.has_default:
