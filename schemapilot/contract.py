@@ -83,3 +83,16 @@ class FieldSpec:
             return None
         return re.compile(self.pattern)
 
+    def to_dict(self) -> Dict[str, Any]:
+        out: Dict[str, Any] = {"type": self.type}
+        if self.required:
+            out["required"] = True
+        if self.nullable:
+            out["nullable"] = True
+        if self.enum is not None:
+            out["enum"] = self.enum
+        if self.minimum is not None:
+            out["min"] = self.minimum
+        if self.maximum is not None:
+            out["max"] = self.maximum
+        if self.min_len is not None:
