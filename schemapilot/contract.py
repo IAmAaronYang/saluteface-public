@@ -70,3 +70,16 @@ class FieldSpec:
     maximum: Optional[float] = None
     min_len: Optional[int] = None
     max_len: Optional[int] = None
+    pattern: Optional[str] = None
+    min_items: Optional[int] = None
+    max_items: Optional[int] = None
+    items: Optional["FieldSpec"] = None
+    default: Any = None
+    has_default: bool = False
+
+    @property
+    def compiled_pattern(self) -> Optional["re.Pattern[str]"]:
+        if self.pattern is None:
+            return None
+        return re.compile(self.pattern)
+
