@@ -108,3 +108,16 @@ class FieldSpec:
         if self.items is not None:
             out["items"] = self.items.to_dict()
         if self.has_default:
+            out["default"] = self.default
+        return out
+
+
+@dataclass
+class Contract:
+    """A parsed, validated contract."""
+
+    name: str
+    version: int
+    fields: Dict[str, FieldSpec] = field(default_factory=dict)
+
+    @property
