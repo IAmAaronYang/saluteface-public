@@ -121,3 +121,15 @@ class Contract:
     fields: Dict[str, FieldSpec] = field(default_factory=dict)
 
     @property
+    def field_names(self) -> List[str]:
+        return list(self.fields.keys())
+
+    @property
+    def required_fields(self) -> List[str]:
+        return [n for n, f in self.fields.items() if f.required]
+
+    def fingerprint(self) -> str:
+        """A stable, order-independent digest of the contract structure."""
+        import hashlib
+
+        canonical = json.dumps(self.to_dict(), sort_keys=True, separators=(",", ":"))
