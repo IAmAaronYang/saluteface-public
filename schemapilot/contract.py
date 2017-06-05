@@ -133,3 +133,16 @@ class Contract:
         import hashlib
 
         canonical = json.dumps(self.to_dict(), sort_keys=True, separators=(",", ":"))
+        return hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:16]
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "name": self.name,
+            "version": self.version,
+            "fields": {n: f.to_dict() for n, f in self.fields.items()},
+        }
+
+
+def _parse_field(name: str, raw: Dict[str, Any]) -> FieldSpec:
+    if not isinstance(raw, dict):
+        raise ContractError(f"field '{name}' must be an object")
