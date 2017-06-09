@@ -171,3 +171,15 @@ def _parse_field(name: str, raw: Dict[str, Any]) -> FieldSpec:
         max_items=raw.get("max_items"),
         items=items,
     )
+    if "default" in raw:
+        spec.default = raw["default"]
+        spec.has_default = True
+
+    _sanity_check(spec)
+    return spec
+
+
+def _sanity_check(spec: FieldSpec) -> None:
+    if spec.minimum is not None and spec.maximum is not None:
+        if spec.minimum > spec.maximum:
+            raise ContractError(f"field '{spec.name}': min > max")
