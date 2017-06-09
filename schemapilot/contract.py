@@ -146,3 +146,15 @@ class Contract:
 def _parse_field(name: str, raw: Dict[str, Any]) -> FieldSpec:
     if not isinstance(raw, dict):
         raise ContractError(f"field '{name}' must be an object")
+    ftype = raw.get("type")
+    if ftype not in ALL_TYPES:
+        raise ContractError(f"field '{name}' has unknown type {ftype!r}")
+
+    items = None
+    if "items" in raw:
+        if ftype != "array":
+            raise ContractError(f"field '{name}' uses 'items' but is not an array")
+        items = _parse_field(f"{name}[]", raw["items"])
+
+    spec = FieldSpec(
+        name=name,
