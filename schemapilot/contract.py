@@ -158,3 +158,16 @@ def _parse_field(name: str, raw: Dict[str, Any]) -> FieldSpec:
 
     spec = FieldSpec(
         name=name,
+        type=ftype,
+        required=bool(raw.get("required", False)),
+        nullable=bool(raw.get("nullable", False)),
+        enum=raw.get("enum"),
+        minimum=raw.get("min"),
+        maximum=raw.get("max"),
+        min_len=raw.get("min_len"),
+        max_len=raw.get("max_len"),
+        pattern=raw.get("pattern"),
+        min_items=raw.get("min_items"),
+        max_items=raw.get("max_items"),
+        items=items,
+    )
