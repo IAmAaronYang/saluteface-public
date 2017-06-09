@@ -183,3 +183,16 @@ def _sanity_check(spec: FieldSpec) -> None:
     if spec.minimum is not None and spec.maximum is not None:
         if spec.minimum > spec.maximum:
             raise ContractError(f"field '{spec.name}': min > max")
+    if spec.min_len is not None and spec.max_len is not None:
+        if spec.min_len > spec.max_len:
+            raise ContractError(f"field '{spec.name}': min_len > max_len")
+    if spec.min_items is not None and spec.max_items is not None:
+        if spec.min_items > spec.max_items:
+            raise ContractError(f"field '{spec.name}': min_items > max_items")
+    if spec.pattern is not None:
+        try:
+            re.compile(spec.pattern)
+        except re.error as exc:  # pragma: no cover - defensive
+            raise ContractError(f"field '{spec.name}': bad pattern: {exc}") from exc
+
+
