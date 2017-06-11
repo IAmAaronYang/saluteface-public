@@ -21,3 +21,15 @@ Two families of cases are produced:
 The generator uses a small linear-congruential PRNG seeded from the contract
 fingerprint plus the user seed, so it never touches the global ``random``
 state and stays reproducible across processes and platforms.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any, Dict, Iterator, List, Optional
+
+from schemapilot.contract import Contract, FieldSpec
+
+
+class _LCG:
+    """A tiny deterministic PRNG (Numerical Recipes constants)."""
