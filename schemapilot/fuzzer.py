@@ -45,3 +45,15 @@ class _LCG:
 
     def below(self, n: int) -> int:
         return self.next() % max(1, n)
+
+    def pick(self, seq: List[Any]) -> Any:
+        return seq[self.below(len(seq))]
+
+
+@dataclass
+class FuzzCase:
+    """A single generated payload with provenance metadata."""
+
+    case_id: str
+    kind: str  # "valid" | "adversarial"
+    payload: Dict[str, Any]
