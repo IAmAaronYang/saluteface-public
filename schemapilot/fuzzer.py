@@ -57,3 +57,15 @@ class FuzzCase:
     case_id: str
     kind: str  # "valid" | "adversarial"
     payload: Dict[str, Any]
+    mutation: Optional[str] = None  # label of the injected fault (adversarial)
+    target_field: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "case_id": self.case_id,
+            "kind": self.kind,
+            "payload": self.payload,
+            "mutation": self.mutation,
+            "target_field": self.target_field,
+        }
+
