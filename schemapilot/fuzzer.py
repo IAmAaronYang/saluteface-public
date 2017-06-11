@@ -33,3 +33,15 @@ from schemapilot.contract import Contract, FieldSpec
 
 class _LCG:
     """A tiny deterministic PRNG (Numerical Recipes constants)."""
+
+    __slots__ = ("state",)
+
+    def __init__(self, seed: int) -> None:
+        self.state = (seed ^ 0x5DEECE66D) & 0xFFFFFFFFFFFF
+
+    def next(self) -> int:
+        self.state = (self.state * 6364136223846793005 + 1442695040888963407) & 0xFFFFFFFFFFFFFFFF
+        return (self.state >> 16) & 0xFFFFFFFF
+
+    def below(self, n: int) -> int:
+        return self.next() % max(1, n)
