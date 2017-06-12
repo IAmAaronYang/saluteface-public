@@ -69,3 +69,15 @@ class FuzzCase:
             "target_field": self.target_field,
         }
 
+
+_ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789"
+
+
+def _seed_string(rng: _LCG, length: int) -> str:
+    return "".join(_ALPHABET[rng.below(len(_ALPHABET))] for _ in range(max(1, length)))
+
+
+def _valid_scalar(spec: FieldSpec, rng: _LCG) -> Any:
+    if spec.enum:
+        return rng.pick(list(spec.enum))
+    if spec.type == "string":
