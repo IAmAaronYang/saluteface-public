@@ -81,3 +81,14 @@ def _valid_scalar(spec: FieldSpec, rng: _LCG) -> Any:
     if spec.enum:
         return rng.pick(list(spec.enum))
     if spec.type == "string":
+        lo = spec.min_len or 3
+        hi = spec.max_len or max(lo, 8)
+        # If a pattern is present we cannot generically satisfy it; emit a
+        # deterministic sample from the fixtures instead of guessing.
+        if spec.pattern:
+            return _pattern_sample(spec.pattern, rng)
+        return _seed_string(rng, lo + rng.below(hi - lo + 1))
+    if spec.type == "integer":
+        lo = int(spec.minimum) if spec.minimum is not None else 0
+        hi = int(spec.maximum) if spec.maximum is not None else lo + 100
+        return lo + rng.below(hi - lo + 1)
