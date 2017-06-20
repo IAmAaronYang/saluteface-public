@@ -92,3 +92,15 @@ def _valid_scalar(spec: FieldSpec, rng: _LCG) -> Any:
         lo = int(spec.minimum) if spec.minimum is not None else 0
         hi = int(spec.maximum) if spec.maximum is not None else lo + 100
         return lo + rng.below(hi - lo + 1)
+    if spec.type == "number":
+        lo = spec.minimum if spec.minimum is not None else 0.0
+        hi = spec.maximum if spec.maximum is not None else lo + 100.0
+        span = hi - lo
+        return round(lo + (rng.next() / 0xFFFFFFFF) * span, 4)
+    if spec.type == "boolean":
+        return bool(rng.below(2))
+    if spec.type == "null":
+        return None
+    return None
+
+
