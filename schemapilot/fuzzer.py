@@ -104,3 +104,15 @@ def _valid_scalar(spec: FieldSpec, rng: _LCG) -> Any:
     return None
 
 
+_HEX_ALPHABET = "0123456789abcdef"
+
+
+def _hex_string(rng: _LCG, length: int) -> str:
+    return "".join(_HEX_ALPHABET[rng.below(16)] for _ in range(max(1, length)))
+
+
+def _pattern_sample(pattern: str, rng: _LCG) -> str:
+    """Best-effort deterministic sample for a handful of common patterns."""
+    known = {
+        r"^INV-[0-9]{6}$": f"INV-{rng.below(1000000):06d}",
+        r"^[A-Z]{3}$": "USD",
