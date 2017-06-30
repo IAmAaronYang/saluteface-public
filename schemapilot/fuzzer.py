@@ -128,3 +128,15 @@ def _pattern_sample(pattern: str, rng: _LCG) -> str:
 def _valid_value(spec: FieldSpec, rng: _LCG) -> Any:
     if spec.type == "array":
         count = spec.min_items or 1
+        item_spec = spec.items or FieldSpec(name=spec.name + "[]", type="string")
+        return [_valid_value(item_spec, rng) for _ in range(count)]
+    if spec.type == "object":
+        return {"k": _seed_string(rng, 4)}
+    return _valid_scalar(spec, rng)
+
+
+class Fuzzer:
+    """Deterministic generator over a contract."""
+
+    def __init__(self, contract: Contract, seed: int = 0) -> None:
+        self.contract = contract
