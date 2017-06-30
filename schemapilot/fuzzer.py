@@ -116,3 +116,15 @@ def _pattern_sample(pattern: str, rng: _LCG) -> str:
     known = {
         r"^INV-[0-9]{6}$": f"INV-{rng.below(1000000):06d}",
         r"^[A-Z]{3}$": "USD",
+        r"^[a-f0-9]{8}$": _hex_string(rng, 8),
+    }
+    if pattern in known:
+        return known[pattern]
+    # Fallback: produce a token that at least resembles the literal prefix.
+    literal = "".join(c for c in pattern if c.isalnum() or c in "-_")
+    return literal or _seed_string(rng, 6)
+
+
+def _valid_value(spec: FieldSpec, rng: _LCG) -> Any:
+    if spec.type == "array":
+        count = spec.min_items or 1
