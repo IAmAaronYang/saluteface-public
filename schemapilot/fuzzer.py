@@ -152,3 +152,15 @@ class Fuzzer:
                 continue
             payload[name] = _valid_value(spec, rng)
         return payload
+
+    # ---- adversarial mutations ----------------------------------------
+    def _mutations_for(self, spec: FieldSpec) -> List[str]:
+        muts: List[str] = ["wrong_type"]
+        if spec.required:
+            muts.append("drop_required")
+        if spec.enum:
+            muts.append("enum_miss")
+        if spec.type in ("integer", "number"):
+            if spec.maximum is not None:
+                muts.append("above_max")
+            if spec.minimum is not None:
