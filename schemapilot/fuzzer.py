@@ -140,3 +140,15 @@ class Fuzzer:
 
     def __init__(self, contract: Contract, seed: int = 0) -> None:
         self.contract = contract
+        base = int(contract.fingerprint(), 16) & 0xFFFFFFFF
+        self.seed = (base ^ (seed * 2654435761)) & 0xFFFFFFFF
+
+    # ---- valid payloads ------------------------------------------------
+    def valid_payload(self, rng: _LCG) -> Dict[str, Any]:
+        payload: Dict[str, Any] = {}
+        for name, spec in self.contract.fields.items():
+            if not spec.required and rng.below(4) == 0 and not spec.has_default:
+                # Occasionally omit optional fields to broaden coverage.
+                continue
+            payload[name] = _valid_value(spec, rng)
+        return payload
