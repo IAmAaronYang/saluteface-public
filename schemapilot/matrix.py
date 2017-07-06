@@ -8,3 +8,11 @@ into a matrix, along with a compatibility *verdict* per pair:
 
 ``identical``
     Same fingerprint.
+``forward``
+    New contract accepts old payloads (relaxed constraints / added optionals).
+``backward``
+    Old contract accepts new payloads.
+``full``
+    Both directions pass — safe to deploy in any order.
+``breaking``
+    Neither direction reaches the acceptance threshold.
