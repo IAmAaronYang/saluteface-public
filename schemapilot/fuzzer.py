@@ -164,3 +164,15 @@ class Fuzzer:
             if spec.maximum is not None:
                 muts.append("above_max")
             if spec.minimum is not None:
+                muts.append("below_min")
+        if spec.type == "string":
+            if spec.pattern:
+                muts.append("pattern_miss")
+            if spec.max_len is not None:
+                muts.append("too_long")
+        if spec.type == "array":
+            if spec.min_items:
+                muts.append("too_few_items")
+            if spec.max_items is not None:
+                muts.append("too_many_items")
+        if not spec.nullable:
