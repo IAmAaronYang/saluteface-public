@@ -188,3 +188,15 @@ class Fuzzer:
         elif mut == "enum_miss":
             p[name] = "__not_in_enum__"
         elif mut == "above_max":
+            p[name] = (spec.maximum or 0) + 1000
+        elif mut == "below_min":
+            p[name] = (spec.minimum or 0) - 1000
+        elif mut == "pattern_miss":
+            p[name] = "###invalid###"
+        elif mut == "too_long":
+            p[name] = "x" * ((spec.max_len or 8) + 16)
+        elif mut == "too_few_items":
+            p[name] = []
+        elif mut == "too_many_items":
+            p[name] = [1] * ((spec.max_items or 1) + 8)
+        elif mut == "null_injection":
