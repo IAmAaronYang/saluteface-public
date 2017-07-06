@@ -176,3 +176,15 @@ class Fuzzer:
             if spec.max_items is not None:
                 muts.append("too_many_items")
         if not spec.nullable:
+            muts.append("null_injection")
+        return muts
+
+    def _apply_mutation(self, base: Dict[str, Any], name: str, spec: FieldSpec, mut: str, rng: _LCG) -> Dict[str, Any]:
+        p = dict(base)
+        if mut == "drop_required":
+            p.pop(name, None)
+        elif mut == "wrong_type":
+            p[name] = 12345 if spec.type == "string" else "not-a-" + spec.type
+        elif mut == "enum_miss":
+            p[name] = "__not_in_enum__"
+        elif mut == "above_max":
