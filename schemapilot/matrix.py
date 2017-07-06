@@ -1,0 +1,10 @@
+"""Contract compatibility matrix.
+
+When a contract evolves (``invoice.v1`` -> ``invoice.v2``), you want to know
+whether payloads produced for one version still satisfy the other. The
+:class:`CompatibilityMatrix` cross-validates the *valid* fixtures generated
+for each contract against every other contract and summarises the pass rate
+into a matrix, along with a compatibility *verdict* per pair:
+
+``identical``
+    Same fingerprint.
