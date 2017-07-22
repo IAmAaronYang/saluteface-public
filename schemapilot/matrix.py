@@ -16,3 +16,10 @@ into a matrix, along with a compatibility *verdict* per pair:
     Both directions pass — safe to deploy in any order.
 ``breaking``
     Neither direction reaches the acceptance threshold.
+
+The matrix is the backbone of SchemaPilot's "will this deploy break my
+downstream consumers?" workflow.
+"""
+
+from __future__ import annotations
+
