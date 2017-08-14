@@ -30,3 +30,11 @@ from schemapilot.contract import Contract
 from schemapilot.fuzzer import Fuzzer
 from schemapilot.validator import Validator
 
+
+@dataclass
+class Cell:
+    producer: str
+    consumer: str
+    total: int
+    passed: int
+
