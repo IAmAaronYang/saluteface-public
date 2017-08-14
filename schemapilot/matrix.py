@@ -45,3 +45,11 @@ class Cell:
     def to_dict(self) -> Dict[str, object]:
         return {
             "producer": self.producer,
+            "consumer": self.consumer,
+            "total": self.total,
+            "passed": self.passed,
+            "rate": round(self.rate, 4),
+        }
+
+
+class CompatibilityMatrix:
