@@ -38,3 +38,10 @@ class Cell:
     total: int
     passed: int
 
+    @property
+    def rate(self) -> float:
+        return self.passed / self.total if self.total else 0.0
+
+    def to_dict(self) -> Dict[str, object]:
+        return {
+            "producer": self.producer,
