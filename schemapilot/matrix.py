@@ -53,3 +53,10 @@ class Cell:
 
 
 class CompatibilityMatrix:
+    def __init__(self, contracts: List[Contract], *, threshold: float = 1.0, sample: int = 6) -> None:
+        self.contracts = contracts
+        self.threshold = threshold
+        self.sample = sample
+        self.cells: Dict[str, Cell] = {}
+
+    def _label(self, c: Contract) -> str:
