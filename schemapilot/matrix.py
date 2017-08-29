@@ -67,3 +67,11 @@ class CompatibilityMatrix:
         pools = {}
         for c in self.contracts:
             fz = Fuzzer(c, seed=7)
+            pools[self._label(c)] = [
+                fc.payload for fc in fz.generate(valid_count=self.sample, adversarial_per_field=0)
+            ]
+        for producer in self.contracts:
+            plabel = self._label(producer)
+            for consumer in self.contracts:
+                clabel = self._label(consumer)
+                validator = Validator(consumer, allow_extra=True)
