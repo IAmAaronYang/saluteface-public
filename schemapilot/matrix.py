@@ -60,3 +60,10 @@ class CompatibilityMatrix:
         self.cells: Dict[str, Cell] = {}
 
     def _label(self, c: Contract) -> str:
+        return f"{c.name}@{c.version}"
+
+    def build(self) -> "CompatibilityMatrix":
+        # Generate a fixed pool of valid payloads per contract.
+        pools = {}
+        for c in self.contracts:
+            fz = Fuzzer(c, seed=7)
