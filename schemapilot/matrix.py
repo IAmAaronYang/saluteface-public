@@ -75,3 +75,10 @@ class CompatibilityMatrix:
             for consumer in self.contracts:
                 clabel = self._label(consumer)
                 validator = Validator(consumer, allow_extra=True)
+                payloads = pools[plabel]
+                passed = sum(1 for p in payloads if validator.validate(p).ok)
+                self.cells[f"{plabel}->{clabel}"] = Cell(plabel, clabel, len(payloads), passed)
+        return self
+
+    def verdict(self, a: Contract, b: Contract) -> str:
+        la, lb = self._label(a), self._label(b)
