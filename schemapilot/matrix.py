@@ -82,3 +82,10 @@ class CompatibilityMatrix:
 
     def verdict(self, a: Contract, b: Contract) -> str:
         la, lb = self._label(a), self._label(b)
+        if a.fingerprint() == b.fingerprint():
+            return "identical"
+        fwd = self.cells[f"{la}->{lb}"].rate >= self.threshold
+        bwd = self.cells[f"{lb}->{la}"].rate >= self.threshold
+        if fwd and bwd:
+            return "full"
+        if fwd:
