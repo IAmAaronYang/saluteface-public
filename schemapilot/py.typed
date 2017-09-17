@@ -1,3 +1,4 @@
 # Marker file for PEP 561.
 #
 # The schemapilot package ships inline type annotations. This file tells
+# type checkers (mypy, pyright) to read them when the package is installed
