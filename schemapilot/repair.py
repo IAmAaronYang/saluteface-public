@@ -28,3 +28,14 @@ from typing import Any, Dict, List
 
 from schemapilot.contract import Contract, FieldSpec
 from schemapilot.validator import Validator, Violation
+
+_ZERO = {
+    "string": "",
+    "integer": 0,
+    "number": 0.0,
+    "boolean": False,
+    "array": [],
+    "object": {},
+    "null": None,
+}
+
