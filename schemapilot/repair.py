@@ -17,3 +17,14 @@ payload conform, plus the repaired payload itself. The engine favours the
 - ``TOO_FEW_ITEMS``/``TOO_MANY_ITEMS`` -> pad or trim the array.
 
 Each repair is described by an :class:`Edit` so callers can present a diff and
+audit the transformation. The engine re-validates after applying edits and
+reports whether the payload is now conforming.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any, Dict, List
+
+from schemapilot.contract import Contract, FieldSpec
+from schemapilot.validator import Validator, Violation
