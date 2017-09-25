@@ -50,3 +50,14 @@ class Edit:
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "op": self.op,
+            "path": self.path,
+            "before": self.before,
+            "after": self.after,
+            "reason": self.reason,
+        }
+
+
+@dataclass
+class RepairPlan:
+    original_ok: bool
