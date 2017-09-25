@@ -39,3 +39,14 @@ _ZERO = {
     "null": None,
 }
 
+
+@dataclass
+class Edit:
+    op: str  # "insert" | "delete" | "replace" | "clamp" | "coerce" | "truncate" | "pad"
+    path: str
+    before: Any = None
+    after: Any = None
+    reason: str = ""
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
