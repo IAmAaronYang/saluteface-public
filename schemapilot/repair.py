@@ -61,3 +61,14 @@ class Edit:
 @dataclass
 class RepairPlan:
     original_ok: bool
+    repaired_ok: bool
+    edits: List[Edit] = field(default_factory=list)
+    payload: Dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "original_ok": self.original_ok,
+            "repaired_ok": self.repaired_ok,
+            "edit_count": len(self.edits),
+            "edits": [e.to_dict() for e in self.edits],
+            "payload": self.payload,
