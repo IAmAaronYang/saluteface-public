@@ -72,3 +72,14 @@ class RepairPlan:
             "edit_count": len(self.edits),
             "edits": [e.to_dict() for e in self.edits],
             "payload": self.payload,
+        }
+
+
+_PATTERN_SEEDS = {
+    r"^INV-[0-9]{6}$": "INV-000000",
+    r"^[A-Z]{3}$": "USD",
+    r"^[a-f0-9]{8}$": "0a1b2c3d",
+}
+
+
+def _pattern_seed(spec: FieldSpec) -> str:
