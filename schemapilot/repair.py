@@ -83,3 +83,14 @@ _PATTERN_SEEDS = {
 
 
 def _pattern_seed(spec: FieldSpec) -> str:
+    """Return a value that satisfies a known pattern, else a literal token."""
+    if spec.pattern in _PATTERN_SEEDS:
+        return _PATTERN_SEEDS[spec.pattern]
+    if spec.enum:
+        return str(spec.enum[0])
+    return "".join(c for c in (spec.pattern or "") if c.isalnum()) or "seed"
+
+
+def _default_value(spec: FieldSpec) -> Any:
+    if spec.has_default:
+        return spec.default
