@@ -94,3 +94,13 @@ def _pattern_seed(spec: FieldSpec) -> str:
 def _default_value(spec: FieldSpec) -> Any:
     if spec.has_default:
         return spec.default
+    if spec.enum:
+        return spec.enum[0]
+    return _ZERO.get(spec.type, None)
+
+
+def _try_coerce(value: Any, ftype: str) -> Any:
+    try:
+        if ftype == "integer":
+            return int(value)
+        if ftype == "number":
