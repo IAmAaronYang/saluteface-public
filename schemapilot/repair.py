@@ -104,3 +104,14 @@ def _try_coerce(value: Any, ftype: str) -> Any:
         if ftype == "integer":
             return int(value)
         if ftype == "number":
+            return float(value)
+        if ftype == "string":
+            return str(value)
+        if ftype == "boolean":
+            if isinstance(value, str):
+                return value.strip().lower() in ("true", "1", "yes")
+            return bool(value)
+    except (TypeError, ValueError):
+        return None
+    return None
+
