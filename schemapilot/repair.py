@@ -126,3 +126,14 @@ def _repair_one(payload: Dict[str, Any], v: Violation, contract: Contract, edits
         edits.append(Edit("insert", root, None, val, "insert default for required field"))
         return
 
+    if v.code == "UNEXPECTED_FIELD":
+        before = payload.pop(v.path, None)
+        edits.append(Edit("delete", v.path, before, None, "drop field absent from contract"))
+        return
+
+    if spec is None or root not in payload:
+        return
+
+    current = payload[root]
+
+    if v.code == "NULL_NOT_ALLOWED":
