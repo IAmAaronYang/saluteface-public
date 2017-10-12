@@ -115,3 +115,14 @@ def _try_coerce(value: Any, ftype: str) -> Any:
         return None
     return None
 
+
+def _repair_one(payload: Dict[str, Any], v: Violation, contract: Contract, edits: List[Edit]) -> None:
+    root = v.path.split("[")[0].split(".")[0]
+    spec = contract.fields.get(root)
+
+    if v.code == "MISSING_REQUIRED" and spec is not None:
+        val = _default_value(spec)
+        payload[root] = val
+        edits.append(Edit("insert", root, None, val, "insert default for required field"))
+        return
+
