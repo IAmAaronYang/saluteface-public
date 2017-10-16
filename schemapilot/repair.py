@@ -137,3 +137,14 @@ def _repair_one(payload: Dict[str, Any], v: Violation, contract: Contract, edits
     current = payload[root]
 
     if v.code == "NULL_NOT_ALLOWED":
+        val = _default_value(spec)
+        payload[root] = val
+        edits.append(Edit("replace", root, None, val, "replace disallowed null"))
+    elif v.code == "TYPE_MISMATCH":
+        coerced = _try_coerce(current, spec.type)
+        val = coerced if coerced is not None else _default_value(spec)
+        payload[root] = val
+        edits.append(Edit("coerce" if coerced is not None else "replace", root, current, val, f"align to type {spec.type}"))
+    elif v.code == "ENUM_VIOLATION" and spec.enum:
+        payload[root] = spec.enum[0]
+        edits.append(Edit("replace", root, current, spec.enum[0], "snap to first enum member"))
