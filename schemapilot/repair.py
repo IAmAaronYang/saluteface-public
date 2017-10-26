@@ -159,3 +159,14 @@ def _repair_one(payload: Dict[str, Any], v: Violation, contract: Contract, edits
         payload[root] = padded
         edits.append(Edit("pad", root, current, padded, "pad string to min_len"))
     elif v.code == "PATTERN_MISMATCH" and spec.pattern is not None:
+        replacement = _pattern_seed(spec)
+        payload[root] = replacement
+        edits.append(Edit("replace", root, current, replacement, "substitute pattern-conforming seed"))
+    elif v.code == "TOO_LONG" and spec.max_len is not None:
+        trimmed = str(current)[: spec.max_len]
+        payload[root] = trimmed
+        edits.append(Edit("truncate", root, current, trimmed, "truncate string to max_len"))
+    elif v.code == "TOO_FEW_ITEMS" and spec.min_items is not None:
+        item = _default_value(spec.items) if spec.items else 0
+        while len(payload[root]) < spec.min_items:
+            payload[root].append(item)
