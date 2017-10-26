@@ -148,3 +148,14 @@ def _repair_one(payload: Dict[str, Any], v: Violation, contract: Contract, edits
     elif v.code == "ENUM_VIOLATION" and spec.enum:
         payload[root] = spec.enum[0]
         edits.append(Edit("replace", root, current, spec.enum[0], "snap to first enum member"))
+    elif v.code == "BELOW_MIN" and spec.minimum is not None:
+        payload[root] = spec.minimum
+        edits.append(Edit("clamp", root, current, spec.minimum, "clamp to minimum"))
+    elif v.code == "ABOVE_MAX" and spec.maximum is not None:
+        payload[root] = spec.maximum
+        edits.append(Edit("clamp", root, current, spec.maximum, "clamp to maximum"))
+    elif v.code == "TOO_SHORT" and spec.min_len is not None:
+        padded = str(current).ljust(spec.min_len, "x")
+        payload[root] = padded
+        edits.append(Edit("pad", root, current, padded, "pad string to min_len"))
+    elif v.code == "PATTERN_MISMATCH" and spec.pattern is not None:
