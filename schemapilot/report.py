@@ -10,3 +10,11 @@ Both formats are derived from the same in-memory :class:`RunReport` so the
 two never drift.
 """
 
+from __future__ import annotations
+
+import json
+from dataclasses import dataclass, field
+from typing import Any, Dict, List
+
+from schemapilot.contract import Contract
+from schemapilot.fuzzer import Fuzzer, FuzzCase
