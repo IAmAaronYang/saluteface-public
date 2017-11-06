@@ -18,3 +18,12 @@ from typing import Any, Dict, List
 
 from schemapilot.contract import Contract
 from schemapilot.fuzzer import Fuzzer, FuzzCase
+from schemapilot.validator import Validator
+
+
+@dataclass
+class CaseOutcome:
+    case: FuzzCase
+    ok: bool
+    codes: List[str]
+    expected_fault: bool  # True for adversarial cases (should fail)
