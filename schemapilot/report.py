@@ -44,3 +44,11 @@ class CaseOutcome:
             "correct": self.correct,
         }
 
+
+@dataclass
+class RunReport:
+    contract: Contract
+    outcomes: List[CaseOutcome] = field(default_factory=list)
+
+    @property
+    def total(self) -> int:
