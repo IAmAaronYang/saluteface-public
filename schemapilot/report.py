@@ -35,3 +35,12 @@ class CaseOutcome:
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "case_id": self.case.case_id,
+            "kind": self.case.kind,
+            "mutation": self.case.mutation,
+            "target_field": self.case.target_field,
+            "ok": self.ok,
+            "codes": self.codes,
+            "correct": self.correct,
+        }
+
