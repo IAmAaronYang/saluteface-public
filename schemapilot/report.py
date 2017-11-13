@@ -27,3 +27,11 @@ class CaseOutcome:
     ok: bool
     codes: List[str]
     expected_fault: bool  # True for adversarial cases (should fail)
+
+    @property
+    def correct(self) -> bool:
+        # Valid cases should pass; adversarial cases should fail.
+        return self.ok != self.expected_fault
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
