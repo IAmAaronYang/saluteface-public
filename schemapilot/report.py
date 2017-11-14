@@ -61,3 +61,11 @@ class RunReport:
     @property
     def accuracy(self) -> float:
         return self.correct / self.total if self.total else 0.0
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "contract": {
+                "name": self.contract.name,
+                "version": self.contract.version,
+                "fingerprint": self.contract.fingerprint(),
+            },
