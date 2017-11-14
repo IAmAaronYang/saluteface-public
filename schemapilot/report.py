@@ -52,3 +52,12 @@ class RunReport:
 
     @property
     def total(self) -> int:
+        return len(self.outcomes)
+
+    @property
+    def correct(self) -> int:
+        return sum(1 for o in self.outcomes if o.correct)
+
+    @property
+    def accuracy(self) -> float:
+        return self.correct / self.total if self.total else 0.0
