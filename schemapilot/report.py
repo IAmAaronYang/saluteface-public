@@ -78,3 +78,11 @@ class RunReport:
             },
             "outcomes": [o.to_dict() for o in self.outcomes],
         }
+
+
+def run_report(contract: Contract, *, seed: int = 0, valid_count: int = 3, adversarial_per_field: int = 3) -> RunReport:
+    fuzzer = Fuzzer(contract, seed=seed)
+    validator = Validator(contract)
+    report = RunReport(contract=contract)
+    for case in fuzzer.generate(valid_count, adversarial_per_field):
+        result = validator.validate(case.payload)
