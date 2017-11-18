@@ -69,3 +69,12 @@ class RunReport:
                 "version": self.contract.version,
                 "fingerprint": self.contract.fingerprint(),
             },
+            "summary": {
+                "total": self.total,
+                "correct": self.correct,
+                "accuracy": round(self.accuracy, 4),
+                "valid_cases": sum(1 for o in self.outcomes if o.case.kind == "valid"),
+                "adversarial_cases": sum(1 for o in self.outcomes if o.case.kind == "adversarial"),
+            },
+            "outcomes": [o.to_dict() for o in self.outcomes],
+        }
