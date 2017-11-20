@@ -86,3 +86,12 @@ def run_report(contract: Contract, *, seed: int = 0, valid_count: int = 3, adver
     report = RunReport(contract=contract)
     for case in fuzzer.generate(valid_count, adversarial_per_field):
         result = validator.validate(case.payload)
+        report.outcomes.append(
+            CaseOutcome(
+                case=case,
+                ok=result.ok,
+                codes=result.codes,
+                expected_fault=(case.kind == "adversarial"),
+            )
+        )
+    return report
