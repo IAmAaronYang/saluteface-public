@@ -95,3 +95,11 @@ def run_report(contract: Contract, *, seed: int = 0, valid_count: int = 3, adver
             )
         )
     return report
+
+
+def to_json(report: RunReport, *, indent: int = 2) -> str:
+    return json.dumps(report.to_dict(), indent=indent, sort_keys=False)
+
+
+def to_markdown(report: RunReport) -> str:
+    d = report.to_dict()
