@@ -24,3 +24,13 @@ Code                   Meaning
 ``TOO_MANY_ITEMS``     array longer than ``max_items``
 ``ITEM_INVALID``       an array element failed nested validation
 =====================  ==============================================
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any, Dict, List
+
+from schemapilot.contract import Contract, FieldSpec
+
+_PY_TYPE = {
