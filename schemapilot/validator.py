@@ -14,3 +14,13 @@ Code                   Meaning
 ``UNEXPECTED_FIELD``   a field not present in the contract
 ``TYPE_MISMATCH``      value type does not match the spec
 ``NULL_NOT_ALLOWED``   explicit null on a non-nullable field
+``ENUM_VIOLATION``     scalar not in the declared enum
+``BELOW_MIN``          numeric below inclusive minimum
+``ABOVE_MAX``          numeric above inclusive maximum
+``TOO_SHORT``          string shorter than ``min_len``
+``TOO_LONG``           string longer than ``max_len``
+``PATTERN_MISMATCH``   string fails the anchored pattern
+``TOO_FEW_ITEMS``      array shorter than ``min_items``
+``TOO_MANY_ITEMS``     array longer than ``max_items``
+``ITEM_INVALID``       an array element failed nested validation
+=====================  ==============================================
