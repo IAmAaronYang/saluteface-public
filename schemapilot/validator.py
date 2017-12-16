@@ -43,3 +43,13 @@ _PY_TYPE = {
 }
 
 
+@dataclass
+class Violation:
+    code: str
+    path: str
+    message: str
+    observed: Any = None
+    expected: Any = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
