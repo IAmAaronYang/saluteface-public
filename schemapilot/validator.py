@@ -34,3 +34,12 @@ from typing import Any, Dict, List
 from schemapilot.contract import Contract, FieldSpec
 
 _PY_TYPE = {
+    "string": str,
+    "integer": int,
+    "number": (int, float),
+    "boolean": bool,
+    "array": list,
+    "object": dict,
+}
+
+
