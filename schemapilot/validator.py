@@ -63,3 +63,12 @@ class Violation:
 
 @dataclass
 class ValidationResult:
+    ok: bool
+    violations: List[Violation] = field(default_factory=list)
+
+    @property
+    def codes(self) -> List[str]:
+        return [v.code for v in self.violations]
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
