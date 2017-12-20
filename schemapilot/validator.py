@@ -53,3 +53,13 @@ class Violation:
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "code": self.code,
+            "path": self.path,
+            "message": self.message,
+            "observed": self.observed,
+            "expected": self.expected,
+        }
+
+
+@dataclass
+class ValidationResult:
