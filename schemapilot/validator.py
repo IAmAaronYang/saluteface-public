@@ -72,3 +72,13 @@ class ValidationResult:
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "ok": self.ok,
+            "violation_count": len(self.violations),
+            "violations": [v.to_dict() for v in self.violations],
+        }
+
+
+def _type_ok(value: Any, ftype: str) -> bool:
+    if ftype == "null":
+        return value is None
+    if ftype == "integer":
