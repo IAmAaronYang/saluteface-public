@@ -82,3 +82,13 @@ def _type_ok(value: Any, ftype: str) -> bool:
     if ftype == "null":
         return value is None
     if ftype == "integer":
+        # bool is a subclass of int; reject it for integer fields.
+        return isinstance(value, int) and not isinstance(value, bool)
+    if ftype == "number":
+        return isinstance(value, (int, float)) and not isinstance(value, bool)
+    if ftype == "boolean":
+        return isinstance(value, bool)
+    expected = _PY_TYPE.get(ftype)
+    return expected is not None and isinstance(value, expected)
+
+
