@@ -92,3 +92,13 @@ def _type_ok(value: Any, ftype: str) -> bool:
     return expected is not None and isinstance(value, expected)
 
 
+class Validator:
+    """Validate payloads against a contract."""
+
+    def __init__(self, contract: Contract, *, allow_extra: bool = False) -> None:
+        self.contract = contract
+        self.allow_extra = allow_extra
+
+    def validate(self, payload: Dict[str, Any]) -> ValidationResult:
+        violations: List[Violation] = []
+
