@@ -111,3 +111,13 @@ class Validator:
         for name in self.contract.required_fields:
             if name not in payload:
                 violations.append(Violation("MISSING_REQUIRED", name, f"required field '{name}' is missing"))
+
+        if not self.allow_extra:
+            for name in payload:
+                if name not in self.contract.fields:
+                    violations.append(Violation("UNEXPECTED_FIELD", name, f"field '{name}' is not in the contract"))
+
+        for name, spec in self.contract.fields.items():
+            if name not in payload:
+                continue
+            self._check_field(name, spec, payload[name], violations)
