@@ -102,3 +102,12 @@ class Validator:
     def validate(self, payload: Dict[str, Any]) -> ValidationResult:
         violations: List[Violation] = []
 
+        if not isinstance(payload, dict):
+            return ValidationResult(
+                ok=False,
+                violations=[Violation("TYPE_MISMATCH", "$", "payload must be an object", type(payload).__name__, "object")],
+            )
+
+        for name in self.contract.required_fields:
+            if name not in payload:
+                violations.append(Violation("MISSING_REQUIRED", name, f"required field '{name}' is missing"))
