@@ -121,3 +121,13 @@ class Validator:
             if name not in payload:
                 continue
             self._check_field(name, spec, payload[name], violations)
+
+        return ValidationResult(ok=not violations, violations=violations)
+
+    def _check_field(self, path: str, spec: FieldSpec, value: Any, out: List[Violation]) -> None:
+        if value is None:
+            if spec.nullable or spec.type == "null":
+                return
+            out.append(Violation("NULL_NOT_ALLOWED", path, f"field '{path}' may not be null"))
+            return
+
