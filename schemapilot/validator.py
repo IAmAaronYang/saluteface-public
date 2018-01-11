@@ -131,3 +131,12 @@ class Validator:
             out.append(Violation("NULL_NOT_ALLOWED", path, f"field '{path}' may not be null"))
             return
 
+        if not _type_ok(value, spec.type):
+            out.append(Violation("TYPE_MISMATCH", path, f"expected {spec.type}", type(value).__name__, spec.type))
+            return
+
+        if spec.enum is not None and value not in spec.enum:
+            out.append(Violation("ENUM_VIOLATION", path, f"value not in enum", value, spec.enum))
+
+        if spec.type in ("integer", "number"):
+            if spec.minimum is not None and value < spec.minimum:
