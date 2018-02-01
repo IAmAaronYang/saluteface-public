@@ -53,3 +53,10 @@ public sealed class Contract
         if (!root.TryGetProperty("name", out var nameEl) ||
             !root.TryGetProperty("fields", out var fieldsEl))
         {
+            throw new FormatException("contract requires 'name' and 'fields'");
+        }
+
+        var fields = new Dictionary<string, FieldSpec>();
+        foreach (var prop in fieldsEl.EnumerateObject())
+        {
+            fields[prop.Name] = ParseField(prop.Name, prop.Value);
