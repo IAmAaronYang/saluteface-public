@@ -45,3 +45,11 @@ public sealed class Contract
         "string", "integer", "number", "boolean", "array", "object", "null"
     };
 
+    /// <summary>Parse a contract from a JSON document.</summary>
+    public static Contract Parse(string json)
+    {
+        using var doc = JsonDocument.Parse(json);
+        var root = doc.RootElement;
+        if (!root.TryGetProperty("name", out var nameEl) ||
+            !root.TryGetProperty("fields", out var fieldsEl))
+        {
