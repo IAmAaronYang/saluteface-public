@@ -30,3 +30,11 @@ public sealed class FieldSpec
         Pattern is null ? null : _compiled ??= new Regex("^(?:" + Pattern + ")$");
 }
 
+/// <summary>A parsed contract: named fields plus version metadata.</summary>
+public sealed class Contract
+{
+    public string Name { get; init; } = "";
+    public int Version { get; init; } = 1;
+    public Dictionary<string, FieldSpec> Fields { get; init; } = new();
+
+    public IEnumerable<string> RequiredFields =>
