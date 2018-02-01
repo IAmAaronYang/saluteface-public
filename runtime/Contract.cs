@@ -38,3 +38,10 @@ public sealed class Contract
     public Dictionary<string, FieldSpec> Fields { get; init; } = new();
 
     public IEnumerable<string> RequiredFields =>
+        Fields.Where(kv => kv.Value.Required).Select(kv => kv.Key);
+
+    public static readonly HashSet<string> AllTypes = new()
+    {
+        "string", "integer", "number", "boolean", "array", "object", "null"
+    };
+
