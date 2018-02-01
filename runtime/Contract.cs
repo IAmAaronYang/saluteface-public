@@ -16,3 +16,10 @@ public sealed class FieldSpec
     public List<JsonElement>? Enum { get; init; }
     public double? Minimum { get; init; }
     public double? Maximum { get; init; }
+    public int? MinLen { get; init; }
+    public int? MaxLen { get; init; }
+    public string? Pattern { get; init; }
+    public int? MinItems { get; init; }
+    public int? MaxItems { get; init; }
+    public FieldSpec? Items { get; init; }
+    public bool HasDefault { get; init; }
