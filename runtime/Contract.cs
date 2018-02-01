@@ -23,3 +23,10 @@ public sealed class FieldSpec
     public int? MaxItems { get; init; }
     public FieldSpec? Items { get; init; }
     public bool HasDefault { get; init; }
+    public JsonElement DefaultValue { get; init; }
+
+    private Regex? _compiled;
+    public Regex? CompiledPattern =>
+        Pattern is null ? null : _compiled ??= new Regex("^(?:" + Pattern + ")$");
+}
+
