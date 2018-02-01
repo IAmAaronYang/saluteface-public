@@ -8,3 +8,11 @@ namespace SchemaPilot.Runtime;
 /// <c>FieldSpec</c> so payloads validate identically in both runtimes.
 /// </summary>
 public sealed class FieldSpec
+{
+    public string Name { get; init; } = "";
+    public string Type { get; init; } = "string";
+    public bool Required { get; init; }
+    public bool Nullable { get; init; }
+    public List<JsonElement>? Enum { get; init; }
+    public double? Minimum { get; init; }
+    public double? Maximum { get; init; }
