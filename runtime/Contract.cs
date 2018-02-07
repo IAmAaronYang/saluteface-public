@@ -60,3 +60,10 @@ public sealed class Contract
         foreach (var prop in fieldsEl.EnumerateObject())
         {
             fields[prop.Name] = ParseField(prop.Name, prop.Value);
+        }
+
+        return new Contract
+        {
+            Name = nameEl.GetString() ?? "",
+            Version = root.TryGetProperty("version", out var v) ? v.GetInt32() : 1,
+            Fields = fields,
