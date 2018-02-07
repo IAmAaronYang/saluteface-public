@@ -67,3 +67,11 @@ public sealed class Contract
             Name = nameEl.GetString() ?? "",
             Version = root.TryGetProperty("version", out var v) ? v.GetInt32() : 1,
             Fields = fields,
+        };
+    }
+
+    private static FieldSpec ParseField(string name, JsonElement raw)
+    {
+        string type = raw.TryGetProperty("type", out var t) ? t.GetString() ?? "string" : "string";
+        if (!AllTypes.Contains(type))
+            throw new FormatException($"field '{name}' has unknown type '{type}'");
