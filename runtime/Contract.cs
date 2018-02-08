@@ -75,3 +75,10 @@ public sealed class Contract
         string type = raw.TryGetProperty("type", out var t) ? t.GetString() ?? "string" : "string";
         if (!AllTypes.Contains(type))
             throw new FormatException($"field '{name}' has unknown type '{type}'");
+
+        List<JsonElement>? enums = null;
+        if (raw.TryGetProperty("enum", out var e) && e.ValueKind == JsonValueKind.Array)
+            enums = e.EnumerateArray().Select(x => x.Clone()).ToList();
+
+        FieldSpec? items = null;
+        if (raw.TryGetProperty("items", out var it))
