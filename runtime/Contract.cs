@@ -82,3 +82,10 @@ public sealed class Contract
 
         FieldSpec? items = null;
         if (raw.TryGetProperty("items", out var it))
+            items = ParseField(name + "[]", it);
+
+        bool hasDefault = raw.TryGetProperty("default", out var defEl);
+
+        return new FieldSpec
+        {
+            Name = name,
