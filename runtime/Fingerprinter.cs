@@ -15,3 +15,13 @@ namespace SchemaPilot.Runtime;
 /// </summary>
 public static class Fingerprinter
 {
+    public static string Compute(Contract contract)
+    {
+        string canonical = Canonicalize(contract);
+        byte[] hash = SHA256.HashData(Encoding.UTF8.GetBytes(canonical));
+        var sb = new StringBuilder(32);
+        foreach (byte b in hash) sb.Append(b.ToString("x2", CultureInfo.InvariantCulture));
+        return sb.ToString()[..16];
+    }
+
+    private static string Canonicalize(Contract contract)
