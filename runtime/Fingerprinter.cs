@@ -25,3 +25,13 @@ public static class Fingerprinter
     }
 
     private static string Canonicalize(Contract contract)
+    {
+        // Mirrors json.dumps(contract.to_dict(), sort_keys=True, separators=(",",":"))
+        var sb = new StringBuilder();
+        sb.Append('{');
+        // Keys in sorted order: fields, name, version
+        sb.Append("\"fields\":");
+        AppendFields(sb, contract.Fields);
+        sb.Append(",\"name\":");
+        AppendString(sb, contract.Name);
+        sb.Append(",\"version\":").Append(contract.Version);
