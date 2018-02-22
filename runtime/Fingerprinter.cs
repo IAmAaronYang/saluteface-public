@@ -45,3 +45,14 @@ public static class Fingerprinter
         bool first = true;
         foreach (var name in fields.Keys.OrderBy(k => k, StringComparer.Ordinal))
         {
+            if (!first) sb.Append(',');
+            first = false;
+            AppendString(sb, name);
+            sb.Append(':');
+            AppendFieldSpec(sb, fields[name]);
+        }
+        sb.Append('}');
+    }
+
+    private static void AppendFieldSpec(StringBuilder sb, FieldSpec spec)
+    {
