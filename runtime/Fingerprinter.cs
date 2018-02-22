@@ -35,3 +35,13 @@ public static class Fingerprinter
         sb.Append(",\"name\":");
         AppendString(sb, contract.Name);
         sb.Append(",\"version\":").Append(contract.Version);
+        sb.Append('}');
+        return sb.ToString();
+    }
+
+    private static void AppendFields(StringBuilder sb, Dictionary<string, FieldSpec> fields)
+    {
+        sb.Append('{');
+        bool first = true;
+        foreach (var name in fields.Keys.OrderBy(k => k, StringComparer.Ordinal))
+        {
