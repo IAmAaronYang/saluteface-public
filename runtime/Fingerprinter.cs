@@ -56,3 +56,13 @@ public static class Fingerprinter
 
     private static void AppendFieldSpec(StringBuilder sb, FieldSpec spec)
     {
+        // Collect the same keys Python's FieldSpec.to_dict emits, then sort
+        // lexicographically to mirror json.dumps(..., sort_keys=True).
+        var members = new SortedDictionary<string, string>(StringComparer.Ordinal);
+        members["type"] = Quoted(spec.Type);
+        if (spec.Required) members["required"] = "true";
+        if (spec.Nullable) members["nullable"] = "true";
+        if (spec.Enum is { } en) members["enum"] = FormatJsonArray(en);
+        if (spec.Minimum is { } mn) members["min"] = FormatNumber(mn);
+        if (spec.Maximum is { } mx) members["max"] = FormatNumber(mx);
+        if (spec.MinLen is { } ml) members["min_len"] = ml.ToString(CultureInfo.InvariantCulture);
