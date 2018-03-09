@@ -66,3 +66,13 @@ public static class Fingerprinter
         if (spec.Minimum is { } mn) members["min"] = FormatNumber(mn);
         if (spec.Maximum is { } mx) members["max"] = FormatNumber(mx);
         if (spec.MinLen is { } ml) members["min_len"] = ml.ToString(CultureInfo.InvariantCulture);
+        if (spec.MaxLen is { } xl) members["max_len"] = xl.ToString(CultureInfo.InvariantCulture);
+        if (spec.Pattern is { } p) members["pattern"] = Quoted(p);
+        if (spec.MinItems is { } mi) members["min_items"] = mi.ToString(CultureInfo.InvariantCulture);
+        if (spec.MaxItems is { } xi) members["max_items"] = xi.ToString(CultureInfo.InvariantCulture);
+        if (spec.Items is { } items)
+        {
+            var nested = new StringBuilder();
+            AppendFieldSpec(nested, items);
+            members["items"] = nested.ToString();
+        }
