@@ -76,3 +76,13 @@ public static class Fingerprinter
             AppendFieldSpec(nested, items);
             members["items"] = nested.ToString();
         }
+        if (spec.HasDefault) members["default"] = FormatJsonValue(spec.DefaultValue);
+
+        sb.Append('{');
+        bool first = true;
+        foreach (var kv in members)
+        {
+            if (!first) sb.Append(',');
+            first = false;
+            AppendString(sb, kv.Key);
+            sb.Append(':').Append(kv.Value);
