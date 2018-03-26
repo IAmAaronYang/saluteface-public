@@ -117,3 +117,13 @@ public static class Fingerprinter
     };
 
     private static string FormatJsonNumber(JsonElement el)
+    {
+        // Preserve the original numeric literal (e.g. 0.0 vs 0, 199.95) so the
+        // canonical form matches Python's json round-trip of enum/default values.
+        string raw = el.GetRawText();
+        return raw;
+    }
+
+    private static string FormatJsonObject(JsonElement el)
+    {
+        var members = new SortedDictionary<string, string>(StringComparer.Ordinal);
