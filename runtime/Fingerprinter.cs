@@ -86,3 +86,13 @@ public static class Fingerprinter
             first = false;
             AppendString(sb, kv.Key);
             sb.Append(':').Append(kv.Value);
+        }
+        sb.Append('}');
+    }
+
+    private static string FormatJsonArray(List<JsonElement> items)
+    {
+        var sb = new StringBuilder();
+        sb.Append('[');
+        for (int i = 0; i < items.Count; i++)
+        {
