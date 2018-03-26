@@ -107,3 +107,13 @@ public static class Fingerprinter
     private static string FormatJsonValue(JsonElement el) => el.ValueKind switch
     {
         JsonValueKind.String => Quoted(el.GetString() ?? ""),
+        JsonValueKind.True => "true",
+        JsonValueKind.False => "false",
+        JsonValueKind.Null => "null",
+        JsonValueKind.Number => FormatJsonNumber(el),
+        JsonValueKind.Array => FormatJsonArray(el.EnumerateArray().Select(x => x.Clone()).ToList()),
+        JsonValueKind.Object => FormatJsonObject(el),
+        _ => "null",
+    };
+
+    private static string FormatJsonNumber(JsonElement el)
