@@ -96,3 +96,14 @@ public static class Fingerprinter
         sb.Append('[');
         for (int i = 0; i < items.Count; i++)
         {
+            if (i > 0) sb.Append(',');
+            sb.Append(FormatJsonValue(items[i]));
+        }
+        sb.Append(']');
+        return sb.ToString();
+    }
+
+    // Serialise a JSON value the way json.dumps(..., separators=(",",":")) does.
+    private static string FormatJsonValue(JsonElement el) => el.ValueKind switch
+    {
+        JsonValueKind.String => Quoted(el.GetString() ?? ""),
