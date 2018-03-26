@@ -127,3 +127,13 @@ public static class Fingerprinter
     private static string FormatJsonObject(JsonElement el)
     {
         var members = new SortedDictionary<string, string>(StringComparer.Ordinal);
+        foreach (var prop in el.EnumerateObject())
+            members[prop.Name] = FormatJsonValue(prop.Value);
+        var sb = new StringBuilder();
+        sb.Append('{');
+        bool first = true;
+        foreach (var kv in members)
+        {
+            if (!first) sb.Append(',');
+            first = false;
+            AppendString(sb, kv.Key);
