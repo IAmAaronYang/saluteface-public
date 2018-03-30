@@ -137,3 +137,13 @@ public static class Fingerprinter
             if (!first) sb.Append(',');
             first = false;
             AppendString(sb, kv.Key);
+            sb.Append(':').Append(kv.Value);
+        }
+        sb.Append('}');
+        return sb.ToString();
+    }
+
+    private static string FormatNumber(double d)
+    {
+        if (d == Math.Floor(d) && !double.IsInfinity(d))
+            return ((long)d).ToString(CultureInfo.InvariantCulture);
