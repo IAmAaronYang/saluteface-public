@@ -13,3 +13,10 @@ namespace SchemaPilot.Runtime;
 /// </summary>
 public static class Program
 {
+    public static int Main(string[] args)
+    {
+        if (args.Length == 0)
+        {
+            Console.Error.WriteLine("usage: SchemaPilot.Runtime <inspect|validate|fingerprint> <args...>");
+            return 64;
+        }
