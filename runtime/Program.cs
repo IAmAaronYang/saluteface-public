@@ -20,3 +20,9 @@ public static class Program
             Console.Error.WriteLine("usage: SchemaPilot.Runtime <inspect|validate|fingerprint> <args...>");
             return 64;
         }
+
+        try
+        {
+            return args[0] switch
+            {
+                "inspect" => Inspect(args),
