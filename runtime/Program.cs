@@ -6,3 +6,10 @@ namespace SchemaPilot.Runtime;
 /// SchemaPilot runtime CLI. Mirrors a subset of the Python CLI so the same
 /// contracts and payloads can be validated in a .NET service or edge worker.
 ///
+/// Commands:
+///   inspect  &lt;contract.json&gt;                 print normalised contract
+///   validate &lt;contract.json&gt; &lt;payload.json&gt;  validate payload, exit 1 on failure
+///   fingerprint &lt;contract.json&gt;             print the stable contract digest
+/// </summary>
+public static class Program
+{
