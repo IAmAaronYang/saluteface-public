@@ -26,3 +26,10 @@ public static class Program
             return args[0] switch
             {
                 "inspect" => Inspect(args),
+                "validate" => Validate(args),
+                "fingerprint" => Fingerprint(args),
+                _ => Unknown(args[0]),
+            };
+        }
+        catch (FileNotFoundException ex)
+        {
