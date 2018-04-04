@@ -33,3 +33,10 @@ public static class Program
         }
         catch (FileNotFoundException ex)
         {
+            Console.Error.WriteLine($"file not found: {ex.FileName}");
+            return 4;
+        }
+        catch (JsonException ex)
+        {
+            Console.Error.WriteLine($"invalid JSON: {ex.Message}");
+            return 5;
