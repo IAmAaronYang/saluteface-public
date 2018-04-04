@@ -46,3 +46,10 @@ public static class Program
             Console.Error.WriteLine($"contract error: {ex.Message}");
             return 3;
         }
+    }
+
+    private static int Unknown(string cmd)
+    {
+        Console.Error.WriteLine($"unknown command: {cmd}");
+        return 64;
+    }
