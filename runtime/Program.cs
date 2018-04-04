@@ -40,3 +40,9 @@ public static class Program
         {
             Console.Error.WriteLine($"invalid JSON: {ex.Message}");
             return 5;
+        }
+        catch (FormatException ex)
+        {
+            Console.Error.WriteLine($"contract error: {ex.Message}");
+            return 3;
+        }
