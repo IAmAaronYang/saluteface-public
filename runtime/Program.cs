@@ -53,3 +53,9 @@ public static class Program
         Console.Error.WriteLine($"unknown command: {cmd}");
         return 64;
     }
+
+    private static int Inspect(string[] args)
+    {
+        var contract = Contract.Parse(File.ReadAllText(args[1]));
+        var summary = new Dictionary<string, object?>
+        {
