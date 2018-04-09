@@ -59,3 +59,10 @@ public static class Program
         var contract = Contract.Parse(File.ReadAllText(args[1]));
         var summary = new Dictionary<string, object?>
         {
+            ["name"] = contract.Name,
+            ["version"] = contract.Version,
+            ["fields"] = contract.Fields.Keys.ToList(),
+            ["required"] = contract.RequiredFields.ToList(),
+            ["fingerprint"] = Fingerprinter.Compute(contract),
+        };
+        Console.WriteLine(JsonSerializer.Serialize(summary, JsonOpts));
