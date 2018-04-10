@@ -66,3 +66,10 @@ public static class Program
             ["fingerprint"] = Fingerprinter.Compute(contract),
         };
         Console.WriteLine(JsonSerializer.Serialize(summary, JsonOpts));
+        return 0;
+    }
+
+    private static int Validate(string[] args)
+    {
+        var contract = Contract.Parse(File.ReadAllText(args[1]));
+        using var doc = JsonDocument.Parse(File.ReadAllText(args[2]));
