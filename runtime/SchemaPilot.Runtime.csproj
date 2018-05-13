@@ -6,3 +6,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyName>SchemaPilot.Runtime</AssemblyName>
+    <RootNamespace>SchemaPilot.Runtime</RootNamespace>
