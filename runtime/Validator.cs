@@ -14,3 +14,13 @@ public sealed class ValidationResult
     public Dictionary<string, object?> ToDict() => new()
     {
         ["ok"] = Ok,
+        ["violation_count"] = Violations.Count,
+        ["violations"] = Violations.Select(v => new Dictionary<string, object?>
+        {
+            ["code"] = v.Code,
+            ["path"] = v.Path,
+            ["message"] = v.Message,
+        }).ToList(),
+    };
+}
+
