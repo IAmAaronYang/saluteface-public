@@ -9,3 +9,4 @@
     <RootNamespace>SchemaPilot.Runtime</RootNamespace>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <InvariantGlobalization>true</InvariantGlobalization>
