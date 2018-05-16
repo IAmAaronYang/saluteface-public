@@ -24,3 +24,14 @@ public sealed class ValidationResult
     };
 }
 
+/// <summary>
+/// Validates JSON payloads against a <see cref="Contract"/>. The rules and
+/// violation codes match the Python validator so a payload accepted by one
+/// runtime is accepted by the other.
+/// </summary>
+public sealed class Validator
+{
+    private readonly Contract _contract;
+    private readonly bool _allowExtra;
+
+    public Validator(Contract contract, bool allowExtra = false)
