@@ -45,3 +45,14 @@ public sealed class Validator
         var result = new ValidationResult();
         if (payload.ValueKind != JsonValueKind.Object)
         {
+            result.Violations.Add(new Violation("TYPE_MISMATCH", "$", "payload must be an object"));
+            return result;
+        }
+
+        var present = payload.EnumerateObject().Select(p => p.Name).ToHashSet();
+
+        foreach (var name in _contract.RequiredFields)
+        {
+            if (!present.Contains(name))
+                result.Violations.Add(new Violation("MISSING_REQUIRED", name, $"required field '{name}' is missing"));
+        }
