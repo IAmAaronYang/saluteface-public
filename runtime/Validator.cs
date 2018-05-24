@@ -35,3 +35,13 @@ public sealed class Validator
     private readonly bool _allowExtra;
 
     public Validator(Contract contract, bool allowExtra = false)
+    {
+        _contract = contract;
+        _allowExtra = allowExtra;
+    }
+
+    public ValidationResult Validate(JsonElement payload)
+    {
+        var result = new ValidationResult();
+        if (payload.ValueKind != JsonValueKind.Object)
+        {
