@@ -56,3 +56,13 @@ public sealed class Validator
             if (!present.Contains(name))
                 result.Violations.Add(new Violation("MISSING_REQUIRED", name, $"required field '{name}' is missing"));
         }
+
+        if (!_allowExtra)
+        {
+            foreach (var name in present)
+            {
+                if (!_contract.Fields.ContainsKey(name))
+                    result.Violations.Add(new Violation("UNEXPECTED_FIELD", name, $"field '{name}' is not in the contract"));
+            }
+        }
+
