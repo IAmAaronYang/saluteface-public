@@ -76,3 +76,14 @@ public sealed class Validator
     }
 
     private static bool TypeOk(JsonElement v, string type) => type switch
+    {
+        "string" => v.ValueKind == JsonValueKind.String,
+        "boolean" => v.ValueKind is JsonValueKind.True or JsonValueKind.False,
+        "integer" => v.ValueKind == JsonValueKind.Number && v.TryGetInt64(out _),
+        "number" => v.ValueKind == JsonValueKind.Number,
+        "array" => v.ValueKind == JsonValueKind.Array,
+        "object" => v.ValueKind == JsonValueKind.Object,
+        "null" => v.ValueKind == JsonValueKind.Null,
+        _ => false,
+    };
+
