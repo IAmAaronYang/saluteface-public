@@ -87,3 +87,13 @@ public sealed class Validator
         _ => false,
     };
 
+    private void CheckField(string path, FieldSpec spec, JsonElement value, List<Violation> outv)
+    {
+        if (value.ValueKind == JsonValueKind.Null)
+        {
+            if (spec.Nullable || spec.Type == "null") return;
+            outv.Add(new Violation("NULL_NOT_ALLOWED", path, $"field '{path}' may not be null"));
+            return;
+        }
+
+        if (!TypeOk(value, spec.Type))
