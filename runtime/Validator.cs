@@ -66,3 +66,13 @@ public sealed class Validator
             }
         }
 
+        foreach (var (name, spec) in _contract.Fields)
+        {
+            if (payload.TryGetProperty(name, out var value))
+                CheckField(name, spec, value, result.Violations);
+        }
+
+        return result;
+    }
+
+    private static bool TypeOk(JsonElement v, string type) => type switch
