@@ -97,3 +97,14 @@ public sealed class Validator
         }
 
         if (!TypeOk(value, spec.Type))
+        {
+            outv.Add(new Violation("TYPE_MISMATCH", path, $"expected {spec.Type}"));
+            return;
+        }
+
+        if (spec.Enum is not null)
+        {
+            bool inEnum = spec.Enum.Any(e => JsonEquals(e, value));
+            if (!inEnum) outv.Add(new Violation("ENUM_VIOLATION", path, "value not in enum"));
+        }
+
