@@ -128,3 +128,14 @@ public sealed class Validator
                 outv.Add(new Violation("PATTERN_MISMATCH", path, $"fails pattern {spec.Pattern}"));
         }
 
+        if (spec.Type == "array")
+        {
+            int count = value.GetArrayLength();
+            if (spec.MinItems is { } mi && count < mi)
+                outv.Add(new Violation("TOO_FEW_ITEMS", path, $"fewer than {mi} items"));
+            if (spec.MaxItems is { } xi && count > xi)
+                outv.Add(new Violation("TOO_MANY_ITEMS", path, $"more than {xi} items"));
+            if (spec.Items is { } itemSpec)
+            {
+                int i = 0;
+                foreach (var item in value.EnumerateArray())
