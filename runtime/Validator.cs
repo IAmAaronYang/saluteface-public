@@ -118,3 +118,13 @@ public sealed class Validator
         }
 
         if (spec.Type == "string")
+        {
+            string s = value.GetString() ?? "";
+            if (spec.MinLen is { } ml && s.Length < ml)
+                outv.Add(new Violation("TOO_SHORT", path, $"shorter than {ml}"));
+            if (spec.MaxLen is { } xl && s.Length > xl)
+                outv.Add(new Violation("TOO_LONG", path, $"longer than {xl}"));
+            if (spec.CompiledPattern is { } rx && !rx.IsMatch(s))
+                outv.Add(new Violation("PATTERN_MISMATCH", path, $"fails pattern {spec.Pattern}"));
+        }
+
