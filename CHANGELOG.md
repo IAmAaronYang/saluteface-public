@@ -99,3 +99,21 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Small linear-congruential generator seeded from the fingerprint so the same
   inputs always produce the same cases without touching the global `random`
   state.
+
+## [0.2.0] - 2016-10-04
+
+### Added
+
+- Validation result model with stable violation codes for types, bounds,
+  enums, patterns, string lengths, array sizes, required fields, and
+  unexpected fields, each with a field path and observed/expected values.
+- Anchored, full-match pattern semantics and strict boolean handling.
+
+## [0.1.0] - 2015-07-14
+
+### Added
+
+- Compact JSON contract grammar and parser (`Contract`, `FieldSpec`).
+- `schemapilot inspect` and `schemapilot validate` CLI commands.
+
+<!-- draft note 1 -->
