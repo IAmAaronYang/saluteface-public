@@ -108,3 +108,13 @@ public sealed class Validator
             if (!inEnum) outv.Add(new Violation("ENUM_VIOLATION", path, "value not in enum"));
         }
 
+        if (spec.Type is "integer" or "number")
+        {
+            double num = value.GetDouble();
+            if (spec.Minimum is { } lo && num < lo)
+                outv.Add(new Violation("BELOW_MIN", path, $"below minimum {lo}"));
+            if (spec.Maximum is { } hi && num > hi)
+                outv.Add(new Violation("ABOVE_MAX", path, $"above maximum {hi}"));
+        }
+
+        if (spec.Type == "string")
