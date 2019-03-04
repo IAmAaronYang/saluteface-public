@@ -147,3 +147,26 @@ public static class Fingerprinter
     {
         if (d == Math.Floor(d) && !double.IsInfinity(d))
             return ((long)d).ToString(CultureInfo.InvariantCulture);
+        return d.ToString("R", CultureInfo.InvariantCulture);
+    }
+
+    private static string Quoted(string s)
+    {
+        var sb = new StringBuilder();
+        AppendString(sb, s);
+        return sb.ToString();
+    }
+
+    private static void AppendString(StringBuilder sb, string s)
+    {
+        sb.Append('"');
+        foreach (char c in s)
+        {
+            switch (c)
+            {
+                case '"': sb.Append("\\\""); break;
+                case '\\': sb.Append("\\\\"); break;
+                default: sb.Append(c); break;
+            }
+        }
+        sb.Append('"');
