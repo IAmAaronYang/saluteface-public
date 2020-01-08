@@ -3,3 +3,4 @@
   "total": 199.95,
   "currency": "USD",
   "lines": [{ "sku": "A-1", "qty": 2 }],
+  "paid": true,
