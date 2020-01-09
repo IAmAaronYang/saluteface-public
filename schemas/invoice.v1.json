@@ -6,3 +6,8 @@
       "type": "string",
       "pattern": "^INV-[0-9]{6}$",
       "required": true
+    },
+    "total": {
+      "type": "number",
+      "min": 0,
+      "max": 1000000000,
