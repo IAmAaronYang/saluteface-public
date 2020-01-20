@@ -21,3 +21,8 @@
     "lines": {
       "type": "array",
       "min_items": 1,
+      "max_items": 500,
+      "items": { "type": "object" }
+    },
+    "paid": {
+      "type": "boolean",
