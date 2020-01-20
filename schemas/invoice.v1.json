@@ -16,3 +16,8 @@
     "currency": {
       "type": "string",
       "enum": ["USD", "EUR", "GBP"],
+      "required": true
+    },
+    "lines": {
+      "type": "array",
+      "min_items": 1,
