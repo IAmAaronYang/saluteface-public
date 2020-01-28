@@ -25,3 +25,9 @@
       "items": { "type": "object" }
     },
     "paid": {
+      "type": "boolean",
+      "default": false
+    },
+    "memo": {
+      "type": "string",
+      "max_len": 280,
