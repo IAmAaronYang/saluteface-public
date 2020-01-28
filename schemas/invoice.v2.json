@@ -14,3 +14,8 @@
       "required": true
     },
     "currency": {
+      "type": "string",
+      "enum": ["USD", "EUR", "GBP", "JPY"],
+      "required": true
+    },
+    "lines": {
