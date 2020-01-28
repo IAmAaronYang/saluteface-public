@@ -8,3 +8,9 @@
       "required": true
     },
     "total": {
+      "type": "number",
+      "min": 0,
+      "max": 1000000000,
+      "required": true
+    },
+    "currency": {
