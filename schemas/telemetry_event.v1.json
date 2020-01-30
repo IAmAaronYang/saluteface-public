@@ -7,3 +7,8 @@
       "pattern": "^[a-f0-9]{8}$",
       "required": true
     },
+    "level": {
+      "type": "string",
+      "enum": ["debug", "info", "warn", "error"],
+      "required": true
+    },
