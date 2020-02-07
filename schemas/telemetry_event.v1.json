@@ -23,3 +23,8 @@
       "min": 0,
       "max": 1
     },
+    "tags": {
+      "type": "array",
+      "min_items": 0,
+      "max_items": 16,
+      "items": { "type": "string", "max_len": 32 }
