@@ -140,3 +140,26 @@ class Validator:
 
         if spec.type in ("integer", "number"):
             if spec.minimum is not None and value < spec.minimum:
+                out.append(Violation("BELOW_MIN", path, f"below minimum {spec.minimum}", value, spec.minimum))
+            if spec.maximum is not None and value > spec.maximum:
+                out.append(Violation("ABOVE_MAX", path, f"above maximum {spec.maximum}", value, spec.maximum))
+
+        if spec.type == "string":
+            if spec.min_len is not None and len(value) < spec.min_len:
+                out.append(Violation("TOO_SHORT", path, f"shorter than {spec.min_len}", len(value), spec.min_len))
+            if spec.max_len is not None and len(value) > spec.max_len:
+                out.append(Violation("TOO_LONG", path, f"longer than {spec.max_len}", len(value), spec.max_len))
+            cp = spec.compiled_pattern
+            if cp is not None and not cp.fullmatch(value):
+                out.append(Violation("PATTERN_MISMATCH", path, f"fails pattern {spec.pattern}", value, spec.pattern))
+
+        if spec.type == "array":
+            if spec.min_items is not None and len(value) < spec.min_items:
+                out.append(Violation("TOO_FEW_ITEMS", path, f"fewer than {spec.min_items} items", len(value), spec.min_items))
+            if spec.max_items is not None and len(value) > spec.max_items:
+                out.append(Violation("TOO_MANY_ITEMS", path, f"more than {spec.max_items} items", len(value), spec.max_items))
+            if spec.items is not None:
+                for i, item in enumerate(value):
+                    sub: List[Violation] = []
+                    self._check_field(f"{path}[{i}]", spec.items, item, sub)
+                    for v in sub:
