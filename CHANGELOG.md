@@ -116,4 +116,4 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Compact JSON contract grammar and parser (`Contract`, `FieldSpec`).
 - `schemapilot inspect` and `schemapilot validate` CLI commands.
 
-<!-- draft note 313 -->
+<!-- draft note 314 -->
