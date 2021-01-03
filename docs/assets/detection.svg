@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="240" viewBox="0 0 760 240" role="img" aria-label="SchemaPilot detection: valid and adversarial cases scored to full accuracy">
+  <title>SchemaPilot fuzz-and-detect scoreboard</title>
+  <desc>An animated scoreboard showing generated valid cases passing and adversarial cases being detected, filling a detection-accuracy bar to one hundred percent.</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1f2937"/>
