@@ -18,3 +18,9 @@
 
   <!-- valid case pills -->
   <g font-family="Consolas, monospace" font-size="11" fill="#052e16">
+    <g>
+      <rect x="24" y="80" width="120" height="26" rx="13" fill="#34d399"/>
+      <text x="84" y="97" text-anchor="middle">valid-000 PASS</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="0.2s" fill="freeze"/>
+    </g>
+    <g>
