@@ -31,3 +31,10 @@
     <g>
       <rect x="288" y="80" width="120" height="26" rx="13" fill="#34d399"/>
       <text x="348" y="97" text-anchor="middle">valid-002 PASS</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.0s" fill="freeze"/>
+    </g>
+  </g>
+
+  <!-- adversarial case pills -->
+  <g font-family="Consolas, monospace" font-size="10" fill="#450a0a">
+    <g>
