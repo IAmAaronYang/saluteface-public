@@ -38,3 +38,9 @@
   <!-- adversarial case pills -->
   <g font-family="Consolas, monospace" font-size="10" fill="#450a0a">
     <g>
+      <rect x="24" y="120" width="150" height="26" rx="13" fill="#f87171"/>
+      <text x="99" y="137" text-anchor="middle">adv wrong_type CAUGHT</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.4s" fill="freeze"/>
+    </g>
+    <g>
+      <rect x="186" y="120" width="150" height="26" rx="13" fill="#f87171"/>
