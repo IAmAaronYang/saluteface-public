@@ -44,3 +44,10 @@
     </g>
     <g>
       <rect x="186" y="120" width="150" height="26" rx="13" fill="#f87171"/>
+      <text x="261" y="137" text-anchor="middle">adv enum_miss CAUGHT</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.8s" fill="freeze"/>
+    </g>
+    <g>
+      <rect x="348" y="120" width="150" height="26" rx="13" fill="#f87171"/>
+      <text x="423" y="137" text-anchor="middle">adv above_max CAUGHT</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="2.2s" fill="freeze"/>
