@@ -18,3 +18,9 @@
       <path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/>
     </marker>
   </defs>
+
+  <rect width="760" height="220" rx="14" fill="url(#bg)"/>
+  <text x="24" y="34" fill="#e2e8f0" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700">SchemaPilot Pipeline</text>
+
+  <line x1="120" y1="118" x2="660" y2="118" stroke="#334155" stroke-width="3"/>
+  <line x1="120" y1="118" x2="200" y2="118" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
