@@ -24,3 +24,10 @@
 
   <line x1="120" y1="118" x2="660" y2="118" stroke="#334155" stroke-width="3"/>
   <line x1="120" y1="118" x2="200" y2="118" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="280" y1="118" x2="360" y2="118" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="440" y1="118" x2="520" y2="118" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <circle r="6" fill="#f472b6">
+    <animateMotion dur="4s" repeatCount="indefinite" path="M120,118 L660,118"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="4s" repeatCount="indefinite"/>
+  </circle>
