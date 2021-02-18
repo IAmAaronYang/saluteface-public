@@ -31,3 +31,10 @@
     <animateMotion dur="4s" repeatCount="indefinite" path="M120,118 L660,118"/>
     <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="4s" repeatCount="indefinite"/>
   </circle>
+
+  <g>
+    <rect x="24" y="90" width="96" height="56" rx="10" fill="url(#node2)"/>
+    <text x="72" y="116" text-anchor="middle" fill="#f8fafc" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600">Contract</text>
+    <text x="72" y="134" text-anchor="middle" fill="#ede9fe" font-family="Consolas, monospace" font-size="10">JSON</text>
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+  </g>
