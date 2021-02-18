@@ -44,3 +44,10 @@
     <text x="240" y="122" text-anchor="middle" fill="#082f49" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">Fuzzer</text>
     <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" begin="0.4s" repeatCount="indefinite"/>
   </g>
+
+  <g>
+    <rect x="360" y="90" width="80" height="56" rx="10" fill="url(#node)"/>
+    <text x="400" y="122" text-anchor="middle" fill="#082f49" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700">Validator</text>
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" begin="0.8s" repeatCount="indefinite"/>
+  </g>
+
