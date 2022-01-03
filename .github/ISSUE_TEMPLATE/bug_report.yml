@@ -1,0 +1,5 @@
+name: Bug report
+description: Report incorrect validation, generation, repair, or matrix behaviour.
+title: "[bug]: "
+labels: ["bug", "triage"]
+body:
