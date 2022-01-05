@@ -3,3 +3,9 @@ description: Report incorrect validation, generation, repair, or matrix behaviou
 title: "[bug]: "
 labels: ["bug", "triage"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve SchemaPilot. Please include the contract and
+        payload that reproduce the issue so we can add a deterministic fixture.
+  - type: input
