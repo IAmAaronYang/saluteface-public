@@ -26,3 +26,9 @@ body:
         - Both
     validations:
       required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Contract
+      description: The compact JSON contract involved.
+      render: json
