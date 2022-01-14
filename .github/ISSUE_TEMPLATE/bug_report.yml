@@ -32,3 +32,9 @@ body:
       label: Contract
       description: The compact JSON contract involved.
       render: json
+    validations:
+      required: true
+  - type: textarea
+    id: payload
+    attributes:
+      label: Payload / command
