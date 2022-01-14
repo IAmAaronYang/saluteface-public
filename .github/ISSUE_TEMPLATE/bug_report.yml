@@ -21,3 +21,8 @@ body:
     attributes:
       label: Runtime
       options:
+        - Python package
+        - .NET runtime
+        - Both
+    validations:
+      required: true
