@@ -9,3 +9,9 @@ body:
         Thanks for helping improve SchemaPilot. Please include the contract and
         payload that reproduce the issue so we can add a deterministic fixture.
   - type: input
+    id: version
+    attributes:
+      label: SchemaPilot version
+      description: Output of `python -c "import schemapilot; print(schemapilot.__version__)"`.
+      placeholder: "0.4.0"
+    validations:
