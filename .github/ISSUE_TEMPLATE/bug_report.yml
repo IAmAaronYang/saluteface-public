@@ -15,3 +15,9 @@ body:
       description: Output of `python -c "import schemapilot; print(schemapilot.__version__)"`.
       placeholder: "0.4.0"
     validations:
+      required: true
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Runtime
+      options:
