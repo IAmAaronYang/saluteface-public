@@ -3,3 +3,4 @@ contact_links:
   - name: Security report
     url: https://github.com/schemapilot/schemapilot/security/advisories/new
     about: Report a vulnerability privately. See SECURITY.md for details.
+  - name: Questions and usage help
