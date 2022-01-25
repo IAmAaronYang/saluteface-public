@@ -2,3 +2,8 @@ name: Feature request
 description: Propose a new constraint, mutation, report format, or workflow.
 title: "[feature]: "
 labels: ["enhancement", "triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
