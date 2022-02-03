@@ -12,3 +12,9 @@ body:
       required: true
   - type: textarea
     id: proposal
+    attributes:
+      label: Proposal
+      description: Describe the constraint, mutation, verdict, or output you want.
+    validations:
+      required: true
+  - type: textarea
