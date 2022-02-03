@@ -23,3 +23,9 @@ body:
       label: Example contract
       description: A small contract that illustrates the request.
       render: json
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Contract grammar
