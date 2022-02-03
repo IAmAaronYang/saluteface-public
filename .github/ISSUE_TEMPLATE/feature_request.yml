@@ -18,3 +18,8 @@ body:
     validations:
       required: true
   - type: textarea
+    id: example
+    attributes:
+      label: Example contract
+      description: A small contract that illustrates the request.
+      render: json
