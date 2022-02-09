@@ -6,3 +6,6 @@
 
 -
 
+## Contract impact
+
+- [ ] No change to the contract grammar
