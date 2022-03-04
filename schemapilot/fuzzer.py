@@ -200,3 +200,32 @@ class Fuzzer:
         elif mut == "too_many_items":
             p[name] = [1] * ((spec.max_items or 1) + 8)
         elif mut == "null_injection":
+            p[name] = None
+        return p
+
+    # ---- public generator ---------------------------------------------
+    def generate(self, valid_count: int = 3, adversarial_per_field: int = 2) -> Iterator[FuzzCase]:
+        rng = _LCG(self.seed)
+        for i in range(valid_count):
+            yield FuzzCase(
+                case_id=f"valid-{i:03d}",
+                kind="valid",
+                payload=self.valid_payload(rng),
+            )
+        idx = 0
+        if adversarial_per_field <= 0:
+            return
+        for name, spec in self.contract.fields.items():
+            muts = self._mutations_for(spec)
+            base = self.valid_payload(rng)
+            for m in muts[:adversarial_per_field]:
+                mutated = self._apply_mutation(base, name, spec, m, rng)
+                yield FuzzCase(
+                    case_id=f"adv-{idx:03d}",
+                    kind="adversarial",
+                    payload=mutated,
+                    mutation=m,
+                    target_field=name,
+                )
+                idx += 1
+
