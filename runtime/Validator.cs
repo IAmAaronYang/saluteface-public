@@ -139,3 +139,26 @@ public sealed class Validator
             {
                 int i = 0;
                 foreach (var item in value.EnumerateArray())
+                {
+                    var sub = new List<Violation>();
+                    CheckField($"{path}[{i}]", itemSpec, item, sub);
+                    foreach (var v in sub)
+                        outv.Add(new Violation("ITEM_INVALID", v.Path, v.Message));
+                    i++;
+                }
+            }
+        }
+    }
+
+    private static bool JsonEquals(JsonElement a, JsonElement b)
+    {
+        if (a.ValueKind != b.ValueKind) return false;
+        return a.ValueKind switch
+        {
+            JsonValueKind.String => a.GetString() == b.GetString(),
+            JsonValueKind.Number => a.GetDouble() == b.GetDouble(),
+            JsonValueKind.True or JsonValueKind.False => true,
+            JsonValueKind.Null => true,
+            _ => a.GetRawText() == b.GetRawText(),
+        };
+    }
