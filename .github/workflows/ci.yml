@@ -4,3 +4,10 @@ on:
   push:
     branches: [main]
   pull_request:
+    branches: [main]
+
+jobs:
+  python:
+    name: Python 3.11
+    runs-on: ubuntu-latest
+    steps:
