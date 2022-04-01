@@ -18,3 +18,10 @@ jobs:
           python-version: "3.11"
       - name: Byte-compile package
         run: python -m compileall -q schemapilot
+      - name: Inspect contracts
+        run: |
+          python -m schemapilot inspect schemas/invoice.v1.json
+          python -m schemapilot inspect schemas/invoice.v2.json
+          python -m schemapilot inspect schemas/telemetry_event.v1.json
+      - name: Validate fixtures
+        run: |
