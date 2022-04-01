@@ -32,3 +32,10 @@ jobs:
           from schemapilot.contract import load_contract
           from schemapilot.report import run_report
           for path in ("schemas/invoice.v1.json", "schemas/invoice.v2.json", "schemas/telemetry_event.v1.json"):
+              rep = run_report(load_contract(path))
+              acc = rep.to_dict()["summary"]["accuracy"]
+              assert acc == 1.0, f"{path}: accuracy {acc} < 1.0"
+              print(path, "accuracy", acc)
+          PY
+
+  dotnet:
