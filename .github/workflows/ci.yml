@@ -25,3 +25,10 @@ jobs:
           python -m schemapilot inspect schemas/telemetry_event.v1.json
       - name: Validate fixtures
         run: |
+          python -m schemapilot validate schemas/invoice.v1.json fixtures/invoice_valid.json
+      - name: Reports reach full detection accuracy
+        run: |
+          python - <<'PY'
+          from schemapilot.contract import load_contract
+          from schemapilot.report import run_report
+          for path in ("schemas/invoice.v1.json", "schemas/invoice.v2.json", "schemas/telemetry_event.v1.json"):
