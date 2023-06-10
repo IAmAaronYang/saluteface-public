@@ -78,3 +78,16 @@ type-appropriate default, so a repair never silently invents data of the wrong
 kind.
 
 ### Empirical compatibility
+
+Contract compatibility is reported by generating valid payloads for one
+contract and validating them against another, in both directions. The
+`forward`/`backward`/`full`/`breaking` verdicts describe deployment safety in
+plain terms. This is an empirical signal over a fixed, deterministic sample —
+not a formal proof — which is the right granularity for a deploy gate.
+
+## Testing philosophy
+
+Because generation is deterministic, the examples in `schemas/` and
+`fixtures/` double as golden inputs: a change that alters a fingerprint or a
+detection accuracy is immediately visible. Cross-runtime parity is verified by
+comparing Python and .NET fingerprints for every shipped contract.
