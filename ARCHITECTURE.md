@@ -91,3 +91,18 @@ and returns distinct exit codes per failure class for CI gating.
 `Contract.cs`, `Validator.cs`, and `Fingerprinter.cs` mirror the Python
 semantics. `Fingerprinter.cs` reconstructs the exact canonical JSON that the
 Python `Contract.to_dict()` produces — including `enum`, `items`, and `default`
+members, sorted keys, and Python-compatible number rendering — so both runtimes
+compute identical digests. `Program.cs` exposes `inspect`, `validate`, and
+`fingerprint`.
+
+## Determinism and parity
+
+Two invariants hold the system together:
+
+1. **Determinism.** Given the same contract and seed, generation is
+   byte-for-byte reproducible across processes and platforms.
+2. **Parity.** The Python and .NET validators accept exactly the same payloads,
+   and both runtimes compute the same contract fingerprint.
+
+These invariants are what make SchemaPilot's reports diffable in code review
+and safe to gate a deployment on.
