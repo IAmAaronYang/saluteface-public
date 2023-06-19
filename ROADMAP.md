@@ -31,3 +31,9 @@ build toward that mission.
 
 - [ ] **M7 — Matrix visualisation.** An HTML heat-map export of the
   compatibility matrix for release reviews.
+- [ ] **M8 — Streaming contracts.** Validation of newline-delimited payload
+  streams for high-throughput pipelines.
+
+Milestones move from *Under consideration* to *In progress* once a design is
+agreed in `DESIGN.md`, and to *Delivered* once shipped and covered by the
+examples in this repository.
