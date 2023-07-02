@@ -17,3 +17,7 @@ If you find a security issue - for example a crash or unbounded resource use
 on a hostile contract, a path handling problem in the CLI, or a report that
 leaks file contents beyond the fields it flags - please report it privately
 using GitHub's "Report a vulnerability" button on the Security tab.
+
+We aim to acknowledge reports within 72 hours and to ship a fix or mitigation
+in the next patch release. Please do not open a public issue before a fix is
+available.
