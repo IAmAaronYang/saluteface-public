@@ -54,3 +54,12 @@ make parity    # check Python/.NET fingerprint parity
    - Reports for the shipped contracts still reach full detection accuracy.
 5. Open a pull request using the template and describe what you verified.
 
+## Reporting bugs and requesting features
+
+Use the issue templates. For bugs, include the contract and payload that
+reproduce the problem so we can turn it into a deterministic example. For
+security issues, follow `SECURITY.md` instead of opening a public issue.
+
+## Code of conduct
+
+Participation in this project is governed by `CODE_OF_CONDUCT.md`.
