@@ -103,3 +103,20 @@ def to_json(report: RunReport, *, indent: int = 2) -> str:
 
 def to_markdown(report: RunReport) -> str:
     d = report.to_dict()
+    s = d["summary"]
+    lines: List[str] = []
+    lines.append(f"# SchemaPilot Report — {report.contract.name} v{report.contract.version}")
+    lines.append("")
+    lines.append(f"- **Fingerprint:** `{d['contract']['fingerprint']}`")
+    lines.append(f"- **Cases:** {s['total']} ({s['valid_cases']} valid, {s['adversarial_cases']} adversarial)")
+    lines.append(f"- **Detection accuracy:** {s['accuracy'] * 100:.1f}%")
+    lines.append("")
+    lines.append("| Case | Kind | Mutation | Field | Result | Correct |")
+    lines.append("|------|------|----------|-------|--------|---------|")
+    for o in d["outcomes"]:
+        result = "PASS" if o["ok"] else "FAIL"
+        correct = "yes" if o["correct"] else "NO"
+        lines.append(
+            f"| {o['case_id']} | {o['kind']} | {o['mutation'] or '-'} | "
+            f"{o['target_field'] or '-'} | {result} | {correct} |"
+        )
