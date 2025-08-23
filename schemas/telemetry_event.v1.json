@@ -28,3 +28,12 @@
       "min_items": 0,
       "max_items": 16,
       "items": { "type": "string", "max_len": 32 }
+    },
+    "note": {
+      "type": "string",
+      "min_len": 1,
+      "max_len": 200,
+      "nullable": true
+    }
+  }
+}
