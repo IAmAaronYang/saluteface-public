@@ -26,3 +26,12 @@
     },
     "paid": {
       "type": "boolean",
+      "default": false
+    },
+    "memo": {
+      "type": "string",
+      "max_len": 140,
+      "nullable": true
+    }
+  }
+}
