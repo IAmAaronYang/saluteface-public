@@ -4,3 +4,5 @@
   "currency": "CAD",
   "lines": [],
   "paid": "yes",
+  "extra_field": "should be dropped"
+}
