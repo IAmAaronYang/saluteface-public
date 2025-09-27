@@ -4,3 +4,5 @@
   "currency": "USD",
   "lines": [{ "sku": "A-1", "qty": 2 }],
   "paid": true,
+  "memo": "Net 30"
+}
