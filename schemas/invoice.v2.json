@@ -31,3 +31,13 @@
     "memo": {
       "type": "string",
       "max_len": 280,
+      "nullable": true
+    },
+    "tax_rate": {
+      "type": "number",
+      "min": 0,
+      "max": 1,
+      "default": 0.0
+    }
+  }
+}
