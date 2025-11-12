@@ -57,3 +57,16 @@
       <text x="590" y="137" text-anchor="middle">adv pattern_miss CAUGHT</text>
       <animate attributeName="opacity" values="0;1" dur="0.4s" begin="2.6s" fill="freeze"/>
     </g>
+  </g>
+
+  <!-- accuracy bar -->
+  <text x="24" y="182" fill="#e5e7eb" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600">Detection accuracy</text>
+  <rect x="24" y="192" width="640" height="24" rx="12" fill="#374151"/>
+  <rect x="24" y="192" width="0" height="24" rx="12" fill="url(#acc)">
+    <animate attributeName="width" values="0;640" dur="2.8s" begin="0.2s" fill="freeze"/>
+  </rect>
+  <text x="690" y="209" fill="#34d399" font-family="Consolas, monospace" font-size="14" font-weight="700">
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.9;1" dur="3.2s" fill="freeze"/>
+    100%
+  </text>
+</svg>
