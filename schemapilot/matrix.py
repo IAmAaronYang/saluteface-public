@@ -89,3 +89,22 @@ class CompatibilityMatrix:
         if fwd and bwd:
             return "full"
         if fwd:
+            return "forward"
+        if bwd:
+            return "backward"
+        return "breaking"
+
+    def to_dict(self) -> Dict[str, object]:
+        labels = [self._label(c) for c in self.contracts]
+        verdicts = {}
+        for i, a in enumerate(self.contracts):
+            for b in self.contracts[i + 1 :]:
+                verdicts[f"{self._label(a)}|{self._label(b)}"] = self.verdict(a, b)
+        return {
+            "labels": labels,
+            "threshold": self.threshold,
+            "cells": [c.to_dict() for c in self.cells.values()],
+            "verdicts": verdicts,
+        }
+
+# draft note 1293
