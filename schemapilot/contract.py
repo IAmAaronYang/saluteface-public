@@ -196,3 +196,36 @@ def _sanity_check(spec: FieldSpec) -> None:
             raise ContractError(f"field '{spec.name}': bad pattern: {exc}") from exc
 
 
+def load_contract(source: Any) -> Contract:
+    """Load a contract from a dict, JSON string, or file path.
+
+    Parameters
+    ----------
+    source:
+        A ``dict`` already parsed, a ``str``/``Path`` pointing at a JSON file,
+        or a raw JSON ``str`` beginning with ``{``.
+    """
+    if isinstance(source, Contract):
+        return source
+    if isinstance(source, (str, Path)):
+        text = str(source)
+        if isinstance(source, Path) or (not text.lstrip().startswith("{")):
+            text = Path(source).read_text(encoding="utf-8")
+        data = json.loads(text)
+    elif isinstance(source, dict):
+        data = source
+    else:
+        raise ContractError(f"cannot load contract from {type(source).__name__}")
+
+    if "name" not in data or "fields" not in data:
+        raise ContractError("contract requires 'name' and 'fields'")
+    fields = {
+        name: _parse_field(name, raw) for name, raw in data["fields"].items()
+    }
+    return Contract(
+        name=str(data["name"]),
+        version=int(data.get("version", 1)),
+        fields=fields,
+    )
+
+# draft note 1294
