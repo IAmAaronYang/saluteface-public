@@ -42,3 +42,13 @@ matrix:
 parity: build
 	$(PY) -m schemapilot inspect $(CONTRACT) | $(PY) -c "import sys,json;print('py',json.load(sys.stdin)['fingerprint'])"
 	$(DOTNET) run -c Release --project $(RUNTIME) -- fingerprint $(CONTRACT)
+
+.PHONY: demo
+demo: inspect report matrix
+
+.PHONY: clean
+clean:
+	$(PY) -c "import shutil,glob,os;[shutil.rmtree(p,ignore_errors=True) for p in glob.glob('**/__pycache__',recursive=True)]"
+	$(PY) -c "import shutil;shutil.rmtree('runtime/bin',ignore_errors=True);shutil.rmtree('runtime/obj',ignore_errors=True)"
+
+<!-- draft note 1296 -->
