@@ -29,3 +29,14 @@ body:
       label: Area
       options:
         - Contract grammar
+        - Fuzzer / mutations
+        - Validator
+        - Repair engine
+        - Compatibility matrix
+        - Reports
+        - CLI
+        - .NET runtime
+    validations:
+      required: true
+
+# draft note 1297
