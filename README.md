@@ -100,3 +100,21 @@ docs/assets/    Diagrams referenced by the documentation
 
 ## Documentation
 
+- [ARCHITECTURE.md](ARCHITECTURE.md) - modules and data flow.
+- [DESIGN.md](DESIGN.md) - the decisions behind the contract vocabulary.
+- [ROADMAP.md](ROADMAP.md) - delivered and planned milestones.
+- [CHANGELOG.md](CHANGELOG.md) - release history.
+
+## Contributing
+
+Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md)
+first; it explains how to keep the two runtimes in lockstep and why determinism
+is treated as a contract. Security reports follow [SECURITY.md](SECURITY.md).
+Participation is governed by the
+[Code of Conduct](CODE_OF_CONDUCT.md).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
+
+<!-- draft note 1298 -->
