@@ -228,4 +228,4 @@ def load_contract(source: Any) -> Contract:
         fields=fields,
     )
 
-# draft note 1294
+# draft note 1300
