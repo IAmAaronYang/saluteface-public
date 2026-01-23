@@ -15,3 +15,10 @@
 ## Cross-runtime parity
 
 - [ ] Python and .NET validators still agree on the fixtures
+- [ ] Python and .NET fingerprints still match for `schemas/*.json`
+
+## Verification
+
+<!-- Commands you ran and their results. -->
+
+<!-- draft note 1302 -->
