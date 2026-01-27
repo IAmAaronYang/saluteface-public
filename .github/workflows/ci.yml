@@ -46,3 +46,17 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
+          dotnet-version: "9.0.x"
+      - name: Build Release
+        run: dotnet build -c Release runtime/SchemaPilot.Runtime.csproj
+      - name: Cross-runtime fingerprint parity
+        run: |
+          set -euo pipefail
+          for c in invoice.v1 invoice.v2 telemetry_event.v1; do
+            cs=$(dotnet run -c Release --project runtime/SchemaPilot.Runtime.csproj -- fingerprint "schemas/$c.json")
+            py=$(python3 -c "import sys;sys.path.insert(0,'.');from schemapilot.contract import load_contract;print(load_contract('schemas/$c.json').fingerprint())")
+            echo "$c: cs=$cs py=$py"
+            test "$cs" = "$py"
+          done
+
+# draft note 1304
