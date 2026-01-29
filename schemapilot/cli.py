@@ -128,3 +128,27 @@ def build_parser() -> argparse.ArgumentParser:
     pm.add_argument("contracts", nargs="+")
     pm.add_argument("--threshold", type=float, default=1.0)
     pm.set_defaults(func=_cmd_matrix)
+
+    return p
+
+
+def main(argv: Optional[List[str]] = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    try:
+        return args.func(args)
+    except ContractError as exc:
+        print(f"contract error: {exc}", file=sys.stderr)
+        return 3
+    except FileNotFoundError as exc:
+        print(f"file not found: {exc}", file=sys.stderr)
+        return 4
+    except json.JSONDecodeError as exc:
+        print(f"invalid JSON: {exc}", file=sys.stderr)
+        return 5
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+# draft note 1306
