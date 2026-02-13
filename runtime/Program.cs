@@ -73,3 +73,19 @@ public static class Program
     {
         var contract = Contract.Parse(File.ReadAllText(args[1]));
         using var doc = JsonDocument.Parse(File.ReadAllText(args[2]));
+        var result = new Validator(contract).Validate(doc.RootElement);
+        Console.WriteLine(JsonSerializer.Serialize(result.ToDict(), JsonOpts));
+        return result.Ok ? 0 : 1;
+    }
+
+    private static int Fingerprint(string[] args)
+    {
+        var contract = Contract.Parse(File.ReadAllText(args[1]));
+        Console.WriteLine(Fingerprinter.Compute(contract));
+        return 0;
+    }
+
+    private static readonly JsonSerializerOptions JsonOpts = new() { WriteIndented = true };
+}
+
+<!-- draft note 1309 -->
