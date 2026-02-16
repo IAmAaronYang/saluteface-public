@@ -4,3 +4,7 @@ contact_links:
     url: https://github.com/schemapilot/schemapilot/security/advisories/new
     about: Report a vulnerability privately. See SECURITY.md for details.
   - name: Questions and usage help
+    url: https://github.com/schemapilot/schemapilot/discussions
+    about: Ask how to model a contract or interpret a compatibility verdict.
+
+# draft note 1310
