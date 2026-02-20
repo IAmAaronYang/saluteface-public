@@ -35,3 +35,13 @@ __all__ = [
     "FuzzCase",
     "Validator",
     "ValidationResult",
+    "Violation",
+    "repair_payload",
+    "RepairPlan",
+    "CompatibilityMatrix",
+    "__version__",
+]
+
+__version__ = "1.0.1"
+
+# draft note 1316
