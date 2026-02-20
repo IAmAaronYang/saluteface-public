@@ -120,3 +120,7 @@ def to_markdown(report: RunReport) -> str:
             f"| {o['case_id']} | {o['kind']} | {o['mutation'] or '-'} | "
             f"{o['target_field'] or '-'} | {result} | {correct} |"
         )
+    lines.append("")
+    return "\n".join(lines)
+
+# draft note 1313
