@@ -162,3 +162,6 @@ public sealed class Validator
             _ => a.GetRawText() == b.GetRawText(),
         };
     }
+}
+
+<!-- draft note 1329 -->
