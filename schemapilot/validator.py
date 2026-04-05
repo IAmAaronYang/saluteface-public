@@ -165,4 +165,4 @@ class Validator:
                     for v in sub:
                         out.append(Violation("ITEM_INVALID", v.path, v.message, v.observed, v.expected))
 
-# draft note 1295
+# draft note 1340
