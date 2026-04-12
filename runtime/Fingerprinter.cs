@@ -172,5 +172,3 @@ public static class Fingerprinter
         sb.Append('"');
     }
 }
-
-<!-- draft note 1337 -->
