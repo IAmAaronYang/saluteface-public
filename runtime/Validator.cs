@@ -163,5 +163,3 @@ public sealed class Validator
         };
     }
 }
-
-<!-- draft note 1329 -->
