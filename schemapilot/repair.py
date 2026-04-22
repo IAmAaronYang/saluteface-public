@@ -170,3 +170,32 @@ def _repair_one(payload: Dict[str, Any], v: Violation, contract: Contract, edits
         item = _default_value(spec.items) if spec.items else 0
         while len(payload[root]) < spec.min_items:
             payload[root].append(item)
+        edits.append(Edit("pad", root, current, payload[root], "pad array to min_items"))
+    elif v.code == "TOO_MANY_ITEMS" and spec.max_items is not None:
+        payload[root] = current[: spec.max_items]
+        edits.append(Edit("truncate", root, current, payload[root], "trim array to max_items"))
+
+
+def repair_payload(contract: Contract, payload: Dict[str, Any], *, max_passes: int = 4) -> RepairPlan:
+    """Compute and apply a minimal repair plan for ``payload``."""
+    validator = Validator(contract)
+    original = validator.validate(payload)
+    working: Dict[str, Any] = dict(payload) if isinstance(payload, dict) else {}
+    edits: List[Edit] = []
+
+    for _ in range(max_passes):
+        result = validator.validate(working)
+        if result.ok:
+            break
+        for viol in result.violations:
+            _repair_one(working, viol, contract, edits)
+
+    final = validator.validate(working)
+    return RepairPlan(
+        original_ok=original.ok,
+        repaired_ok=final.ok,
+        edits=edits,
+        payload=working,
+    )
+
+# draft note 1346
