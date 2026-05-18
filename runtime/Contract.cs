@@ -89,3 +89,20 @@ public sealed class Contract
         return new FieldSpec
         {
             Name = name,
+            Type = type,
+            Required = raw.TryGetProperty("required", out var r) && r.GetBoolean(),
+            Nullable = raw.TryGetProperty("nullable", out var n) && n.GetBoolean(),
+            Enum = enums,
+            Minimum = raw.TryGetProperty("min", out var mn) ? mn.GetDouble() : null,
+            Maximum = raw.TryGetProperty("max", out var mx) ? mx.GetDouble() : null,
+            MinLen = raw.TryGetProperty("min_len", out var ml) ? ml.GetInt32() : null,
+            MaxLen = raw.TryGetProperty("max_len", out var xl) ? xl.GetInt32() : null,
+            Pattern = raw.TryGetProperty("pattern", out var p) ? p.GetString() : null,
+            MinItems = raw.TryGetProperty("min_items", out var mi) ? mi.GetInt32() : null,
+            MaxItems = raw.TryGetProperty("max_items", out var xi) ? xi.GetInt32() : null,
+            Items = items,
+            HasDefault = hasDefault,
+            DefaultValue = hasDefault ? defEl.Clone() : default,
+        };
+    }
+}
