@@ -122,5 +122,3 @@ def to_markdown(report: RunReport) -> str:
         )
     lines.append("")
     return "\n".join(lines)
-
-# draft note 1313
