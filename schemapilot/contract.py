@@ -227,5 +227,3 @@ def load_contract(source: Any) -> Contract:
         version=int(data.get("version", 1)),
         fields=fields,
     )
-
-# draft note 1319
