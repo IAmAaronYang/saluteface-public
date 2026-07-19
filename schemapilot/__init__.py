@@ -43,5 +43,3 @@ __all__ = [
 ]
 
 __version__ = "1.0.1"
-
-# draft note 1344
