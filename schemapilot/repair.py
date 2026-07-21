@@ -197,5 +197,3 @@ def repair_payload(contract: Contract, payload: Dict[str, Any], *, max_passes: i
         edits=edits,
         payload=working,
     )
-
-# draft note 1346
