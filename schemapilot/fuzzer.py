@@ -231,5 +231,3 @@ class Fuzzer:
 
     def all_cases(self, valid_count: int = 3, adversarial_per_field: int = 2) -> List[FuzzCase]:
         return list(self.generate(valid_count, adversarial_per_field))
-
-# draft note 1324
