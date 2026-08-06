@@ -106,5 +106,3 @@ class CompatibilityMatrix:
             "cells": [c.to_dict() for c in self.cells.values()],
             "verdicts": verdicts,
         }
-
-# draft note 1343
