@@ -58,5 +58,3 @@ jobs:
             echo "$c: cs=$cs py=$py"
             test "$cs" = "$py"
           done
-
-# draft note 1345
