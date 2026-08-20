@@ -38,3 +38,14 @@ body:
     id: payload
     attributes:
       label: Payload / command
+      description: The payload and the exact command you ran.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+      description: What you expected and what actually happened.
+    validations:
+      required: true
