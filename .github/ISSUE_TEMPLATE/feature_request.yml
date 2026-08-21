@@ -38,5 +38,3 @@ body:
         - .NET runtime
     validations:
       required: true
-
-# draft note 1334
