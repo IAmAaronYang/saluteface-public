@@ -50,5 +50,3 @@ demo: inspect report matrix
 clean:
 	$(PY) -c "import shutil,glob,os;[shutil.rmtree(p,ignore_errors=True) for p in glob.glob('**/__pycache__',recursive=True)]"
 	$(PY) -c "import shutil;shutil.rmtree('runtime/bin',ignore_errors=True);shutil.rmtree('runtime/obj',ignore_errors=True)"
-
-<!-- draft note 1336 -->
