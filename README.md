@@ -116,5 +116,3 @@ Participation is governed by the
 ## License
 
 MIT. See [LICENSE](LICENSE).
-
-<!-- draft note 1333 -->
