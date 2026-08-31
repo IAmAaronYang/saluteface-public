@@ -20,5 +20,3 @@
 ## Verification
 
 <!-- Commands you ran and their results. -->
-
-<!-- draft note 1326 -->
