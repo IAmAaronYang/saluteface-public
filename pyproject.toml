@@ -56,5 +56,3 @@ select = ["E", "F", "I", "UP", "B"]
 python_version = "3.11"
 strict = true
 warn_unused_ignores = true
-
-<!-- draft note 1341 -->
