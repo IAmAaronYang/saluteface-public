@@ -74,7 +74,9 @@ fixed set of constraints (`type`, `required`, `nullable`, `enum`, `min`/`max`,
 ```
 
 The fingerprint of the normalised contract is its identity primitive: it seeds
-deterministic generation and flags contract drift between revisions.
+deterministic generation and flags contract drift between revisions. Because it
+is derived from the normalised form, cosmetic edits such as key order or
+whitespace do not move it, while any change to a constraint does.
 
 ## .NET runtime
 
