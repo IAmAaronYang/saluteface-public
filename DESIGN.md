@@ -58,7 +58,9 @@ The fuzzer uses a small linear-congruential generator instead of Python's
 `random` module. This avoids mutating global state, keeps the sequence
 identical across Python versions, and makes the generator trivial to port. The
 LCG is not cryptographically strong — it does not need to be; it needs to be
-reproducible.
+reproducible. Its modulus and multiplier are fixed constants rather than
+time- or platform-derived values, so the sequence is identical wherever the
+package runs.
 
 ### Single-fault adversarial cases
 
