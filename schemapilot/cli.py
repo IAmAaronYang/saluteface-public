@@ -20,10 +20,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 from typing import List, Optional
 
+from schemapilot import __version__
 from schemapilot.contract import load_contract, ContractError
 from schemapilot.fuzzer import Fuzzer
 from schemapilot.matrix import CompatibilityMatrix
@@ -34,6 +36,25 @@ from schemapilot.validator import Validator
 
 def _read_json(path: str):
     return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def _env_int(name: str, default: int) -> int:
+    try:
+        return int(os.environ[name])
+    except (KeyError, ValueError):
+        return default
+
+
+def _env_float(name: str, default: float) -> float:
+    try:
+        return float(os.environ[name])
+    except (KeyError, ValueError):
+        return default
+
+
+def _env_choice(name: str, default: str, choices: tuple) -> str:
+    value = os.environ.get(name, default)
+    return value if value in choices else default
 
 
 def _cmd_inspect(args: argparse.Namespace) -> int:
@@ -100,9 +121,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     pf = sub.add_parser("fuzz", help="generate deterministic payloads")
     pf.add_argument("contract")
-    pf.add_argument("--seed", type=int, default=0)
-    pf.add_argument("--valid", type=int, default=3)
-    pf.add_argument("--adversarial", type=int, default=2)
+    pf.add_argument("--seed", type=int, default=_env_int("SCHEMAPILOT_SEED", 0))
+    pf.add_argument("--valid", type=int, default=_env_int("SCHEMAPILOT_VALID_COUNT", 3))
+    pf.add_argument("--adversarial", type=int,
+                    default=_env_int("SCHEMAPILOT_ADVERSARIAL_PER_FIELD", 2))
     pf.set_defaults(func=_cmd_fuzz)
 
     pv = sub.add_parser("validate", help="validate a payload against a contract")
@@ -118,15 +140,19 @@ def build_parser() -> argparse.ArgumentParser:
 
     prep = sub.add_parser("report", help="fuzz + validate and emit a report")
     prep.add_argument("contract")
-    prep.add_argument("--seed", type=int, default=0)
-    prep.add_argument("--valid", type=int, default=3)
-    prep.add_argument("--adversarial", type=int, default=3)
-    prep.add_argument("--format", choices=["json", "markdown"], default="json")
+    prep.add_argument("--seed", type=int, default=_env_int("SCHEMAPILOT_SEED", 0))
+    prep.add_argument("--valid", type=int, default=_env_int("SCHEMAPILOT_VALID_COUNT", 3))
+    prep.add_argument("--adversarial", type=int,
+                      default=_env_int("SCHEMAPILOT_ADVERSARIAL_PER_FIELD", 3))
+    prep.add_argument("--format",
+                      choices=["json", "markdown"],
+                      default=_env_choice("SCHEMAPILOT_REPORT_FORMAT", "json", ("json", "markdown")))
     prep.set_defaults(func=_cmd_report)
 
     pm = sub.add_parser("matrix", help="cross-contract compatibility matrix")
     pm.add_argument("contracts", nargs="+")
-    pm.add_argument("--threshold", type=float, default=1.0)
+    pm.add_argument("--threshold", type=float,
+                    default=_env_float("SCHEMAPILOT_MATRIX_THRESHOLD", 1.0))
     pm.set_defaults(func=_cmd_matrix)
 
     return p
