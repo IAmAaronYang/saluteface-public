@@ -113,6 +113,7 @@ def _cmd_matrix(args: argparse.Namespace) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="schemapilot", description="Structured Output Contract Fuzzer")
+    p.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     sub = p.add_subparsers(dest="command", required=True)
 
     pi = sub.add_parser("inspect", help="parse and normalise a contract")
