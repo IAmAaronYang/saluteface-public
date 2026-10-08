@@ -6,6 +6,14 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- `schemapilot --version` prints the package version.
+- CLI defaults now read the documented `SCHEMAPILOT_*` environment variables
+  (`SCHEMAPILOT_SEED`, `SCHEMAPILOT_VALID_COUNT`,
+  `SCHEMAPILOT_ADVERSARIAL_PER_FIELD`, `SCHEMAPILOT_MATRIX_THRESHOLD`, and
+  `SCHEMAPILOT_REPORT_FORMAT`) when the matching flag is not supplied.
+
 ### Planned
 
 - Nested-object field grammar (`type: "object"` with a `fields` map).
