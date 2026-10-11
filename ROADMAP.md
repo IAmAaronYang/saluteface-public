@@ -30,7 +30,8 @@ build toward that mission.
 ## Under consideration
 
 - [ ] **M7 — Matrix visualisation.** An HTML heat-map export of the
-  compatibility matrix for release reviews.
+  compatibility matrix for release reviews. The first cut will render the
+  existing `matrix` JSON, so no new data model is needed.
 - [ ] **M8 — Streaming contracts.** Validation of newline-delimited payload
   streams for high-throughput pipelines.
 
