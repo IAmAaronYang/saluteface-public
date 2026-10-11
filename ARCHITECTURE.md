@@ -85,7 +85,9 @@ for machines and Markdown for humans from the same in-memory model.
 
 A thin argparse front end wiring the modules into the `inspect`, `fuzz`,
 `validate`, `repair`, `report`, and `matrix` commands. It reads and writes JSON
-and returns distinct exit codes per failure class for CI gating.
+and returns distinct exit codes per failure class for CI gating: 0 success,
+1 validation findings, 2 unrepaired payload, 3 contract error, 4 missing file,
+5 invalid JSON. The codes are stable and safe to branch on.
 
 ## .NET runtime (`runtime/`)
 
