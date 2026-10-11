@@ -54,6 +54,12 @@ make parity    # check Python/.NET fingerprint parity
    - Reports for the shipped contracts still reach full detection accuracy.
 5. Open a pull request using the template and describe what you verified.
 
+## Release process
+
+Releases are cut from `main`. Before tagging a release, run `make compile`,
+`make build`, `make parity`, and the report commands from the README, then add
+the release notes to `CHANGELOG.md` and move entries out of `[Unreleased]`.
+
 ## Reporting bugs and requesting features
 
 Use the issue templates. For bugs, include the contract and payload that
