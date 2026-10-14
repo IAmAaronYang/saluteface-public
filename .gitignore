@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.venv/
+venv/
+env/
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+.vs/
+artifacts/
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# SchemaPilot working files
+_tmp_*
+*.report.md
+*.report.json
+out/
+
+# Python generated artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

@@ -1,0 +1,51 @@
+name: Bug report
+description: Report incorrect validation, generation, repair, or matrix behaviour.
+title: "[bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve SchemaPilot. Please include the contract and
+        payload that reproduce the issue so we can add a deterministic fixture.
+  - type: input
+    id: version
+    attributes:
+      label: SchemaPilot version
+      description: Output of `python -c "import schemapilot; print(schemapilot.__version__)"`.
+      placeholder: "0.4.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Runtime
+      options:
+        - Python package
+        - .NET runtime
+        - Both
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Contract
+      description: The compact JSON contract involved.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: payload
+    attributes:
+      label: Payload / command
+      description: The payload and the exact command you ran.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+      description: What you expected and what actually happened.
+    validations:
+      required: true

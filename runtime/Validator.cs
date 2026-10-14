@@ -1,0 +1,165 @@
+using System.Text.Json;
+
+namespace SchemaPilot.Runtime;
+
+/// <summary>A single validation failure with a stable code and field path.</summary>
+public sealed record Violation(string Code, string Path, string Message);
+
+/// <summary>Outcome of validating a payload against a contract.</summary>
+public sealed class ValidationResult
+{
+    public bool Ok => Violations.Count == 0;
+    public List<Violation> Violations { get; } = new();
+
+    public Dictionary<string, object?> ToDict() => new()
+    {
+        ["ok"] = Ok,
+        ["violation_count"] = Violations.Count,
+        ["violations"] = Violations.Select(v => new Dictionary<string, object?>
+        {
+            ["code"] = v.Code,
+            ["path"] = v.Path,
+            ["message"] = v.Message,
+        }).ToList(),
+    };
+}
+
+/// <summary>
+/// Validates JSON payloads against a <see cref="Contract"/>. The rules and
+/// violation codes match the Python validator so a payload accepted by one
+/// runtime is accepted by the other.
+/// </summary>
+public sealed class Validator
+{
+    private readonly Contract _contract;
+    private readonly bool _allowExtra;
+
+    public Validator(Contract contract, bool allowExtra = false)
+    {
+        _contract = contract;
+        _allowExtra = allowExtra;
+    }
+
+    public ValidationResult Validate(JsonElement payload)
+    {
+        var result = new ValidationResult();
+        if (payload.ValueKind != JsonValueKind.Object)
+        {
+            result.Violations.Add(new Violation("TYPE_MISMATCH", "$", "payload must be an object"));
+            return result;
+        }
+
+        var present = payload.EnumerateObject().Select(p => p.Name).ToHashSet();
+
+        foreach (var name in _contract.RequiredFields)
+        {
+            if (!present.Contains(name))
+                result.Violations.Add(new Violation("MISSING_REQUIRED", name, $"required field '{name}' is missing"));
+        }
+
+        if (!_allowExtra)
+        {
+            foreach (var name in present)
+            {
+                if (!_contract.Fields.ContainsKey(name))
+                    result.Violations.Add(new Violation("UNEXPECTED_FIELD", name, $"field '{name}' is not in the contract"));
+            }
+        }
+
+        foreach (var (name, spec) in _contract.Fields)
+        {
+            if (payload.TryGetProperty(name, out var value))
+                CheckField(name, spec, value, result.Violations);
+        }
+
+        return result;
+    }
+
+    private static bool TypeOk(JsonElement v, string type) => type switch
+    {
+        "string" => v.ValueKind == JsonValueKind.String,
+        "boolean" => v.ValueKind is JsonValueKind.True or JsonValueKind.False,
+        "integer" => v.ValueKind == JsonValueKind.Number && v.TryGetInt64(out _),
+        "number" => v.ValueKind == JsonValueKind.Number,
+        "array" => v.ValueKind == JsonValueKind.Array,
+        "object" => v.ValueKind == JsonValueKind.Object,
+        "null" => v.ValueKind == JsonValueKind.Null,
+        _ => false,
+    };
+
+    private void CheckField(string path, FieldSpec spec, JsonElement value, List<Violation> outv)
+    {
+        if (value.ValueKind == JsonValueKind.Null)
+        {
+            if (spec.Nullable || spec.Type == "null") return;
+            outv.Add(new Violation("NULL_NOT_ALLOWED", path, $"field '{path}' may not be null"));
+            return;
+        }
+
+        if (!TypeOk(value, spec.Type))
+        {
+            outv.Add(new Violation("TYPE_MISMATCH", path, $"expected {spec.Type}"));
+            return;
+        }
+
+        if (spec.Enum is not null)
+        {
+            bool inEnum = spec.Enum.Any(e => JsonEquals(e, value));
+            if (!inEnum) outv.Add(new Violation("ENUM_VIOLATION", path, "value not in enum"));
+        }
+
+        if (spec.Type is "integer" or "number")
+        {
+            double num = value.GetDouble();
+            if (spec.Minimum is { } lo && num < lo)
+                outv.Add(new Violation("BELOW_MIN", path, $"below minimum {lo}"));
+            if (spec.Maximum is { } hi && num > hi)
+                outv.Add(new Violation("ABOVE_MAX", path, $"above maximum {hi}"));
+        }
+
+        if (spec.Type == "string")
+        {
+            string s = value.GetString() ?? "";
+            if (spec.MinLen is { } ml && s.Length < ml)
+                outv.Add(new Violation("TOO_SHORT", path, $"shorter than {ml}"));
+            if (spec.MaxLen is { } xl && s.Length > xl)
+                outv.Add(new Violation("TOO_LONG", path, $"longer than {xl}"));
+            if (spec.CompiledPattern is { } rx && !rx.IsMatch(s))
+                outv.Add(new Violation("PATTERN_MISMATCH", path, $"fails pattern {spec.Pattern}"));
+        }
+
+        if (spec.Type == "array")
+        {
+            int count = value.GetArrayLength();
+            if (spec.MinItems is { } mi && count < mi)
+                outv.Add(new Violation("TOO_FEW_ITEMS", path, $"fewer than {mi} items"));
+            if (spec.MaxItems is { } xi && count > xi)
+                outv.Add(new Violation("TOO_MANY_ITEMS", path, $"more than {xi} items"));
+            if (spec.Items is { } itemSpec)
+            {
+                int i = 0;
+                foreach (var item in value.EnumerateArray())
+                {
+                    var sub = new List<Violation>();
+                    CheckField($"{path}[{i}]", itemSpec, item, sub);
+                    foreach (var v in sub)
+                        outv.Add(new Violation("ITEM_INVALID", v.Path, v.Message));
+                    i++;
+                }
+            }
+        }
+    }
+
+    private static bool JsonEquals(JsonElement a, JsonElement b)
+    {
+        if (a.ValueKind != b.ValueKind) return false;
+        return a.ValueKind switch
+        {
+            JsonValueKind.String => a.GetString() == b.GetString(),
+            JsonValueKind.Number => a.GetDouble() == b.GetDouble(),
+            JsonValueKind.True or JsonValueKind.False => true,
+            JsonValueKind.Null => true,
+            _ => a.GetRawText() == b.GetRawText(),
+        };
+    }
+}

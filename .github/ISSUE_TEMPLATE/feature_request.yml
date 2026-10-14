@@ -1,0 +1,40 @@
+name: Feature request
+description: Propose a new constraint, mutation, report format, or workflow.
+title: "[feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What contract or workflow gap are you hitting today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Describe the constraint, mutation, verdict, or output you want.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example contract
+      description: A small contract that illustrates the request.
+      render: json
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Contract grammar
+        - Fuzzer / mutations
+        - Validator
+        - Repair engine
+        - Compatibility matrix
+        - Reports
+        - CLI
+        - .NET runtime
+    validations:
+      required: true

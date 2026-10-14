@@ -1,0 +1,39 @@
+{
+  "name": "telemetry_event",
+  "version": 1,
+  "fields": {
+    "trace_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{8}$",
+      "required": true
+    },
+    "level": {
+      "type": "string",
+      "enum": ["debug", "info", "warn", "error"],
+      "required": true
+    },
+    "count": {
+      "type": "integer",
+      "min": 0,
+      "max": 100000,
+      "required": true
+    },
+    "ratio": {
+      "type": "number",
+      "min": 0,
+      "max": 1
+    },
+    "tags": {
+      "type": "array",
+      "min_items": 0,
+      "max_items": 16,
+      "items": { "type": "string", "max_len": 32 }
+    },
+    "note": {
+      "type": "string",
+      "min_len": 1,
+      "max_len": 200,
+      "nullable": true
+    }
+  }
+}

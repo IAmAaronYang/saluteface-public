@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="240" viewBox="0 0 760 240" role="img" aria-label="SchemaPilot detection: valid and adversarial cases scored to full accuracy">
+  <title>SchemaPilot fuzz-and-detect scoreboard</title>
+  <desc>An animated scoreboard showing generated valid cases passing and adversarial cases being detected, filling a detection-accuracy bar to one hundred percent.</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="760" height="240" rx="14" fill="url(#bg2)"/>
+  <text x="24" y="36" fill="#f9fafb" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700">Fuzz &amp; Detect</text>
+  <text x="24" y="58" fill="#9ca3af" font-family="Consolas, monospace" font-size="12">valid cases pass - adversarial cases are detected</text>
+
+  <!-- valid case pills -->
+  <g font-family="Consolas, monospace" font-size="11" fill="#052e16">
+    <g>
+      <rect x="24" y="80" width="120" height="26" rx="13" fill="#34d399"/>
+      <text x="84" y="97" text-anchor="middle">valid-000 PASS</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="0.2s" fill="freeze"/>
+    </g>
+    <g>
+      <rect x="156" y="80" width="120" height="26" rx="13" fill="#34d399"/>
+      <text x="216" y="97" text-anchor="middle">valid-001 PASS</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="0.6s" fill="freeze"/>
+    </g>
+    <g>
+      <rect x="288" y="80" width="120" height="26" rx="13" fill="#34d399"/>
+      <text x="348" y="97" text-anchor="middle">valid-002 PASS</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.0s" fill="freeze"/>
+    </g>
+  </g>
+
+  <!-- adversarial case pills -->
+  <g font-family="Consolas, monospace" font-size="10" fill="#450a0a">
+    <g>
+      <rect x="24" y="120" width="150" height="26" rx="13" fill="#f87171"/>
+      <text x="99" y="137" text-anchor="middle">adv wrong_type CAUGHT</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.4s" fill="freeze"/>
+    </g>
+    <g>
+      <rect x="186" y="120" width="150" height="26" rx="13" fill="#f87171"/>
+      <text x="261" y="137" text-anchor="middle">adv enum_miss CAUGHT</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="1.8s" fill="freeze"/>
+    </g>
+    <g>
+      <rect x="348" y="120" width="150" height="26" rx="13" fill="#f87171"/>
+      <text x="423" y="137" text-anchor="middle">adv above_max CAUGHT</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="2.2s" fill="freeze"/>
+    </g>
+    <g>
+      <rect x="510" y="120" width="160" height="26" rx="13" fill="#f87171"/>
+      <text x="590" y="137" text-anchor="middle">adv pattern_miss CAUGHT</text>
+      <animate attributeName="opacity" values="0;1" dur="0.4s" begin="2.6s" fill="freeze"/>
+    </g>
+  </g>
+
+  <!-- accuracy bar -->
+  <text x="24" y="182" fill="#e5e7eb" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600">Detection accuracy</text>
+  <rect x="24" y="192" width="640" height="24" rx="12" fill="#374151"/>
+  <rect x="24" y="192" width="0" height="24" rx="12" fill="url(#acc)">
+    <animate attributeName="width" values="0;640" dur="2.8s" begin="0.2s" fill="freeze"/>
+  </rect>
+  <text x="690" y="209" fill="#34d399" font-family="Consolas, monospace" font-size="14" font-weight="700">
+    <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.9;1" dur="3.2s" fill="freeze"/>
+    100%
+  </text>
+</svg>

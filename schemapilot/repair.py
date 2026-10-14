@@ -1,0 +1,199 @@
+"""Minimal repair engine.
+
+Given a contract and an invalid payload, :func:`repair_payload` computes a
+:class:`RepairPlan`: an ordered list of concrete edits that would make the
+payload conform, plus the repaired payload itself. The engine favours the
+*smallest* change that resolves each violation:
+
+- ``MISSING_REQUIRED`` -> insert the field's ``default`` when present, else a
+  type-appropriate zero value.
+- ``UNEXPECTED_FIELD``  -> drop the field.
+- ``NULL_NOT_ALLOWED``  -> replace null with ``default`` or a zero value.
+- ``TYPE_MISMATCH``     -> coerce when safely possible (e.g. ``"12"`` -> 12),
+  otherwise substitute a zero value.
+- ``ENUM_VIOLATION``    -> snap to the first enum member.
+- ``BELOW_MIN``/``ABOVE_MAX`` -> clamp to the nearest bound.
+- ``TOO_SHORT``/``TOO_LONG``  -> pad or truncate the string.
+- ``TOO_FEW_ITEMS``/``TOO_MANY_ITEMS`` -> pad or trim the array.
+
+Each repair is described by an :class:`Edit` so callers can present a diff and
+audit the transformation. The engine re-validates after applying edits and
+reports whether the payload is now conforming.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any, Dict, List
+
+from schemapilot.contract import Contract, FieldSpec
+from schemapilot.validator import Validator, Violation
+
+_ZERO = {
+    "string": "",
+    "integer": 0,
+    "number": 0.0,
+    "boolean": False,
+    "array": [],
+    "object": {},
+    "null": None,
+}
+
+
+@dataclass
+class Edit:
+    op: str  # "insert" | "delete" | "replace" | "clamp" | "coerce" | "truncate" | "pad"
+    path: str
+    before: Any = None
+    after: Any = None
+    reason: str = ""
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "op": self.op,
+            "path": self.path,
+            "before": self.before,
+            "after": self.after,
+            "reason": self.reason,
+        }
+
+
+@dataclass
+class RepairPlan:
+    original_ok: bool
+    repaired_ok: bool
+    edits: List[Edit] = field(default_factory=list)
+    payload: Dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "original_ok": self.original_ok,
+            "repaired_ok": self.repaired_ok,
+            "edit_count": len(self.edits),
+            "edits": [e.to_dict() for e in self.edits],
+            "payload": self.payload,
+        }
+
+
+_PATTERN_SEEDS = {
+    r"^INV-[0-9]{6}$": "INV-000000",
+    r"^[A-Z]{3}$": "USD",
+    r"^[a-f0-9]{8}$": "0a1b2c3d",
+}
+
+
+def _pattern_seed(spec: FieldSpec) -> str:
+    """Return a value that satisfies a known pattern, else a literal token."""
+    if spec.pattern in _PATTERN_SEEDS:
+        return _PATTERN_SEEDS[spec.pattern]
+    if spec.enum:
+        return str(spec.enum[0])
+    return "".join(c for c in (spec.pattern or "") if c.isalnum()) or "seed"
+
+
+def _default_value(spec: FieldSpec) -> Any:
+    if spec.has_default:
+        return spec.default
+    if spec.enum:
+        return spec.enum[0]
+    return _ZERO.get(spec.type, None)
+
+
+def _try_coerce(value: Any, ftype: str) -> Any:
+    try:
+        if ftype == "integer":
+            return int(value)
+        if ftype == "number":
+            return float(value)
+        if ftype == "string":
+            return str(value)
+        if ftype == "boolean":
+            if isinstance(value, str):
+                return value.strip().lower() in ("true", "1", "yes")
+            return bool(value)
+    except (TypeError, ValueError):
+        return None
+    return None
+
+
+def _repair_one(payload: Dict[str, Any], v: Violation, contract: Contract, edits: List[Edit]) -> None:
+    root = v.path.split("[")[0].split(".")[0]
+    spec = contract.fields.get(root)
+
+    if v.code == "MISSING_REQUIRED" and spec is not None:
+        val = _default_value(spec)
+        payload[root] = val
+        edits.append(Edit("insert", root, None, val, "insert default for required field"))
+        return
+
+    if v.code == "UNEXPECTED_FIELD":
+        before = payload.pop(v.path, None)
+        edits.append(Edit("delete", v.path, before, None, "drop field absent from contract"))
+        return
+
+    if spec is None or root not in payload:
+        return
+
+    current = payload[root]
+
+    if v.code == "NULL_NOT_ALLOWED":
+        val = _default_value(spec)
+        payload[root] = val
+        edits.append(Edit("replace", root, None, val, "replace disallowed null"))
+    elif v.code == "TYPE_MISMATCH":
+        coerced = _try_coerce(current, spec.type)
+        val = coerced if coerced is not None else _default_value(spec)
+        payload[root] = val
+        edits.append(Edit("coerce" if coerced is not None else "replace", root, current, val, f"align to type {spec.type}"))
+    elif v.code == "ENUM_VIOLATION" and spec.enum:
+        payload[root] = spec.enum[0]
+        edits.append(Edit("replace", root, current, spec.enum[0], "snap to first enum member"))
+    elif v.code == "BELOW_MIN" and spec.minimum is not None:
+        payload[root] = spec.minimum
+        edits.append(Edit("clamp", root, current, spec.minimum, "clamp to minimum"))
+    elif v.code == "ABOVE_MAX" and spec.maximum is not None:
+        payload[root] = spec.maximum
+        edits.append(Edit("clamp", root, current, spec.maximum, "clamp to maximum"))
+    elif v.code == "TOO_SHORT" and spec.min_len is not None:
+        padded = str(current).ljust(spec.min_len, "x")
+        payload[root] = padded
+        edits.append(Edit("pad", root, current, padded, "pad string to min_len"))
+    elif v.code == "PATTERN_MISMATCH" and spec.pattern is not None:
+        replacement = _pattern_seed(spec)
+        payload[root] = replacement
+        edits.append(Edit("replace", root, current, replacement, "substitute pattern-conforming seed"))
+    elif v.code == "TOO_LONG" and spec.max_len is not None:
+        trimmed = str(current)[: spec.max_len]
+        payload[root] = trimmed
+        edits.append(Edit("truncate", root, current, trimmed, "truncate string to max_len"))
+    elif v.code == "TOO_FEW_ITEMS" and spec.min_items is not None:
+        item = _default_value(spec.items) if spec.items else 0
+        while len(payload[root]) < spec.min_items:
+            payload[root].append(item)
+        edits.append(Edit("pad", root, current, payload[root], "pad array to min_items"))
+    elif v.code == "TOO_MANY_ITEMS" and spec.max_items is not None:
+        payload[root] = current[: spec.max_items]
+        edits.append(Edit("truncate", root, current, payload[root], "trim array to max_items"))
+
+
+def repair_payload(contract: Contract, payload: Dict[str, Any], *, max_passes: int = 4) -> RepairPlan:
+    """Compute and apply a minimal repair plan for ``payload``."""
+    validator = Validator(contract)
+    original = validator.validate(payload)
+    working: Dict[str, Any] = dict(payload) if isinstance(payload, dict) else {}
+    edits: List[Edit] = []
+
+    for _ in range(max_passes):
+        result = validator.validate(working)
+        if result.ok:
+            break
+        for viol in result.violations:
+            _repair_one(working, viol, contract, edits)
+
+    final = validator.validate(working)
+    return RepairPlan(
+        original_ok=original.ok,
+        repaired_ok=final.ok,
+        edits=edits,
+        payload=working,
+    )

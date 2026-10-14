@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="220" viewBox="0 0 760 220" role="img" aria-label="SchemaPilot pipeline: contract to fuzzer, validator, repair, report and matrix">
+  <title>SchemaPilot processing pipeline</title>
+  <desc>An animated diagram showing a JSON contract flowing through the fuzzer, validator, repair engine, and out to report and matrix stages.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="node2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="760" height="220" rx="14" fill="url(#bg)"/>
+  <text x="24" y="34" fill="#e2e8f0" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700">SchemaPilot Pipeline</text>
+
+  <line x1="120" y1="118" x2="660" y2="118" stroke="#334155" stroke-width="3"/>
+  <line x1="120" y1="118" x2="200" y2="118" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="280" y1="118" x2="360" y2="118" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="440" y1="118" x2="520" y2="118" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <circle r="6" fill="#f472b6">
+    <animateMotion dur="4s" repeatCount="indefinite" path="M120,118 L660,118"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="4s" repeatCount="indefinite"/>
+  </circle>
+
+  <g>
+    <rect x="24" y="90" width="96" height="56" rx="10" fill="url(#node2)"/>
+    <text x="72" y="116" text-anchor="middle" fill="#f8fafc" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600">Contract</text>
+    <text x="72" y="134" text-anchor="middle" fill="#ede9fe" font-family="Consolas, monospace" font-size="10">JSON</text>
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+  </g>
+
+  <g>
+    <rect x="200" y="90" width="80" height="56" rx="10" fill="url(#node)"/>
+    <text x="240" y="122" text-anchor="middle" fill="#082f49" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">Fuzzer</text>
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" begin="0.4s" repeatCount="indefinite"/>
+  </g>
+
+  <g>
+    <rect x="360" y="90" width="80" height="56" rx="10" fill="url(#node)"/>
+    <text x="400" y="122" text-anchor="middle" fill="#082f49" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700">Validator</text>
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" begin="0.8s" repeatCount="indefinite"/>
+  </g>
+
+  <g>
+    <rect x="520" y="90" width="80" height="56" rx="10" fill="url(#node)"/>
+    <text x="560" y="122" text-anchor="middle" fill="#082f49" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">Repair</text>
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" begin="1.2s" repeatCount="indefinite"/>
+  </g>
+
+  <g>
+    <rect x="636" y="60" width="100" height="40" rx="8" fill="#22c55e"/>
+    <text x="686" y="85" text-anchor="middle" fill="#052e16" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700">Report</text>
+    <line x1="600" y1="112" x2="636" y2="86" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+  <g>
+    <rect x="636" y="136" width="100" height="40" rx="8" fill="#f59e0b"/>
+    <text x="686" y="161" text-anchor="middle" fill="#451a03" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700">Matrix</text>
+    <line x1="600" y1="124" x2="636" y2="150" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+
+  <text x="24" y="200" fill="#64748b" font-family="Consolas, monospace" font-size="11">deterministic - dependency-free - Python 3.11 + .NET 9 parity</text>
+</svg>

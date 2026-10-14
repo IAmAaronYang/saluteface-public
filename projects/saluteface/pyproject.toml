@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "saluteface-research"
+version = "0.3.0"
+description = "Reproducible protein-sequence watermark research toolkit"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name="Saluteface contributors"}]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.10", "build>=1.2"]
+
+[project.scripts]
+saluteface = "saluteface.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["saluteface*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
