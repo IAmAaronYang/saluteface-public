@@ -1,120 +1,73 @@
-# SchemaPilot
+# Saluteface Research Toolkit
 
-[![ci](https://github.com/bramrahanddian/SchemaPilot/actions/workflows/ci.yml/badge.svg)](https://github.com/bramrahanddian/SchemaPilot/actions/workflows/ci.yml)
-[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![python: 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
+Reproducible open-source tools for protein-sequence dataset preparation, validation, lightweight provenance manifests, and **educational** watermark experiments.
 
-SchemaPilot is a deterministic structured output contract fuzzer. Point it at a
-compact JSON contract and it will:
+> **Scope and provenance:** This repository is an original experimental implementation. It is **not** an official release by Orbofi, SalutefaceAAC, Hugging Face, Google DeepMind or SynthID Bio, and it does not assert that an autonomous agent authored any third-party research. The watermark algorithm is an intentionally simple illustrative protocol, **not** an implementation of SynthID Bio, and must not be used to claim biological fidelity or provenance.
 
-- **fuzz** the contract into reproducible valid and adversarial payloads,
-- **validate** real payloads and report every violation with a stable code,
-- **repair** invalid payloads with a minimal, auditable list of edits,
-- **matrix** two contracts to decide whether a change is safe to deploy,
-- **report** the whole pass as JSON for machines or Markdown for review.
+## Features
 
-Generation is seeded from a canonical contract fingerprint, so the same
-contract and seed always produce byte-identical payloads and reports. The
-package is dependency-free - Python standard library only - and a .NET 9
-runtime mirrors the parser, validator, and fingerprint so Python producers and
-.NET consumers reach the same verdicts.
+- Strict amino-acid sequence validation and streaming FASTA parsing.
+- Deterministic 80/10/10 train/validation/test assignment.
+- Strict JSONL contracts; reproducible SHA-256 dataset manifests.
+- Deterministic keyed educational watermark substitution experiment.
+- True/false positive detection metrics and explicit undefined denominator handling.
+- Local provenance records with honest self-attestation scope.
+- CLI and unit tests across supported Python versions.
+- Dependency-light standard-library implementation.
 
-![SchemaPilot pipeline](docs/assets/pipeline.svg)
-
-## Quick start
-
-Python 3.11 or newer. There is nothing to install; run the package in place:
+## Install & run
 
 ```bash
-git clone https://github.com/bramrahanddian/SchemaPilot
-cd SchemaPilot
-
-python -m schemapilot inspect schemas/invoice.v1.json
-python -m schemapilot fuzz schemas/invoice.v1.json --seed 7 --valid 3 --adversarial 2
-python -m schemapilot validate schemas/invoice.v1.json fixtures/invoice_invalid.json
-python -m schemapilot repair schemas/invoice.v1.json fixtures/invoice_invalid.json
-python -m schemapilot report schemas/invoice.v1.json --format markdown
-python -m schemapilot matrix schemas/invoice.v1.json schemas/invoice.v2.json
+python -m venv .venv
+source .venv/bin/activate   # Windows Git Bash: source .venv/Scripts/activate
+python -m pip install -e '.[dev]'
+pytest -q
+saluteface convert examples/example.fasta output/dataset.jsonl --source synthetic-example
+saluteface validate output/dataset.jsonl
+SALUTEFACE_EXPERIMENT_KEY=local-test-key saluteface verify examples/example.fasta
 ```
 
-`make demo` runs inspect, report, and matrix end to end on the shipped
-contracts.
+## Scientific limitations
 
-## Commands
+- The watermark substitutions modify protein primary sequences; no claim of retained biological function.
+- Detection scores are experimental and not validated on real biological datasets.
+- Data in `examples/` is synthetic illustrative data, not scraped or copied from other projects.
+- Reproducibility and provenance hashes are not proofs of research authorship or on-chain publication.
 
-| Command    | What it does                                                             |
-|------------|--------------------------------------------------------------------------|
-| `inspect`  | Parse a contract, print its normalised form and fingerprint.             |
-| `fuzz`     | Generate deterministic valid and adversarial payloads.                   |
-| `validate` | Validate a payload file against a contract.                              |
-| `repair`   | Compute a minimal repair plan for an invalid payload.                    |
-| `report`   | Run a full fuzz+validate pass; emit JSON or Markdown.                    |
-| `matrix`   | Cross-validate contracts and print compatibility verdicts.               |
+## Integration with SchemaPilot
 
-Exit codes are stable for CI gating: `0` success, `1` validation findings,
-`2` unrepaired payload, `3` contract error, `4` missing file, `5` invalid JSON.
+The supplied ZIP is a **self-contained overlay**, not a copy of SchemaPilot or its history. Clone SchemaPilot and copy the overlay on top. Before doing so, check its MIT license and choose whether to preserve SchemaPilot's own project identity and docs separately. A sensible integration is to move SchemaPilot's existing code into an `integrations/schemapilot/` adapter in a future PR rather than presenting unrelated prior commits as Saluteface development history. The repository should retain original author attribution and history; never rewrite or backdate contributions to claim artificial project age.
 
-## Contracts
+## Related public research (not incorporated here)
 
-A contract is a small, diffable JSON document: a flat `fields` map with a
-fixed set of constraints (`type`, `required`, `nullable`, `enum`, `min`/`max`,
-`min_len`/`max_len`, `pattern`, `min_items`/`max_items`, `items`, `default`).
+- https://huggingface.co/datasets/SalutefaceAAC/synthidbio-sequence-pilot/discussions/1
+- https://www.orbofi.com/agent/salute-face
+- https://www.orbofi.com/aac/4663/0xA583222dD1Af98820DA4234a6fE14c91E4465AAC
 
-```json
-{
-  "name": "invoice",
-  "version": 1,
-  "fields": {
-    "id":       { "type": "string",  "pattern": "^INV-[0-9]{6}$", "required": true },
-    "total":    { "type": "number",  "min": 0, "required": true },
-    "currency": { "type": "string",  "enum": ["USD", "EUR", "GBP"], "required": true },
-    "paid":     { "type": "boolean", "default": false }
-  }
-}
-```
-
-The fingerprint of the normalised contract is its identity primitive: it seeds
-deterministic generation and flags contract drift between revisions. Because it
-is derived from the normalised form, cosmetic edits such as key order or
-whitespace do not move it, while any change to a constraint does.
-
-## .NET runtime
-
-`runtime/SchemaPilot.Runtime` re-implements the parser, validator, and
-fingerprint for .NET services:
-
-```bash
-dotnet run -c Release --project runtime/SchemaPilot.Runtime.csproj -- fingerprint schemas/invoice.v1.json
-```
-
-Both runtimes must compute the same digest; CI verifies cross-runtime parity for
-every contract in `schemas/`.
-
-## Repository layout
-
-```
-schemapilot/    Python package: contract, fuzzer, validator, repair, matrix, report, cli
-runtime/        .NET 9 runtime mirroring the parser, validator, and fingerprint
-schemas/        Example contracts (invoice v1/v2, telemetry event v1)
-fixtures/       Valid and invalid payload examples used by the docs and CI
-docs/assets/    Diagrams referenced by the documentation
-```
-
-## Documentation
-
-- [ARCHITECTURE.md](ARCHITECTURE.md) - modules and data flow.
-- [DESIGN.md](DESIGN.md) - the decisions behind the contract vocabulary.
-- [ROADMAP.md](ROADMAP.md) - delivered and planned milestones.
-- [CHANGELOG.md](CHANGELOG.md) - release history.
-
-## Contributing
-
-Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md)
-first; it explains how to keep the two runtimes in lockstep and why determinism
-is treated as a contract. Security reports follow [SECURITY.md](SECURITY.md).
-Participation is governed by the
-[Code of Conduct](CODE_OF_CONDUCT.md).
+These are links for context only and do not establish endorsement, ownership or integration.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT for this new code. Third-party code retains its original license and attribution.
+
+## Expanded research modules
+
+- `saluteface.features`: residue entropy, k-mer statistics and compositional profiles.
+- `saluteface.mutations`: reproducible insertions, deletions and substitutions.
+- `saluteface.quality`: duplicate detection, split leakage and conflicting-label audits.
+- `saluteface.benchmark`: control/embedding/attack benchmark with actual detector outcomes.
+- `saluteface.io_utils`: atomic JSON report writing.
+
+See [BENCHMARKS.md](docs/BENCHMARKS.md) for executable commands.
+
+## Version 0.3 — executable research pipeline
+
+Added seven research modules: `similarity`, `alignment`, `structure`, `significance`, `splits`, `hub_export`, `pipeline`, `experiment`, `report`, and more than twenty new unit/integration tests. The workflows perform real computations rather than precomputed output. See [Methods and limitations](docs/V3_METHODS.md).
+
+```bash
+python -m pip install -e '.[dev]'
+python -m saluteface pipeline examples/example.fasta ./output/pipeline
+SALUTEFACE_EXPERIMENT_KEY=local-key python -m saluteface experiment examples/example.fasta ./output/experiment.json
+```
+
+**Provenance:** Independent educational implementation; not the original Orbofi agent, not an official DeepMind/Hugging Face system, and no false claim of an autonomous research publication.
