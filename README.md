@@ -1,73 +1,175 @@
-# Saluteface Research Toolkit
+<div align="center">
 
-Reproducible open-source tools for protein-sequence dataset preparation, validation, lightweight provenance manifests, and **educational** watermark experiments.
+<img src="https://i.imgur.com/35IODwj.png" alt="SaluteFace — open research and protein sequence toolkit" width="100%" />
 
-> **Scope and provenance:** This repository is an original experimental implementation. It is **not** an official release by Orbofi, SalutefaceAAC, Hugging Face, Google DeepMind or SynthID Bio, and it does not assert that an autonomous agent authored any third-party research. The watermark algorithm is an intentionally simple illustrative protocol, **not** an implementation of SynthID Bio, and must not be used to claim biological fidelity or provenance.
+# SaluteFace
 
-## Features
+**Protein sequence research · Experimental watermarking · Reproducible datasets**
 
-- Strict amino-acid sequence validation and streaming FASTA parsing.
-- Deterministic 80/10/10 train/validation/test assignment.
-- Strict JSONL contracts; reproducible SHA-256 dataset manifests.
-- Deterministic keyed educational watermark substitution experiment.
-- True/false positive detection metrics and explicit undefined denominator handling.
-- Local provenance records with honest self-attestation scope.
-- CLI and unit tests across supported Python versions.
-- Dependency-light standard-library implementation.
+An open-source research toolkit with an AI-agent identity for exploring protein sequences, evaluating experimental watermarking methods, and producing inspectable research artifacts.
 
-## Install & run
+[Explore the dataset](https://huggingface.co/datasets/SalutefaceAAC/synthidbio-sequence-pilot) · [Research toolkit](projects/saluteface/) · [Tests](projects/saluteface/tests/) · [Image gallery](https://imgur.com/a/Ti5gGNe)
 
-```bash
-python -m venv .venv
-source .venv/bin/activate   # Windows Git Bash: source .venv/Scripts/activate
-python -m pip install -e '.[dev]'
-pytest -q
-saluteface convert examples/example.fasta output/dataset.jsonl --source synthetic-example
-saluteface validate output/dataset.jsonl
-SALUTEFACE_EXPERIMENT_KEY=local-test-key saluteface verify examples/example.fasta
+</div>
+
+---
+
+## Overview
+
+SaluteFace brings reproducible protein-sequence research workflows into a small, testable Python toolkit. It handles sequence ingestion, structured dataset exports, quality checks, similarity analysis, and experimental watermark robustness studies.
+
+The project also references a separate, publicly shared Hugging Face research artifact, [`SalutefaceAAC/synthidbio-sequence-pilot`](https://huggingface.co/datasets/SalutefaceAAC/synthidbio-sequence-pilot), focused on public-key protein-sequence scoring and reproducibility. **This is an independent research effort, not an official implementation of Google DeepMind's SynthID Bio.**
+
+## Research dataset
+
+<img src="https://i.imgur.com/JHFAQiR.png" alt="Hugging Face-style overview of the published sequence pilot dataset" width="100%" />
+
+The linked dataset documents protein-sequence scoring experiments, conformance vectors, and a null-model analysis. Its records are organized for independent inspection, with fields such as `record_id`, `backbone`, `arm`, `role`, `sample`, `length`, and `windows`.
+
+**Interpretation matters.** Public-key scores do not reproduce detection with private laboratory keys; a near-chance public-key score is not evidence that a secret-key watermarking method fails. Review the [dataset card](https://huggingface.co/datasets/SalutefaceAAC/synthidbio-sequence-pilot) and its limitations before drawing conclusions.
+
+## What the toolkit does
+
+| Area | Capabilities |
+| --- | --- |
+| Sequence processing | Read and transform FASTA inputs into deterministic structured records. |
+| Data quality | Validate data, identify duplicates, and audit cross-split leakage. |
+| Analysis | Extract features, compare similarity, and align protein sequences. |
+| Watermark research | Evaluate experimental keyed scoring and synthetic mutation robustness. |
+| Reproducibility | Run benchmarks, comparative experiments, and export research artifacts. |
+| Sharing | Prepare structured records suitable for downstream dataset publication workflows. |
+
+## Open research & community
+
+<img src="https://i.imgur.com/v8IbB30.png" alt="SaluteFace Hugging Face research dataset publication and community discussion" width="100%" />
+
+The dataset's Hugging Face repository includes its documentation and a public community discussion introducing the research artifact.
+
+**[Dataset card and files](https://huggingface.co/datasets/SalutefaceAAC/synthidbio-sequence-pilot)** · **[Community discussions](https://huggingface.co/datasets/SalutefaceAAC/synthidbio-sequence-pilot/discussions)**
+
+The SaluteFace agent identity describes the project's research and publishing direction. This repository should not be read as independent proof of autonomous account creation, CAPTCHA completion, or unassisted publication; those claims require separate operational evidence.
+
+## Research workflow
+
+<img src="https://i.imgur.com/IZg6HAL.png" alt="SaluteFace research workflow: FASTA processing, dataset structuring, experimental analysis, and validation" width="100%" />
+
+```text
+FASTA sequences
+      |
+      v
+Parsing + validation
+      |
+      v
+Dataset preparation + leakage checks
+      |
+      v
+Feature / similarity / watermark experiments
+      |
+      v
+Reports + structured research artifacts
 ```
 
-## Scientific limitations
+The tools favor explicit inputs and reproducible outputs. Experimental results should be reported together with their configuration, data provenance, and limitations.
 
-- The watermark substitutions modify protein primary sequences; no claim of retained biological function.
-- Detection scores are experimental and not validated on real biological datasets.
-- Data in `examples/` is synthetic illustrative data, not scraped or copied from other projects.
-- Reproducibility and provenance hashes are not proofs of research authorship or on-chain publication.
+## Get started
 
-## Integration with SchemaPilot
+**Requirements:** Python 3.10 or newer.
 
-The supplied ZIP is a **self-contained overlay**, not a copy of SchemaPilot or its history. Clone SchemaPilot and copy the overlay on top. Before doing so, check its MIT license and choose whether to preserve SchemaPilot's own project identity and docs separately. A sensible integration is to move SchemaPilot's existing code into an `integrations/schemapilot/` adapter in a future PR rather than presenting unrelated prior commits as Saluteface development history. The repository should retain original author attribution and history; never rewrite or backdate contributions to claim artificial project age.
-
-## Related public research (not incorporated here)
-
-- https://huggingface.co/datasets/SalutefaceAAC/synthidbio-sequence-pilot/discussions/1
-- https://www.orbofi.com/agent/salute-face
-- https://www.orbofi.com/aac/4663/0xA583222dD1Af98820DA4234a6fE14c91E4465AAC
-
-These are links for context only and do not establish endorsement, ownership or integration.
-
-## License
-
-MIT for this new code. Third-party code retains its original license and attribution.
-
-## Expanded research modules
-
-- `saluteface.features`: residue entropy, k-mer statistics and compositional profiles.
-- `saluteface.mutations`: reproducible insertions, deletions and substitutions.
-- `saluteface.quality`: duplicate detection, split leakage and conflicting-label audits.
-- `saluteface.benchmark`: control/embedding/attack benchmark with actual detector outcomes.
-- `saluteface.io_utils`: atomic JSON report writing.
-
-See [BENCHMARKS.md](docs/BENCHMARKS.md) for executable commands.
-
-## Version 0.3 — executable research pipeline
-
-Added seven research modules: `similarity`, `alignment`, `structure`, `significance`, `splits`, `hub_export`, `pipeline`, `experiment`, `report`, and more than twenty new unit/integration tests. The workflows perform real computations rather than precomputed output. See [Methods and limitations](docs/V3_METHODS.md).
+From the repository root:
 
 ```bash
-python -m pip install -e '.[dev]'
-python -m saluteface pipeline examples/example.fasta ./output/pipeline
-SALUTEFACE_EXPERIMENT_KEY=local-key python -m saluteface experiment examples/example.fasta ./output/experiment.json
+git clone https://github.com/IAmAaronYang/SaluteFace339811.git
+cd SaluteFace339811
+python -m pip install -e ".[dev]"
 ```
 
-**Provenance:** Independent educational implementation; not the original Orbofi agent, not an official DeepMind/Hugging Face system, and no false claim of an autonomous research publication.
+Check the available commands:
+
+```bash
+saluteface --help
+saluteface version
+```
+
+Or invoke the module directly:
+
+```bash
+python -m saluteface.cli --help
+```
+
+## Command-line interface
+
+| Command | Purpose |
+| --- | --- |
+| `convert` | Convert FASTA into deterministic JSONL and a manifest. |
+| `validate` | Validate structured sequence records. |
+| `audit` | Check duplicates and cross-split leakage. |
+| `features` | Export sequence features. |
+| `similarity` | Identify near-duplicate sequences. |
+| `align` | Align protein sequences. |
+| `verify` | Evaluate the toolkit's experimental keyed watermark agreement. |
+| `benchmark` | Run synthetic watermark robustness experiments. |
+| `experiment` | Compare research configurations and mutation budgets. |
+| `pipeline` | Run the dataset preparation and export workflow. |
+| `version` | Print the installed package version. |
+
+Each subcommand exposes its own options. For example:
+
+```bash
+saluteface pipeline --help
+saluteface benchmark --help
+saluteface experiment --help
+```
+
+## Validation & reproducibility
+
+The latest locally reported run of the toolkit's test suite passed **60 tests**. This is a development snapshot, not a permanent coverage or CI guarantee. You can independently reproduce the check:
+
+```bash
+python -m pytest -q projects/saluteface/tests
+```
+
+Build the Python distribution:
+
+```bash
+python -m build
+```
+
+You can also work directly from the nested Python package under [`projects/saluteface/`](projects/saluteface/).
+
+## Scope and limitations
+
+- The toolkit contains **experimental** protein-watermark research utilities. It is not a validated biosafety or forensic detection product.
+- Synthetic benchmarks and toy keyed scoring are not interchangeable with the private-key detection system described in SynthID Bio research.
+- The linked Hugging Face dataset is presented for independent scrutiny; it is **not peer reviewed** and is **not an accepted upstream contribution**.
+- No affiliation with or endorsement by **Google, Google DeepMind, or Hugging Face** is implied.
+- Preserve the licenses and attribution notices attached to upstream code and research materials; the dataset and the repository may have different licensing requirements.
+
+## Project layout
+
+```text
+projects/saluteface/
+  saluteface/       # Python research modules and CLI
+  tests/            # Automated verification
+  docs/             # Project documentation
+README.md           # This overview
+pyproject.toml      # Root package configuration
+Makefile            # Optional local developer shortcuts
+```
+
+## Contributing
+
+Contributions are welcome, particularly for reproducibility, independent verification, test coverage, documentation, and properly cited benchmark work. Please review [`CONTRIBUTING.md`](CONTRIBUTING.md) and open an issue with a minimal reproducible example for bug reports.
+
+## License and provenance
+
+Refer to the repository's [`LICENSE`](LICENSE), [`PROJECT_PROVENANCE.md`](PROJECT_PROVENANCE.md), and any attribution notices in the linked research dataset. Third-party code, reference materials, and datasets retain their respective licensing and attribution requirements.
+
+---
+
+<div align="center">
+
+**SaluteFace** · Open-source protein sequence research
+
+[Hugging Face dataset](https://huggingface.co/datasets/SalutefaceAAC/synthidbio-sequence-pilot) · [Repository](https://github.com/IAmAaronYang/SaluteFace339811)
+
+</div>
