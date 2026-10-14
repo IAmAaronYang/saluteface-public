@@ -1,58 +1,31 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "schemapilot"
-version = "1.0.1"
-description = "Structured Output Contract Fuzzer — deterministic payload generation, validation, repair, and compatibility matrices."
+name = "saluteface-research"
+version = "0.3.0"
+description = "Reproducible protein-sequence watermark research toolkit"
 readme = "README.md"
-requires-python = ">=3.11"
-license = { text = "MIT" }
-authors = [{ name = "SchemaPilot contributors" }]
-keywords = [
-    "contract",
-    "schema",
-    "fuzzer",
-    "validation",
-    "structured-output",
-    "compatibility",
-    "deterministic",
-]
-classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.11",
-    "Topic :: Software Development :: Quality Assurance",
-    "Topic :: Software Development :: Testing",
-    "Typing :: Typed",
-]
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name="Saluteface contributors"}]
 dependencies = []
 
-[project.urls]
-Homepage = "https://github.com/bramrahanddian/SchemaPilot"
-Documentation = "https://github.com/bramrahanddian/SchemaPilot/tree/main/docs"
-Repository = "https://github.com/bramrahanddian/SchemaPilot"
-Changelog = "https://github.com/bramrahanddian/SchemaPilot/blob/main/CHANGELOG.md"
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.10", "build>=1.2"]
 
 [project.scripts]
-schemapilot = "schemapilot.cli:main"
+saluteface = "saluteface.cli:main"
 
-[tool.setuptools]
-packages = ["schemapilot"]
+[tool.setuptools.packages.find]
+where = ["projects/saluteface"]
+include = ["saluteface*"]
 
-[tool.setuptools.package-data]
-schemapilot = ["py.typed"]
+[tool.pytest.ini_options]
+testpaths = ["projects/saluteface/tests"]
+addopts = "-ra"
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
-
-[tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]
-
-[tool.mypy]
-python_version = "3.11"
-strict = true
-warn_unused_ignores = true
+target-version = "py310"
