@@ -160,7 +160,7 @@ Makefile            # Optional local developer shortcuts
 
 Contributions are welcome, particularly for reproducibility, independent verification, test coverage, documentation, and properly cited benchmark work. Please review [`CONTRIBUTING.md`](CONTRIBUTING.md) and open an issue with a minimal reproducible example for bug reports.
 
-CRYPTO [BTC/EVM/SOL]
+CRYPTO CONTRIBUTIONS TO DEVELOPMENT [BTC/EVM/SOL]:
 
 bc1puk5pv3yd8lezkqgcfsvc4k92tstkv3dkumfeyac8v5lmsu4zkdcsnnpxmw
 
