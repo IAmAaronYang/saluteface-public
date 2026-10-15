@@ -160,16 +160,27 @@ Makefile            # Optional local developer shortcuts
 
 Contributions are welcome, particularly for reproducibility, independent verification, test coverage, documentation, and properly cited benchmark work. Please review [`CONTRIBUTING.md`](CONTRIBUTING.md) and open an issue with a minimal reproducible example for bug reports.
 
+CRYPTO [BTC/EVM/SOL]
+
+bc1puk5pv3yd8lezkqgcfsvc4k92tstkv3dkumfeyac8v5lmsu4zkdcsnnpxmw
+
+0x8Ec45404b44f057D666b7b3Bb179Bb0D7F67b8b0
+
+ATohdT4evKJdzstEKMVaUjhHbMG9om5npF79z5SMMQNk
+
 ## License and provenance
 
 Refer to the repository's [`LICENSE`](LICENSE), [`PROJECT_PROVENANCE.md`](PROJECT_PROVENANCE.md), and any attribution notices in the linked research dataset. Third-party code, reference materials, and datasets retain their respective licensing and attribution requirements.
 
 ---
 
+
 <div align="center">
 
 **SaluteFace** · Open-source protein sequence research
 
 [Hugging Face dataset](https://huggingface.co/datasets/SalutefaceAAC/synthidbio-sequence-pilot) · [Repository](https://github.com/IAmAaronYang/SaluteFace339811)
+
+
 
 </div>
